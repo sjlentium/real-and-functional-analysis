@@ -1,22 +1,19 @@
-name: Build and Deploy PDF
+name: Build LaTeX
 on: [push]
-permissions:
-  contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Compile LaTeX
         uses: xu-cheng/latex-action@v3
         with:
           root_file: main.tex
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+
+      - name: Upload PDF Artifact
+        uses: actions/upload-artifact@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./
-          publish_branch: gh-pages
-          keep_files: true
-          exclude_assets: '.github,*.tex,*.bib,*.cls,*.png,*.jpg,*.gitignore,README.md'
+          name: Course-Notes-PDF
+          path: main.pdf
