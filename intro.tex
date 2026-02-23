@@ -1,0 +1,141 @@
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{calc, backgrounds}
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{mdframed}
+\usepackage{etoolbox}
+\usepackage{newtxtext}
+\usepackage{mathtools}
+
+\setcounter{tocdepth}{2}
+
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\K}{\mathcal{K}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\NN}{\mathcal{N}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\Pset}{\mathcal{P}}
+\newcommand{\Scal}{\mathcal{S}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rn}{\mathbb{R}^N}
+\newcommand{\Rext}{\overline{\mathbb{R}}}
+\newcommand{\Rp}{\mathbb{R}_+}
+\newcommand{\Rpext}{\overline{\mathbb{R}}_+}
+\renewcommand{\Re}{\operatorname{Re}}
+\renewcommand{\Im}{\operatorname{Im}}
+\newcommand{\Ker}{\operatorname{Ker}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\Proj}{\operatorname{Proj}}
+\newcommand{\dist}{\operatorname{dist}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\DeclareMathOperator*{\esssup}{ess\,sup}
+\DeclareMathOperator*{\essinf}{ess\,inf}
+\newcommand{\coloneqq}{\mathrel{\mathop:}=}
+
+% Colors
+\definecolor{proofcol}{HTML}{EBF3FF}
+\definecolor{remarkcol}{HTML}{EBFFF0}
+\definecolor{sectioncol}{HTML}{214B8F}
+\definecolor{subsectioncol}{HTML}{2464C9}
+\definecolor{subsubsectioncol}{HTML}{2464C9}
+\definecolor{theoremcol}{HTML}{FCFCFC}
+
+% Section formatting
+\titleformat{\section}
+  {\normalfont\Large\bfseries\color{sectioncol}}
+  {}{0em}{}
+\titlespacing*{\section}{0pt}{30pt}{15pt}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries\color{subsectioncol}}
+  {}{0em}{}
+\titlespacing*{\subsection}{0pt}{20pt}{10pt}
+
+\titleformat{\subsubsection}
+  {\normalfont\bfseries\color{subsubsectioncol}}
+  {}{0em}{}
+\titlespacing*{\subsubsection}{0pt}{15pt}{8pt}
+
+% Style for theorem-like environments
+\mdfdefinestyle{theoremstyle}{
+  linewidth=0pt,
+  leftmargin=-8pt,
+  rightmargin=-8pt,
+  innerleftmargin=8pt,
+  innerrightmargin=8pt,
+  innertopmargin=8pt,
+  innerbottommargin=8pt,
+  skipabove=6pt,
+  skipbelow=6pt,
+  nobreak=true,
+  backgroundcolor=theoremcol
+}
+
+\mdfdefinestyle{proofstyle}{
+  linewidth=0pt,
+  leftmargin=0pt,
+  rightmargin=0pt,
+  innerleftmargin=8pt,
+  innerrightmargin=8pt,
+  innertopmargin=8pt,
+  innerbottommargin=8pt,
+  skipabove=6pt,
+  skipbelow=6pt,
+  nobreak=true,
+  backgroundcolor=proofcol
+}
+
+\mdfdefinestyle{examplestyle}{
+  linewidth=1pt,
+  linecolor=gray!50,
+  leftmargin=0pt,
+  rightmargin=0pt,
+  innerleftmargin=8pt,
+  innerrightmargin=8pt,
+  innertopmargin=8pt,
+  innerbottommargin=8pt,
+  skipabove=6pt,
+  skipbelow=6pt,
+  nobreak=true,
+  backgroundcolor=white
+}
+
+% Define the actual environments
+\newenvironment{theorem}{\begin{mdframed}[style=theoremstyle]\textbf{Theorem. }}{\end{mdframed}}
+\newenvironment{definition}{\begin{mdframed}[style=theoremstyle]\textbf{Definition. }}{\end{mdframed}}
+\newenvironment{lemma}{\begin{mdframed}[style=theoremstyle]\textbf{Lemma. }}{\end{mdframed}}
+\newenvironment{corollary}{\begin{mdframed}[style=theoremstyle]\textbf{Corollary. }}{\end{mdframed}}
+\newenvironment{proposition}{\begin{mdframed}[style=theoremstyle]\textbf{Proposition. }}{\end{mdframed}}
+\newenvironment{exercise}{\begin{mdframed}[style=theoremstyle]\textbf{Exercise. }}{\end{mdframed}}
+
+% Special environments with different colors
+\newenvironment{remark}
+  {\begin{mdframed}[style=proofstyle,backgroundcolor=remarkcol]\textbf{Remark. }}
+  {\end{mdframed}}
+
+\newenvironment{example}
+  {\begin{mdframed}[style=examplestyle]\textbf{Example. }}
+  {\end{mdframed}}
+
+% Proof environment
+\renewenvironment{proof}[1][\proofname]
+  {\begin{mdframed}
+  [style=proofstyle]\textbf{Proof. }\newline}
+  {\hfill$\blacksquare$\end{mdframed}}
+
+% Solution environment
+\newenvironment{solution}
+  {\begin{mdframed}[style=proofstyle]\textbf{Solution. }\newline}
+  {\hfill$\square$\end{mdframed}}
+
+\setlength{\parskip}{0pt}
+\setlength{\parindent}{0pt}

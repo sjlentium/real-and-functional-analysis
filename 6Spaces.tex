@@ -1,0 +1,711 @@
+\section{Metric Spaces}
+
+Let \((X, d)\) be a metric space.
+
+\begin{definition}
+For any \(r > 0\) and \(x_0 \in X\), the \textbf{open ball} of radius \(r\) centered at \(x_0\) is defined as:
+\[
+B_r(x_0) \coloneqq \{ x \in X : d(x, x_0) < r \}.
+\]
+\end{definition}
+
+Let \(\{x_n\} \subset X\) be a sequence.
+
+\begin{definition}
+A sequence \(\{x_n\}\) is said to be \textbf{bounded} if there exist \(x_0 \in X\) and \(k > 0\) such that:
+\[
+d(x_n, x_0) \leq k, \quad \forall n \in \mathbb{N}.
+\]
+\end{definition}
+
+\begin{definition}
+A sequence \(\{x_n\}\) is called a \textbf{Cauchy sequence} if for every \(\varepsilon > 0\), there exists \(\nu_\varepsilon \in \mathbb{N}\) such that:
+\[
+d(x_n, x_m) < \varepsilon, \quad \forall n, m > \nu_\varepsilon.
+\]
+\end{definition}
+
+\begin{definition}
+A metric space \((X, d)\) is \textbf{complete} if every Cauchy sequence \(\{x_n\} \subset X\) converges in \(X\).
+\end{definition}
+
+\begin{example} 
+\begin{enumerate}
+    \item \((\mathbb{R}^n, |\cdot|_2)\) is complete.
+    \item \((C^0([a,b]), d_\infty)\) is complete, where
+    \[
+    d_\infty(f, g) \coloneqq \sup_{x \in [a,b]} |f(x) - g(x)|.
+    \]
+    \item \((C^0([a,b]), d)\) with the metric
+    \[
+    d(f, g) \coloneqq \int_a^b |f(x) - g(x)| \, dx
+    \]
+    is \textbf{not} complete. Its completion is the space \(L^1([a,b])\).
+\end{enumerate}
+\end{example}
+
+\subsection{Density and Separability}
+
+\begin{definition}
+A subset \(A \subset X\) is \textbf{dense} in \(X\) if \(\overline{A} = X\), where the closure \(\overline{A} = A \cup \partial A\) consists of all points \(x \in X\) for which there exists a sequence \(\{x_n\} \subset A\) such that \(x_n \to x\) as \(n \to \infty\).
+\end{definition}
+
+\begin{definition}
+A metric space \(X\) is \textbf{separable} if it contains a countable dense subset \(A \subset X\).
+\end{definition}
+
+\begin{example}
+\(\mathbb{R}\) is separable, since \(\mathbb{Q}\) is a countable dense subset.
+\end{example}
+
+\begin{theorem}
+The space \(C^0([a,b])\) is separable.
+\end{theorem}
+
+\subsection{Compactness in Metric Spaces}
+
+\begin{definition}
+A subset \(E \subseteq X\) is \textbf{compact} if every open cover of \(E\) has a finite subcover.
+\end{definition}
+
+\begin{definition}
+A subset \(E \subseteq X\) is \textbf{sequentially compact} if every sequence \(\{x_n\} \subseteq E\) has a convergent subsequence with limit in \(E\).
+\end{definition}
+
+\begin{theorem}
+In a metric space \(X\), a subset \(E \subseteq X\) is compact if and only if it is sequentially compact.
+\end{theorem}
+
+\begin{proposition}
+If \(E \subseteq X\) is compact, then \(E\) is closed and bounded. The converse is not true in general.
+\end{proposition}
+
+\begin{remark}
+In \(\mathbb{R}^n\), a subset \(E \subseteq \mathbb{R}^n\) is compact if and only if it is closed and bounded.
+\end{remark}
+
+\subsection{Compactness in \(C^0(X)\)}
+
+Let \(X\) be a compact metric space, and define:
+\[
+C^0(X) \coloneqq \{ f : X \to \mathbb{R} \text{ continuous} \},
+\]
+equipped with the metric:
+\[
+d(f, g) \coloneqq \sup_{x \in X} |f(x) - g(x)|.
+\]
+This is a complete metric space.
+
+\begin{definition}
+A family \(\A \subset C^0(X)\) is \textbf{equicontinuous} if for every \(\varepsilon > 0\), there exists \(\delta_\varepsilon > 0\) such that for all \(f \in \A\) and for all \(x, y \in X\):
+\[
+d(x, y) < \delta_\varepsilon \quad \Rightarrow \quad |f(x) - f(y)| < \varepsilon.
+\]
+\end{definition}
+
+\begin{definition}
+A subset \(E \subseteq X\) is \textbf{relatively compact} if its closure \(\overline{E}\) is compact.
+\end{definition}
+
+\begin{theorem}[Ascoli-Arzelà]
+Let \(X\) be a compact metric space and \(\F \subset C^0(X)\). Then:
+\[
+\F \text{ is bounded and equicontinuous} \quad \Longleftrightarrow \quad \F \text{ is relatively compact}.
+\]
+In particular, if \(\F\) is closed, then:
+\[
+\F \text{ is compact} \quad \Longleftrightarrow \quad \F \text{ is bounded and equicontinuous}.
+\]
+\end{theorem}
+
+\subsection{Application to Sequences of Functions}
+
+Consider a sequence of functions \(\{f_n\}_{n \in \mathbb{N}} \subset C^0(X)\), where \(X = [a,b] \subset \mathbb{R}\) or more generally \(X = K \subseteq \mathbb{R}^n\) with \(K\) compact.
+
+\begin{itemize}
+    \item \textbf{Equicontinuity of \(\{f_n\}\)}: The choice of \(\delta = \delta(\varepsilon)\) must be independent of \(n\).
+    \item \textbf{Boundedness of \(\{f_n\}\)}: There exists \(M > 0\), independent of \(n\), such that:
+    \[
+    \sup_{x \in X} |f_n(x)| \leq M, \quad \forall n \in \mathbb{N}.
+    \]
+\end{itemize}
+
+The family \(\{f_n\}\) is relatively compact if and only if its closure \(\overline{\{f_n\}}\) is compact. This is equivalent to the following: for every subsequence \(\{f_{n_i}\} \subseteq \overline{\{f_n\}}\), there exists a further subsequence \(\{f_{n_{i_k}}\} \subset \overline{\{f_n\}}\) and a function \(f \in C^0(X)\) such that:
+\[
+f_{n_{i_k}} \to f \quad \text{uniformly in } X \text{ as } k \to \infty.
+\]
+In particular, if we consider the original sequence \(\{f_n\}\) itself, this implies the existence of a subsequence \(\{f_{n_k}\} \subset \{f_n\}\) and a function \(f \in C^0(X)\) such that \(f_{n_k} \to f\) uniformly.
+
+
+\begin{corollary}
+If \(\{f_n\} \subset C^0(X)\) is bounded and equicontinuous, then there exists a subsequence \(\{f_{n_k}\} \subset \{f_n\}\) and a function \(f \in C^0(X)\) such that \(f_{n_k} \to f\) uniformly in \(C^0(X)\).
+\end{corollary}
+
+\begin{corollary}
+Let $\{f_n\} \subset C^0(X)$ with $X$ a compact metric space. Assume $\{f_n\}$ is bounded and equicontinuous. Then there exists $\{f_{n_k}\} \subset \{f_n\}$ and $f \in C^0(X)$ such that $f_{n_k} \to f$ for $k \to \infty$ in $C^0(X)$.
+\end{corollary}
+
+\clearpage
+\begin{corollary}
+Let $\{f_n\} \subset C^1([a,b])$ and suppose there exists $c > 0$ such that:
+\begin{enumerate}
+\item $\sup_{[a,b]} |f_n| \leq c, \quad \forall n \in \N$
+\item $\sup_{[a,b]} |f_n'| \leq c, \quad \forall n \in \N$
+\end{enumerate}
+Then there exists $\{f_{n_k}\} \subset \{f_n\}$ and $f \in C^0([a,b])$ such that $f_{n_k} \to f$ for $k \to \infty$ in $C^0([a,b])$.
+\end{corollary}
+
+\begin{proof}
+The proof of this corollary illustrates the power of the Arzelà-Ascoli theorem:
+
+\begin{enumerate}
+\item \textbf{Boundedness in $C^0$}: Condition (1) directly gives that $\{f_n\}$ is uniformly bounded:
+\[
+\sup_{[a,b]} |f_n| \leq c \quad \text{for all } n.
+\]
+
+\item \textbf{Equicontinuity from derivatives}: Condition (2) implies the sequence is equi-Lipschitz. By the Mean Value Theorem, for any $x, y \in [a,b]$:
+\[
+|f_n(y) - f_n(x)| = |f_n'(\xi_n)| \cdot |y - x| \leq c|y - x|,
+\]
+for some $\xi_n$ between $x$ and $y$.
+
+\item \textbf{Uniform equicontinuity}: This Lipschitz condition gives uniform equicontinuity. For any $\varepsilon > 0$, take $\delta = \varepsilon/c$. Then $|x - y| < \delta$ implies:
+\[
+|f_n(y) - f_n(x)| \leq c|x - y| < c \cdot \frac{\varepsilon}{c} = \varepsilon \quad \text{for all } n.
+\]
+
+\item \textbf{Applying Arzelà-Ascoli}: The Arzelà-Ascoli theorem states that a uniformly bounded and equicontinuous sequence of functions on a compact metric space has a uniformly convergent subsequence.
+
+\item \textbf{Conclusion}: Therefore, there exists a subsequence $\{f_{n_k}\}$ that converges uniformly to some $f \in C^0([a,b])$.
+\end{enumerate}
+
+This result is particularly important in the calculus of variations and PDE theory, where it's often used to extract convergent subsequences from minimizing sequences.
+\end{proof}
+
+\begin{remark}
+Consider $C^1([a,b])$ with the metric:
+\[
+d(f,g) \coloneqq \sup_{[a,b]} |f - g| + \sup_{[a,b]} |f' - g'|,
+\]
+which is a complete metric space. Then the two conditions in the corollary mean that $\{f_n\} \subset C^1$ is bounded.
+\end{remark}
+
+\clearpage
+\section{Normed and Banach Spaces}
+
+Let \( X \) be a vector space.
+
+A \textbf{norm} is a function \( \|\cdot\| : X \to [0, \infty) \) such that:
+\begin{itemize}
+    \item \( \|x\| = 0 \iff x = 0 \)
+    \item \( \|\lambda x\| = |\lambda| \|x\| \) for all \( \lambda \in \mathbb{R} \), \( x \in X \)
+    \item \( \|x + y\| \leq \|x\| + \|y\| \) for all \( x, y \in X \)
+\end{itemize}
+
+The pair \( (X, \|\cdot\|) \) is called a \textbf{normed space}.
+
+Define the metric \( d(x, y) \coloneqq \|x - y\| \). Then \( (X, d) \) is a metric space.
+
+\subsection{Examples}
+
+\begin{example}
+\( \mathbb{R}^n \), \( \dim \mathbb{R}^n = n < \infty \). For \( p \in [1, \infty) \):
+\[
+\|x\|_p \coloneqq \left( \sum_{i=1}^{n} |x_i|^p \right)^{1/p}, \quad \|x\|_\infty \coloneqq \max_{i=1,\dots,n} |x_i|
+\]
+\end{example}
+
+\begin{example}
+\( C^0([a,b]) \), \( \|f\|_{C^0} \coloneqq \max_{[a,b]} |f| \).
+
+\[
+C^k([a,b]), \quad \|f\|_{C^k} \coloneqq \sum_{i=0}^{k} \max_{[a,b]} |f^{(i)}|
+\]
+where \( f^{(0)} = f \).
+\end{example}
+
+\begin{example}
+For \( p \in [1, \infty) \), define:
+\[
+L^p(X, \A, \mu) \coloneqq \left\{ f \in M(X, \A) : \int_X |f|^p  d\mu < \infty \right\}, \quad \|f\|_p \coloneqq \left( \int_X |f|^p  d\mu \right)^{1/p}
+\]
+For \( p = \infty \):
+\[
+L^\infty(X, \A, \mu), \quad \|f\|_\infty \coloneqq \esssup_X |f|
+\]
+In \( L^p \), we identify functions that are equal almost everywhere.
+\end{example}
+
+\begin{example}
+\( AC([a,b]) \), the space of absolutely continuous functions, with norm:
+\[
+\|f\|_{AC} = |f(a)| + \|f'\|_1 \quad \text{or} \quad \|f\|_{AC} = \|f\|_1 + \|f'\|_1
+\]
+\end{example}
+
+\begin{example}
+\( W^{1,p}([a,b]) \), the Sobolev space, with norm:
+\[
+\|f\|_{W^{1,p}} = \|f\|_{L^p} + \|f'\|_{L^p}
+\]
+\end{example}
+
+\begin{example}
+For \( p \in [1, \infty) \), the space of sequences:
+\[
+\ell^p \coloneqq \left\{ x = (x^{(1)}, x^{(2)}, \dots) : \|x\|_p \coloneqq \left( \sum_{k=1}^{\infty} |x^{(k)}|^p \right)^{1/p} < \infty \right\}
+\]
+For \( p = \infty \):
+\[
+\ell^\infty \coloneqq \left\{ x : \|x\|_\infty \coloneqq \sup_{k \in \mathbb{N}} |x^{(k)}| < \infty \right\}
+\]
+\end{example}
+
+\begin{remark}
+If \( p < q \), then \( \ell^p \subset \ell^q \).
+\end{remark}
+
+\begin{remark}
+\( L^p(\mathbb{N}, \mathcal{P}(\mathbb{N}), \mu^{\#}) = \ell^p \), where \( \mu^{\#} \) is the counting measure.
+\end{remark}
+
+\subsection{Sequences and Series}
+
+Let \( (X, \|\cdot\|) \) be a normed space, \( \{x_n\} \subset X \), \( x \in X \).
+
+\begin{definition}
+We say \( x_n \to x \) as \( n \to \infty \) if \( \|x_n - x\| \to 0 \) as \( n \to \infty \), i.e., \( d(x_n, x) \to 0 \).
+\end{definition}
+
+\begin{remark}
+If \( x_n \to x \), then \( \|x_n\| \to \|x\| \). The converse is not true.
+\end{remark}
+
+\begin{proof}
+By the reverse triangle inequality: \( |\|x_n\| - \|x\|| \leq \|x_n - x\| \to 0 \).
+\end{proof}
+
+\begin{definition}
+A sequence \( \{x_n\} \subset X \) is a \textbf{Cauchy sequence} if for every \( \varepsilon > 0 \), there exists \( \bar{n} \in \mathbb{N} \) such that \( \|x_m - x_n\| < \varepsilon \) for all \( m, n > \bar{n} \).
+\end{definition}
+
+\begin{remark}
+Every convergent sequence is Cauchy. The converse is not true.
+\end{remark}
+
+\begin{definition}
+A sequence \( \{x_n\} \) is \textbf{bounded} if there exists \( M > 0 \) such that \( \|x_n\| \leq M \) for all \( n \in \mathbb{N} \).
+\end{definition}
+
+\begin{remark}
+Every Cauchy sequence is bounded.
+\end{remark}
+
+\begin{definition}
+For a sequence \( \{x_n\} \subset X \), define the partial sums \( s_n \coloneqq \sum_{k=1}^{n} x_k \). The series \( \sum_{k=1}^{\infty} x_k \) is \textbf{convergent} if the sequence \( \{s_n\} \) converges to some \( x \in X \), i.e., \( \|s_n - x\| \to 0 \). We write \( x = \sum_{k=1}^{\infty} x_k \).
+\end{definition}
+
+\begin{remark}
+If \( \sum_{k=1}^{\infty} \|x_k\| \) converges, it does not necessarily imply that \( \sum_{k=1}^{\infty} x_k \) converges.
+\end{remark}
+
+\subsection{Completeness}
+
+\begin{definition}
+A normed space \( (X, \|\cdot\|) \) is \textbf{complete} if the metric space \( (X, d) \) is complete, i.e., every Cauchy sequence in \( X \) converges in \( X \). A complete normed space is called a \textbf{Banach space}.
+\end{definition}
+
+\begin{example}
+All the examples above are Banach spaces.
+\end{example}
+
+\begin{theorem}[Criterion for completeness]
+\begin{enumerate}
+    \item Let \( X \) be a Banach space and \( \{x_n\} \subset X \). If \( \sum_{n=1}^{\infty} \|x_n\| \) converges, then \( \sum_{n=1}^{\infty} x_n \) converges.
+    \item Let \( X \) be a normed space. If for every \( \{x_n\} \subset X \) such that \( \sum_{n=1}^{\infty} \|x_n\| \) converges implies that \( \sum_{n=1}^{\infty} x_n \) converges, then \( X \) is Banach.
+\end{enumerate}
+\end{theorem}
+
+\subsection{Finite and Infinite Dimension}
+
+\begin{definition}
+A vector space \( X \) has \textbf{infinite dimension} if for every \( n \in \mathbb{N} \), there exists a set of \( n \) linearly independent vectors in \( X \).
+\end{definition}
+
+\begin{remark}
+If \( Y \) is a finite-dimensional vector subspace of a normed space \( X \), then \( Y \) is closed. If \( Y \) has infinite dimension, it is not necessarily closed.
+\end{remark}
+
+\begin{definition}
+Let \( (X, \|\cdot\|) \) and \( (X, \|\cdot\|_\#) \) be normed spaces. Two norms \( \|\cdot\| \) and \( \|\cdot\|_\# \) are \textbf{equivalent} if there exist constants \( m, M > 0 \) such that:
+\[
+m \|x\| \leq \|x\|_\# \leq M \|x\| \quad \text{for all } x \in X.
+\]
+\end{definition}
+
+\begin{theorem}
+If \( \dim X < \infty \), then all norms on \( X \) are equivalent.
+\end{theorem}
+
+\begin{remark}
+\( (C^0([a,b]), \|\cdot\|_\infty) \) is a Banach space, but \( (C^0([a,b]), \|\cdot\|_1) \) is not complete. Hence, these norms are not equivalent. In fact, \( \dim C^0 = \infty \).
+\end{remark}
+
+\clearpage
+\subsection{Balls and Closure}
+
+Let \( X \) be a normed space, \( x_0 \in X \), \( r > 0 \).
+
+\begin{itemize}
+    \item Open ball: \( B_r(x_0) \coloneqq \{ x \in X : \|x - x_0\| < r \} \)
+    \item Closed ball: \( \overline{B}_r(x_0) \coloneqq \{ x \in X : \|x - x_0\| \leq r \} \)
+\end{itemize}
+
+The closure of \( B_r(x_0) \) is denoted \( \overline{B_r(x_0)} \). In general, \( \overline{B_r(x_0)} = \overline{B}_r(x_0) \), but in a metric space, it is possible that \( \overline{B_r(x_0)} \subsetneq \overline{B}_r(x_0) \).
+
+\subsection{Compactness}
+
+\begin{example}
+Let \( X \) be a normed space with \( \dim X < \infty \), and let \( E \subsetneq X \) be a vector subspace. Then there exists \( x \in X \) with \( \|x\| = 1 \) and \( \dist(x, E) \geq 1 \).
+
+Indeed, since \( E \subsetneq X \), there exists \( y \in X \setminus E \). Let \( \eta \coloneqq \Proj_E y \) and \( x \coloneqq (y - \eta)/\|y - \eta\| \). Then \( \|x\| = 1 \) and \( \dist(x, E) \geq 1 \).
+\end{example}
+
+\begin{lemma}[Riesz]
+Let \( X \) be a normed space and \( E \subsetneq X \) a closed vector subspace. Then for every \( \varepsilon > 0 \), there exists \( x \in X \) with \( \|x\| = 1 \) and \( \dist(x, E) \geq 1 - \varepsilon \), where \( \dist(x, E) \coloneqq \inf_{\xi \in E} \|x - \xi\| \).
+\end{lemma}
+
+\begin{proof}
+Let \( y \in X \setminus E \). Then \( d \coloneqq \dist(y, E) > 0 \) since \( E \) is closed. For \( \varepsilon \in (0,1) \), choose \( \eta \in E \) such that:
+\[
+d \leq \|y - \eta\| \leq \frac{d}{1 - \varepsilon} > d
+\]
+Define \( x \coloneqq (y - \eta)/\|y - \eta\| \). Then \( \|x\| = 1 \). For any \( \xi \in E \):
+\[
+\|x - \xi\| = \left\| \frac{y - \eta}{\|y - \eta\|} - \xi \right\| = \frac{1}{\|y - \eta\|} \|y - (\eta + \xi \|y - \eta\|) \| \geq \frac{d}{\|y - \eta\|} \geq 1 - \varepsilon
+\]
+since \( \eta + \xi \|y - \eta\| \in E \). Hence, \( \dist(x, E) \geq 1 - \varepsilon \).
+\end{proof}
+
+\clearpage
+\begin{theorem}[Riesz]
+Let \( X \) be a normed space. If \( \dim X = \infty \), then the closed unit ball \( \overline{B}_1(0) \) is not compact.
+\end{theorem}
+
+\begin{proof}
+We construct a sequence with no convergent subsequence.
+
+Pick \( x_1 \in \overline{B}_1(0) \) and let \( Y_1 \coloneqq \operatorname{span}\{x_1\} \). Since \( \dim Y_1 = 1 < \infty \), \( Y_1 \) is closed.
+\begin{itemize}
+    \item If \( X = Y_1 \), then \( \dim X < \infty \), and we are done.
+    
+    \item Otherwise, by Riesz's lemma with \( \varepsilon = 1/2 \), there exists \( x_2 \in \overline{B}_1(0) \) such that \( \|x_2 - x_1\| \geq 1/2 \).
+\end{itemize}
+Let \( Y_2 \coloneqq \operatorname{span}\{x_1, x_2\} \), which is closed.
+\begin{itemize}
+    \item If \( X = Y_2 \), then \( \dim X < \infty \).
+    
+    \item Otherwise, continue this process inductively:
+    \begin{itemize}
+        \item Given \( x_1, \dots, x_n \) with \( \|x_i - x_j\| \geq 1/2 \) for \( i \neq j \)
+        \item Let \( Y_n \coloneqq \operatorname{span}\{x_1, \dots, x_n\} \), which is closed
+        \item If \( X = Y_n \), then \( \dim X < \infty \)
+        \item Otherwise, by Riesz's lemma, there exists \( x_{n+1} \in \overline{B}_1(0) \) with \( \|x_{n+1} - x_i\| \geq 1/2 \) for all \( i = 1, \dots, n \)
+    \end{itemize}
+\end{itemize}
+If \( \dim X = \infty \), this process continues indefinitely, producing a sequence \( \{x_n\} \subset \overline{B}_1(0) \) with \( \|x_i - x_j\| \geq 1/2 \) for all \( i \neq j \).
+
+This sequence has no convergent subsequence, so \( \overline{B}_1(0) \) is not sequentially compact, hence not compact.
+\end{proof}
+
+\begin{corollary}
+Let \( X \) be a normed space. Then:
+\[
+\exists K \subseteq X \text{ closed and bounded} \iff \dim X < \infty
+\]
+\end{corollary}
+
+\clearpage
+\section{Lebesgue Spaces}
+\subsection{\( L^p \) Spaces}
+
+Let \( (X, \A, \mu) \) be a measure space and \( p \in (1, \infty) \). Define:
+\[
+L^p(X, \A, \mu) \coloneqq \left\{ f \in M(X, \A) : \int_X |f|^p  d\mu < \infty \right\}
+\]
+Define an equivalence relation \( f R g \iff f = g \) almost everywhere. Then:
+\[
+L^p(X, \A, \mu) \coloneqq L^p(X, \A, \mu) / R
+\]
+We typically write \( f \in L^p \).
+
+\begin{lemma}
+Let \( p \in [1, \infty) \), \( a, b \geq 0 \). Then:
+\[
+(a + b)^p \leq 2^{p-1}(a^p + b^p)
+\]
+\end{lemma}
+
+\begin{proof}
+The function \( x \mapsto x^p \) is convex on \( [0, \infty) \), so:
+\[
+\left( \frac{a + b}{2} \right)^p \leq \frac{a^p + b^p}{2}
+\]
+Multiplying by \( 2^p \) gives the result.
+\end{proof}
+
+\begin{lemma}
+\( L^p \) is a vector space.
+\end{lemma}
+
+\begin{proof}
+Let \( f, g \in L^p \), \( \lambda \in \mathbb{R} \). Then \( f + \lambda g \) is measurable, and:
+\[
+\int_X |f + \lambda g|^p  d\mu \leq 2^{p-1} \left( \int_X |f|^p  d\mu + |\lambda|^p \int_X |g|^p  d\mu \right) < \infty
+\]
+Hence, \( f + \lambda g \in L^p \).
+\end{proof}
+
+\begin{lemma}[Young's inequality]
+Let \( p \in (1, \infty) \), \( a, b > 0 \). Then:
+\[
+ab \leq \frac{a^p}{p} + \frac{b^q}{q}
+\]
+where \( \frac{1}{p} + \frac{1}{q} = 1 \).
+\end{lemma}
+Proof in the next page $\downarrow$.
+
+\begin{proof}
+Define the function \( \varphi(x) \coloneqq e^x \), which is convex on \( \mathbb{R} \). Then for all \( x, y \in \mathbb{R} \) and \( t \in [0,1] \), we have:
+\[
+\varphi(tx + (1-t)y) \leq t\varphi(x) + (1-t)\varphi(y)
+\]
+
+Now consider:
+\[
+ab = e^{\log a} \cdot e^{\log b} = e^{\frac{1}{p} \log a^p + \frac{1}{q} \log b^q}
+\]
+
+Apply the convexity inequality with:
+\begin{itemize}
+    \item \( t = \frac{1}{p} \), \( 1 - t = \frac{1}{q} \)
+    \item \( x = \log a^p \)
+    \item \( y = \log b^q \)
+\end{itemize}
+
+This gives:
+\[
+ab=e^{\frac{1}{p} \log a^p + \frac{1}{q} \log b^q} \leq \frac{1}{p} e^{\log a^p} + \frac{1}{q} e^{\log b^q} = \frac{a^p}{p} + \frac{b^q}{q}
+\]
+\end{proof}
+
+\begin{definition}
+Two exponents \( p, q \in [1, \infty] \) are \textbf{conjugate} if:
+\begin{itemize}
+    \item \( p, q \in (1, \infty) \) and \( \frac{1}{p} + \frac{1}{q} = 1 \), or
+    \item \( p = 1 \), \( q = \infty \), or
+    \item \( p = \infty \), \( q = 1 \)
+\end{itemize}
+\end{definition}
+
+\begin{theorem}[Hölder's inequality]
+Let \( f, g \in M(X, \A) \), and let \( p, q \in [1, \infty] \) be conjugate. Then:
+\[
+\|fg\|_1 \leq \|f\|_p \|g\|_q
+\]
+\end{theorem}
+
+\begin{proof}
+Case 1: \( p, q \in (1, \infty) \), \( \frac{1}{p} + \frac{1}{q} = 1 \). If \( \|f\|_p \|g\|_q = \infty \), the inequality is trivial. If \( \|f\|_p \|g\|_q = 0 \), then \( f = 0 \) or \( g = 0 \) a.e., so \( fg = 0 \) a.e., and the inequality holds. Assume \( 0 < \|f\|_p, \|g\|_q < \infty \). For \( x \in X \), let:
+\[
+a = \frac{|f(x)|^p}{\|f\|_p^p}, \quad b = \frac{|g(x)|^q}{\|g\|_q^q}
+\]
+By Young's inequality:
+\[
+\frac{|f(x)|}{\|f\|_p} \frac{|g(x)|}{\|g\|_q} \leq \frac{1}{p} \frac{|f(x)|^p}{\|f\|_p^p} + \frac{1}{q} \frac{|g(x)|^q}{\|g\|_q^q}
+\]
+Integrating both sides:
+\[
+\frac{1}{\|f\|_p \|g\|_q} \int_X |f(x)g(x)|  d\mu \leq \frac{1}{p} + \frac{1}{q} = 1
+\]
+So \( \|fg\|_1 \leq \|f\|_p \|g\|_q \).
+
+Case 2: \( p = 1 \), \( q = \infty \). Then \( |g| \leq \|g\|_\infty \) a.e., so:
+\[
+\|fg\|_1 = \int_X |fg|  d\mu \leq \|g\|_\infty \int_X |f|  d\mu = \|f\|_1 \|g\|_\infty
+\]
+\end{proof}
+
+\begin{theorem}[Minkowski's inequality]
+Let \( f, g \in M(X, \A) \), \( p \in [1, \infty] \). Then:
+\[
+\|f + g\|_p \leq \|f\|_p + \|g\|_p
+\]
+\end{theorem}
+
+\begin{proof}
+Case 1: \( p \in (1, \infty) \).
+\[
+\|f + g\|_p^p = \int_X |f + g|^p  d\mu = \int_X |f + g| |f + g|^{p-1}  d\mu \leq \int_X |f| |f + g|^{p-1}  d\mu + \int_X |g| |f + g|^{p-1}  d\mu
+\]
+By Hölder's inequality:
+\[
+\int_X |f| |f + g|^{p-1}  d\mu \leq \|f\|_p \| |f + g|^{p-1} \|_q, \quad \int_X |g| |f + g|^{p-1}  d\mu \leq \|g\|_p \| |f + g|^{p-1} \|_q
+\]
+Note that \( \| |f + g|^{p-1} \|_q = \left( \int_X |f + g|^{(p-1)q}  d\mu \right)^{1/q} = \|f + g\|_p^{p/q} \). So:
+\[
+\|f + g\|_p^p \leq (\|f\|_p + \|g\|_p) \|f + g\|_p^{p/q}
+\]
+Dividing by \( \|f + g\|_p^{p/q} \) (if zero, trivial) gives:
+\[
+\|f + g\|_p \leq \|f\|_p + \|g\|_p
+\]
+
+Case 2: \( p = 1 \).
+\[
+\|f + g\|_1 = \int_X |f + g|  d\mu \leq \int_X (|f| + |g|)  d\mu = \|f\|_1 + \|g\|_1
+\]
+
+Case 3: \( p = \infty \).
+\[
+\|f + g\|_\infty = \esssup_X |f + g| \leq \esssup_X (|f| + |g|) \leq \esssup_X |f| + \esssup_X |g| = \|f\|_\infty + \|g\|_\infty
+\]
+\end{proof}
+
+\begin{corollary}
+\( L^p(X, \A, \mu) \) is a normed space with the norm \( \|f\|_p \).
+\end{corollary}
+
+\begin{proof}
+Clearly \( \|f\|_p = 0 \iff f = 0 \) a.e., and \( \|\lambda f\|_p = |\lambda| \|f\|_p \). Minkowski's inequality gives the triangle inequality.
+\end{proof}
+
+\clearpage
+\begin{theorem}[Inclusion of \( L^p \) spaces]
+Suppose \( \mu(X) < \infty \). Then for \( 1 \leq p \leq q \leq \infty \), we have:
+\[
+L^q(X, \A, \mu) \subseteq L^p(X, \A, \mu)
+\]
+Moreover, there exists \( C > 0 \) such that \( \|f\|_p \leq C \|f\|_q \) for all \( f \in L^q \).
+\end{theorem}
+
+\begin{proof}
+Case 1: \( q = \infty \).
+\[
+\|f\|_p^p = \int_X |f|^p  d\mu \leq \|f\|_\infty^p \mu(X) \Rightarrow \|f\|_p \leq \mu(X)^{1/p} \|f\|_\infty
+\]
+
+Case 2: \( q < \infty \).
+
+By Hölder's inequality with \( r = \frac{q}{q - p} \), \( s = \frac{q}{p} \):
+\[
+\|f\|_p^p = \int_X |f|^p  d\mu = \int_X 1 \cdot |f|^p  d\mu \leq \left( \int_X 1^r  d\mu \right)^{1/r} \left( \int_X (|f|^p)^s  d\mu \right)^{1/s} = \mu(X)^{\frac{q - p}{q}} \|f\|_q^p
+\]
+So \( \|f\|_p \leq \mu(X)^{\frac{q - p}{pq}} \|f\|_q \).
+\end{proof}
+
+\begin{remark}
+Note that it is necessary that $\mu(X) < \infty$.
+
+If $\mu(X) = \infty$, in general the preceding inclusion is false.
+
+Consider $f(x) = \frac{1}{x}$ for $x \in (1, \infty)$ with $\lambda((1, \infty)) = \infty$. \\
+Then $f \in L^2((1, \infty))$, but $f \notin L^1((1, \infty))$. \\
+Hence $L^2((1, \infty)) \nsubseteq L^1((1, \infty))$.
+\end{remark}
+
+\begin{remark}
+For \( \ell^p \) spaces with counting measure, \( \mu^{\#}(\mathbb{N}) = \infty \), so the above theorem does not apply. In fact, \( \ell^p \subset \ell^q \) for \( p \leq q \).
+\end{remark}
+
+\begin{theorem}[Interpolation inequality]
+Let \( (X, \A, \mu) \) be a measure space, \( 1 \leq p \leq q \leq \infty \). If \( f \in L^p \cap L^q \), then \( f \in L^r \) for all \( r \in (p, q) \), and:
+\[
+\|f\|_r \leq \|f\|_p^\alpha \|f\|_q^{1 - \alpha}
+\]
+where \( \alpha \in (0, 1) \) satisfies \( \frac{1}{r} = \frac{\alpha}{p} + \frac{1 - \alpha}{q} \).
+\end{theorem}
+
+\begin{proof}
+Write \( |f|^r = |f|^{\alpha r} |f|^{(1 - \alpha)r} \). Apply Hölder's inequality with exponents \( P = \frac{p}{\alpha r} \), \( Q = \frac{q}{(1 - \alpha)r} \). Then:
+\[
+\|f\|_r^r = \int_X |f|^r  d\mu \leq \left( \int_X |f|^p  d\mu \right)^{\alpha r / p} \left( \int_X |f|^q  d\mu \right)^{(1 - \alpha)r / q} = \|f\|_p^{\alpha r} \|f\|_q^{(1 - \alpha)r}
+\]
+Taking the \( r \)-roots gives the result.
+\end{proof}
+
+\clearpage
+\subsection{Completeness of \( L^p \) Spaces}
+
+\begin{theorem}
+\( L^p(X, \A, \mu) \) is a Banach space for all \( p \in [1, \infty] \).
+\end{theorem}
+
+\begin{proof}
+We prove the case \( p \in [1, \infty) \). It suffices to show that if \( \{f_n\} \subset L^p \) and \( \sum_{n=1}^{\infty} \|f_n\|_p \) converges, then \( \sum_{n=1}^{\infty} f_n \) converges in \( L^p \).
+
+Let \( g_k \coloneqq \sum_{n=1}^{k} |f_n| \). By Minkowski's inequality:
+\[
+\|g_k\|_p \leq \sum_{n=1}^{k} \|f_n\|_p \leq M \coloneqq \sum_{n=1}^{\infty} \|f_n\|_p < \infty
+\]
+Let \( g(x) \coloneqq \sum_{n=1}^{\infty} |f_n(x)| \). Then \( \{g_k\} \) is an increasing sequence of non-negative measurable functions. By the Beppo-Levi (Monotone Convergence) Theorem:
+\[
+\lim_{k \to \infty} \int_X g_k^p  d\mu = \int_X g^p  d\mu \leq M^p
+\]
+So \( g \in L^p \), hence \( g < \infty \) a.e., and \( \sum_{n=1}^{\infty} f_n \) converges absolutely a.e. Let \( s(x) \coloneqq \sum_{n=1}^{\infty} f_n(x) \), \( s_k(x) \coloneqq \sum_{n=1}^{k} f_n(x) \). Then \( s_k \to s \) a.e., and \( |s_k - s|^p \to 0 \) a.e. Moreover:
+\[
+|s_k - s|^p \leq \left( \sum_{n=k+1}^{\infty} |f_n| \right)^p \leq g^p \in L^1
+\]
+By the Dominated Convergence Theorem:
+\[
+\lim_{k \to \infty} \int_X |s_k - s|^p  d\mu = 0
+\]
+So \( \|s_k - s\|_p \to 0 \), hence \( \sum_{n=1}^{\infty} f_n \) converges in \( L^p \).
+\end{proof}
+
+\begin{remark} [Dominated Convergence Theorem in \( L^p \)]
+Let \( \{f_n\} \subset M(X, \A) \), \( f \in M(X, \A) \), and \( f_n \to f \) a.e.
+\begin{enumerate}
+    \item If there exists \( g \in L^1(X) \) such that \( |f_n - f|^p \leq g \) a.e. for all \( n \), then \( f_n \to f \) in \( L^p \).
+    \item If there exists \( g \in L^p(X) \) such that \( |f_n|^p \leq g \) a.e. for all \( n \), then \( f_n \to f \) in \( L^p \).
+\end{enumerate}
+\end{remark}
+
+\subsection{Separability}
+
+Let \( \Omega \subseteq \mathbb{R}^N \) be open and Lebesgue measurable.
+
+\begin{enumerate}
+    \item \( C_c^0(\Omega) \) is dense in \( L^p(\Omega) \) for all \( p \in [1, \infty) \).
+    \item \( C_0^\infty(\Omega) \) is dense in \( L^p(\Omega) \) for all \( p \in [1, \infty) \).
+\end{enumerate}
+
+\begin{theorem}
+\( L^p(\Omega) \) is separable for all \( p \in [1, \infty) \).
+\end{theorem}
+
+\clearpage
+\begin{lemma}
+Let \( X \) be a metric space. Suppose there exists an uncountable family \( \{A_i\}_{i \in I} \) of open sets such that \( A_i \cap A_j = \emptyset \) for \( i \neq j \). Then \( X \) is not separable.
+\end{lemma}
+
+\begin{proof}
+Suppose \( X \) is separable, so there exists a countable dense set \( \{c_n\} \). For each \( i \in I \), \( A_i \cap \{c_n\} \neq \emptyset \), so there exists \( n(i) \) such that \( c_{n(i)} \in A_i \). The map \( i \mapsto n(i) \) is injective because \( A_i \cap A_j = \emptyset \) for \( i \neq j \). But \( I \) is uncountable and \( \mathbb{N} \) is countable, contradiction.
+\end{proof}
+
+\begin{theorem}
+\( L^\infty(\mathbb{R}, \mathcal{L}, \lambda) \) is not separable.
+\end{theorem}
+
+\begin{proof}
+Consider the family \( \{\chi_{[-\alpha, \alpha]} : \alpha > 0\} \subset L^\infty(\mathbb{R}) \). For \( \alpha \neq \alpha' \), \( \|\chi_{[-\alpha, \alpha]} - \chi_{[-\alpha', \alpha']}\|_\infty = 1 \). Let \( A_\alpha \coloneqq B_{1/2}(\chi_{[-\alpha, \alpha]}) \). Then \( \{A_\alpha\} \) is an uncountable family of disjoint open sets. By the lemma, \( L^\infty \) is not separable.
+\end{proof}
+
+\subsection{\( \ell^p \) Spaces}
+
+\begin{itemize}
+    \item \( \ell^p \) is a Banach space for all \( p \in [1, \infty] \).
+    \item \( \ell^p \) is separable for all \( p \in [1, \infty) \).
+    \item \( \ell^\infty \) is not separable.
+\end{itemize}

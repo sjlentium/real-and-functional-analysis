@@ -1,0 +1,402 @@
+\section{Hilbert Spaces}
+\subsection{Pre-Hilbert and Hilbert Spaces}
+
+\begin{definition}
+A vector space $H$ with a scalar/inner product is called a \textbf{pre-Hilbert space} or \textbf{inner product space}. 
+
+Define $\|x\| \coloneqq \sqrt{\langle x, x \rangle}$ for all $x \in H$. This is a norm.
+
+If $(H, \langle \cdot, \cdot \rangle)$ is pre-Hilbert, then $(H, \|\cdot\|)$ is a normed space. So all theorems from normed spaces hold.
+
+Thus $(H, d)$ is a metric space with $d(x,y) = \|y - x\|$.
+
+A pre-Hilbert space which is complete is called a \textbf{Hilbert space}.
+\end{definition}
+
+\subsection*{Examples}
+
+\begin{example}
+$C^0([a,b], \langle \cdot, \cdot \rangle)$ with 
+\[
+\langle f, g \rangle \coloneqq \int_a^b f(x)g(x) \, dx
+\]
+is only pre-Hilbert.
+\end{example}
+
+\begin{example}
+$L^2(X, \A, \mu)$ with 
+\[
+\langle f, g \rangle \coloneqq \int_X f(x)g(x) \, d\mu
+\]
+is Hilbert, because $L^2$ is complete.
+\end{example}
+
+\begin{example}
+$\ell^2$ with 
+\[
+\langle x, y \rangle = \sum_{n=1}^{\infty} x^{(n)} y^{(n)}
+\]
+is Hilbert.
+\end{example}
+
+\begin{example}
+$W^{1,2}((a,b)) \equiv H^1((a,b)) \coloneqq \{ f \in L^2((a,b)) : f' \in L^2((a,b)) \}$ with
+\[
+\langle f, g \rangle \coloneqq \int_a^b f(x)g(x) \, dx + \int_a^b f'(x) g'(x) \, dx
+\]
+is Hilbert, where $f'$ is the weak derivative.
+\end{example}
+
+\begin{remark}
+$L^p$ is Hilbert if and only if $p = 2$.
+\end{remark}
+
+\subsection{Parallelogram Identity}
+
+\begin{theorem}[Parallelogram Identity]
+Let $H$ be a pre-Hilbert space. Then
+\[
+\left\| \frac{a+b}{2} \right\|^2 + \left\| \frac{a-b}{2} \right\|^2 = \frac{1}{2} \left( \|a\|^2 + \|b\|^2 \right), \quad \forall a,b \in H.
+\]
+\end{theorem}
+
+\begin{remark}
+If $\|\cdot\|$ satisfies the parallelogram identity, then $\|\cdot\| = \sqrt{\langle \cdot, \cdot \rangle}$.
+\end{remark}
+
+\begin{remark}
+Consider $H = L^p$ with $1 < p < \infty$. For $p \geq 2$,
+\[
+\left\| \frac{a+b}{2} \right\|_p^p + \left\| \frac{a-b}{2} \right\|_p^p \leq \frac{1}{2} \left( \|a\|_p^p + \|b\|_p^p \right), \quad \forall a,b \in H.
+\]
+This is the first Clarkson inequality.
+\end{remark}
+
+\subsection{Convex Sets and Projection Theorem}
+
+\begin{definition}
+Let $E$ be a normed space, $K \subseteq E$. $K$ is \textbf{convex} if for all $x,y \in K$ the segment joining $x$ to $y$ belongs to $K$.
+\end{definition}
+
+\begin{theorem}[Projection Theorem]
+Let $H$ be a Hilbert space and $K \subset H$ a closed convex subset. 
+
+\textbf{\textit{Part 1}}. For every $f \in H$, there exists a unique $u \in K$ such that
+\[
+\|f - u\| = \min_{v \in K} \|f - v\| \coloneqq \dist(f, K).
+\]
+
+\textbf{\textit{Part 2}}. Moreover, $u$ satisfies the above property if and only if
+\[
+u \in K, \quad \langle f - u, v - u \rangle \leq 0, \quad \forall v \in K.
+\]
+\end{theorem}
+
+Proof in the next page $\downarrow$.
+
+\begin{proof}
+\textbf{Part 1. Existence.}
+Let $\{v_n\} \subset K$ be a minimizing sequence, i.e., 
+\[
+\{v_n\} \subset K, \quad d_n \coloneqq \|f - v_n\| \to \inf_{v \in K} \|f - v\| =: d.
+\]
+We claim $\{v_n\}$ is Cauchy. By the parallelogram law with $a = f - v_n$ and $b = f - v_m$:
+\[
+\left\| f - \frac{v_n + v_m}{2} \right\|^2 + \left\| \frac{v_n - v_m}{2} \right\|^2 = \frac{1}{2} (d_n^2 + d_m^2).
+\]
+Since $K$ is convex, $(v_n + v_m)/2 \in K$, so 
+\[
+\left\| f - \frac{v_n + v_m}{2} \right\|^2 \geq d.
+\]
+Thus,
+\[
+\left\| \frac{v_n - v_m}{2} \right\|^2 = \frac{1}{2} (d_n^2 + d_m^2) - \left\| f - \frac{v_n + v_m}{2} \right\|^2 \leq \frac{1}{2} (d_n^2 + d_m^2) - d^2.
+\]
+Taking limit as $n,m \to \infty$, we get $\|(v_n - v_m)/2\|^2 \to 0$, so $\{v_n\}$ is Cauchy.
+
+Since $H$ is complete, $\exists u \in H$ such that $v_n \to u$. As $K$ is closed, $u \in K$. Then
+\[
+d \leq \|f - u\| \leq \|f - v_n\| + \|v_n - u\| = d_n + \|v_n - u\| \to d + 0,
+\]
+so $\|f - u\| = d$.
+
+\textbf{Part 1. Uniqueness.}
+Suppose by contradiction that $u, \tilde{u} \in K$ with $u \neq \tilde{u}$ and 
+\[
+d = \|f - u\| = \|f - \tilde{u}\|.
+\]
+Apply the parallelogram identity with $a = f - u$, $b = f - \tilde{u}$:
+\[
+\left\| f - \frac{u + \tilde{u}}{2} \right\|^2 + \left\| \frac{u - \tilde{u}}{2} \right\|^2 = \frac{1}{2} (d^2 + d^2) = d^2.
+\]
+Let $\left\| \frac{u - \tilde{u}}{2} \right\|^2 =: \sigma > 0$. Then
+\[
+d^2 \leq \left\| f - \frac{u + \tilde{u}}{2} \right\|^2 = d^2 - \sigma,
+\]
+a contradiction.
+
+\textbf{Part 2.} Not included.
+\end{proof}
+
+\begin{theorem}[Projection in $L^p$]
+Let $1 < p < \infty$, $K \subset L^p(X, \A, \mu)$ a closed convex subset. Then for every $f \in L^p$, there exists a unique $u \in K$ such that
+\[
+\|f - u\|_p = \min_{v \in K} \|f - v\|_p = \dist(f, K).
+\]
+\end{theorem}
+
+\begin{proof}
+Same argument as above, with the parallelogram law replaced by the first Clarkson inequality.
+\end{proof}
+
+\begin{definition}
+$u \coloneqq \Proj_K f$ is the element of $K$ of minimal distance from $f$.
+\end{definition}
+
+\subsection{Projection Theorem: Special Case}
+
+\begin{corollary}
+Let $H$ be a Hilbert space and $M \subset H$ a closed vector subspace. Let $f \in H$. Then
+\[
+u = \Proj_M f \iff u \in M, \quad \langle f - u, v \rangle = 0, \quad \forall v \in M.
+\]
+This is the \textbf{orthogonal projection}.
+\end{corollary}
+
+\begin{proof}
+$(\Rightarrow)$ Condition (2) in the general theorem gives:
+\[
+u \in M, \quad \langle f - u, v - u \rangle \leq 0, \quad \forall v \in M.
+\]
+Since $M$ is a vector space, $tv \in M$ for all $t \in \R$, so
+\[
+\langle f - u, tv - u \rangle \leq 0, \quad \forall v \in M, \forall t \in \R.
+\]
+By homogeneity and linearity: $
+t \langle f - u, v \rangle \leq \langle f - u, u \rangle \quad \text{for all } v \in M, \; t \in \mathbb{R}.
+$
+
+If $\langle f - u, v \rangle > 0$ for some $v$, choosing 
+\[
+t > \frac{\langle f - u, u \rangle}{\langle f - u, v \rangle}
+\]
+gives a contradiction.
+
+Hence
+\[
+\langle f - u, v \rangle = 0 \quad \text{for all } v \in M.
+\]
+
+
+$(\Leftarrow)$ If $u$ satisfies condition (3), then for $\xi \in M$, set $v = \xi - u \in M$:
+\[
+\langle f - u, \xi - u \rangle = 0, \quad \forall \xi \in M,
+\]
+which is condition (2), so $u = \Proj_M f$.
+\end{proof}
+
+\begin{remark}
+In $L^p$, for $f \in L^p$ and $M \subset L^p$ a closed vector subspace, $u = \Proj_M f$ satisfies
+\[
+\int_X |f - u|^{p-2} (f - u) v \, d\mu = 0, \quad \forall v \in M \subset L^p.
+\]
+This replaces the orthogonality condition. For $p = 2$, this is exactly the scalar product in $L^2$.
+\end{remark}
+
+\clearpage
+\subsection{Dual of Hilbert Spaces}
+
+Let $(V, \langle \cdot, \cdot \rangle)$ with $\dim V = n \Rightarrow V^* = V$. For $\dim V = \infty$, what happens?
+
+Let $H$ be a Hilbert space, $f \in H$. Define $\varphi: H \to \R$ by $\varphi(u) \coloneqq \langle f, u \rangle$ for all $u \in H$. Then $\varphi \in H^*$ and $\|\varphi\|_\LL = \|f\|_H$, so $H \subseteq H^*$. Is $H^* \subseteq H$?
+
+\begin{theorem}[Riesz Representation Theorem]
+Let $H$ be a Hilbert space. For any $\varphi \in H^*$, there exists a unique $f \in H$ such that
+\[
+\varphi(u) = \langle f, u \rangle, \quad \forall u \in H,
+\]
+and $\|\varphi\|_\LL = \|f\|_H$.
+\end{theorem}
+
+\begin{remark}
+In the proof, we find $f = \varphi(g) \cdot g$.
+\end{remark}
+
+\begin{proof}
+\textbf{Existence.} Let $M \coloneqq \varphi^{-1}(0)$, the kernel of $\varphi$, a closed vector subspace. If $M = H$, take $f = 0$. Otherwise, $M \subsetneq H$. We claim there exists $g \in H$ with $\|g\| = 1$ and $g \in M^\perp$.
+
+Indeed, let $g_0 \in H \setminus M$, $g_1 \coloneqq \Proj_M g_0$, and define
+\[
+g \coloneqq \frac{g_0 - g_1}{\|g_0 - g_1\|}.
+\]
+Then $\|g\| = 1$ and $g \in M^\perp$.
+
+For any $u \in H$, set $v \coloneqq u - \lambda g$ with $\lambda = \varphi(u)/\varphi(g)$. Note that
+\[
+\varphi(g) = \frac{\varphi(g_0) - \varphi(g_1)}{\|g_0 - g_1\|} = \frac{\varphi(g_0)}{\|g_0 - g_1\|}.
+\]
+Then $\varphi(v) = \varphi(u) - \lambda \varphi(g) = 0$, so $v \in M$. Hence
+\[
+\langle g, v \rangle = 0 \Rightarrow \langle g, u - \lambda g \rangle = 0 \Rightarrow \langle g, u \rangle = \lambda \|g\|^2 = \lambda,
+\]
+so $\langle g, u \rangle = \varphi(u)/\varphi(g) \Rightarrow \varphi(u) = \varphi(g) \langle g, u \rangle = \langle f, u \rangle$ with $f = \varphi(g) \cdot g$.
+
+\textbf{Uniqueness.} Suppose $f_1, f_2 \in H$ both represent $\varphi$. Then
+\[
+0 = \langle f_1 - f_2, u \rangle, \quad \forall u \in H.
+\]
+Choosing $u = f_1 - f_2$ gives $\|f_1 - f_2\|^2 = 0$, so $f_1 = f_2$.
+
+The norm equality $\|\varphi\|_\LL = \|f\|_H$ follows as in exercises.
+\end{proof}
+
+\begin{remark}
+By similar arguments, we get the Riesz Representation Theorem for $L^p$ spaces ($1 < p < \infty$).
+\end{remark}
+
+\clearpage
+\subsection{Lax-Milgram Theorem}
+
+Let $H$ be a pre-Hilbert space, $B: H \times H \to \R$ a bilinear form.
+
+\begin{definition}
+We say $B$ is \textbf{bounded/continuous} if there exists $\alpha > 0$ such that
+\[
+|B(u,v)| \leq \alpha \|u\| \|v\|, \quad \forall u,v \in H. \tag{1}
+\]
+
+We say $B$ is \textbf{coercive} if there exists $\beta > 0$ such that
+\[
+B(u,u) \geq \beta \|u\|^2, \quad \forall u \in H. \tag{2}
+\]
+\end{definition}
+
+Let $f \in H^*$. Consider the problem: find $u \in H$ such that
+\[
+B(u,v) = f(v), \quad \forall v \in H. \tag{3}
+\]
+
+\begin{theorem}[Lax-Milgram]
+Let $H$ be a Hilbert space, $B: H \times H \to \R$ a bilinear form that is continuous (1) and coercive (2). Let $f \in H^*$. Then there exists a unique $u \in H$ satisfying (3).
+\end{theorem}
+
+\begin{proof}
+1. For fixed $u \in H$, the map $v \mapsto B(u,v)$ is linear and continuous. By Riesz, there exists a unique $w \in H$ such that
+\[
+B(u,v) = \langle w, v \rangle, \quad \forall v \in H. \tag{*}
+\]
+
+2. Define $A: H \to H$ by $A(u) \coloneqq w$. Then $A$ is linear and continuous since
+\[
+\|A(u)\|^2 = \langle A(u), A(u) \rangle = B(u, A(u)) \leq \alpha \|u\| \|A(u)\|,
+\]
+so $\|A(u)\| \leq \alpha \|u\|$ for all $u \in H$.
+
+3. \textbf{(i) $A$ is injective.} By (2) and (*):
+\[
+\beta \|u\|^2 \leq B(u,u) = \langle A(u), u \rangle \leq \|u\| \|A(u)\| \Rightarrow \|A(u)\| \geq \beta \|u\|.
+\]
+If $u \neq 0$, then $\|A(u)\| > 0$, so $\Ker(A) = \{0\}$.
+
+\textbf{(ii) $\Im(A)$ is closed.} Let $\{v_n\} \subseteq \Im(A)$ with $v_n \to v$ in $H$. Write $v_n = A(u_n)$. Then
+\[
+\beta \|u_n - u_m\| \leq \|A(u_n) - A(u_m)\| = \|v_n - v_m\|,
+\]
+so $\{u_n\}$ is Cauchy. Since $H$ is complete, $u_n \to u$ for some $u \in H$. By continuity of $A$, $v_n = A(u_n) \to A(u)$, so $v = A(u) \in \Im(A)$.
+
+4. $A$ is surjective. If not, $\Im(A) \subsetneq H$. Since $\Im(A)$ is closed, there exists $\eta \in H$ with $\eta \in \Im(A)^\perp$. Then
+\[
+0 < \beta \|\eta\|^2 \leq B(\eta, \eta) = \langle A(\eta), \eta \rangle = 0,
+\]
+a contradiction.
+
+5. By Riesz, there exists a unique $y \in H$ such that $f(v) = \langle y, v \rangle$ for all $v \in H$. Since $A$ is bijective, there exists a unique $u \in H$ with $A(u) = y$. Then
+\[
+B(u,v) = \langle A(u), v \rangle = \langle y, v \rangle = f(v), \quad \forall v \in H.
+\]
+
+6. \textbf{Uniqueness.} Suppose $u, \tilde{u} \in H$ both satisfy (3). Then
+\[
+B(u - \tilde{u}, v) = 0, \quad \forall v \in H.
+\]
+Taking $v = u - \tilde{u}$ gives
+\[
+0 < \beta \|u - \tilde{u}\|^2 \leq B(u - \tilde{u}, u - \tilde{u}) = 0,
+\]
+a contradiction.
+\end{proof}
+
+\begin{remark}
+If $B$ is symmetric, then $B$ defines a new inner product on $H$. The norms $\|\cdot\|_* = \sqrt{B(u,u)}$ and $\|\cdot\|$ are equivalent by (1) and (2). Then $(H, B(\cdot, \cdot))$ is also Hilbert, and Riesz gives $f(v) = B(g,v)$ for some $g \in H$.
+\end{remark}
+
+\begin{remark}
+If $B$ is symmetric, then $u$ solves (3) if and only if
+\[
+u \in H, \quad \frac{1}{2} B(u,u) - f(u) = \min_{v \in H} \left\{ \frac{1}{2} B(v,v) - f(v) \right\}.
+\]
+This is a minimization problem.
+\end{remark}
+
+\subsection{Orthonormal Bases}
+
+\begin{definition}
+Let $H$ be a Hilbert space. A sequence $\{e_n\} \subset H$ is an \textbf{orthonormal basis} (or Hilbert basis) if:
+\begin{enumerate}
+\item $\langle e_n, e_m \rangle = 0$ for all $n \neq m \in \N$, and $\|e_n\| = 1$ for all $n \in \N$.
+\item $\Span(\{e_n\})$ is dense in $H$.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+Condition (2) is equivalent to: for every $u \in H$ and $\varepsilon > 0$, there exist $n \in \N$ and $\alpha_1, \dots, \alpha_n \in \R$ such that
+\[
+\left\| u - \sum_{i=1}^n \alpha_i e_i \right\| < \varepsilon.
+\]
+\end{remark}
+
+\begin{theorem}
+Let $H$ be a Hilbert space with orthonormal basis $\{e_n\}$. Then for every $u \in H$:
+\[
+u = \sum_{k=1}^\infty \langle u, e_k \rangle e_k, \quad \|u\|^2 = \sum_{k=1}^\infty |\langle u, e_k \rangle|^2.
+\]
+Conversely, for any sequence $\{\alpha_k\} \in \ell^2$, the series $\sum_{k=1}^\infty \alpha_k e_k$ converges to some $u \in H$ with
+\[
+\langle u, e_k \rangle = \alpha_k, \quad \|u\|^2 = \sum_{k=1}^\infty \alpha_k^2.
+\]
+\end{theorem}
+
+\begin{remark}
+This is the \textbf{abstract Fourier series}. The convergence is in the Hilbert space norm:
+\[
+\left\| \sum_{k=1}^\infty \langle u, e_k \rangle e_k - u \right\| \to 0 \quad (n \to \infty).
+\]
+The $\langle u, e_k \rangle$ are the \textbf{Fourier coefficients}, and $\langle u, e_k \rangle e_k$ is the projection of $u$ onto $\Span(e_k)$. The identity $\|u\|^2 = \sum_{k=1}^\infty |\langle u, e_k \rangle|^2$ is \textbf{Parseval's identity}.
+\end{remark}
+
+\clearpage
+\begin{theorem}
+Every separable Hilbert space has an orthonormal basis.
+\end{theorem}
+
+\begin{example}
+1. $L^2$: trigonometric functions $\sin$, $\cos$, or polynomials (from ODEs).
+
+2. $\ell^2$: standard basis $e_n^{(k)} = \delta_{nk}$.
+\end{example}
+
+\begin{theorem}
+Let $\{e_n\}_{n \in \N}$ be an orthonormal basis in a Hilbert space $H$. Then $e_n \rightharpoonup 0$ weakly, but $e_n \not\to 0$ strongly.
+\end{theorem}
+
+\begin{proof}
+For any $f \in H$, Parseval's identity gives $\|f\|^2 = \sum_{k=1}^\infty \langle f, e_n \rangle^2 < \infty$, so $\langle f, e_n \rangle \to 0$ as $n \to \infty$. This means $F(e_n) \to 0$ for all $F \in H^*$, i.e., $e_n \rightharpoonup 0$ weakly. But $\|e_n\| = 1$ for all $n$, so $e_n \not\to 0$ strongly.
+\end{proof}
+
+\begin{theorem}
+Any Hilbert space is reflexive.
+\end{theorem}
+
+\begin{proof}
+As in $L^p$, $H$ is uniformly convex (using the parallelogram law instead of Clarkson's inequality). The conclusion follows from the Milman-Pettis theorem.
+\end{proof}

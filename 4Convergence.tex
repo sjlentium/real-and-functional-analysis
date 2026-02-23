@@ -1,0 +1,140 @@
+\section{Types of Convergence}
+
+\subsection{Convergences}
+Let $\{f_n\} \subseteq \M(X,\A)$ with $f_n : X \to \R$ and $f : X \to \Rext$.
+
+\subsubsection{Pointwise Convergence}
+$f_n \to f$ pointwise in $X$ as $n \to \infty$ if and only if
+\[
+\forall x \in X, \quad f_n(x) \to f(x) \quad \text{as } n \to \infty.
+\]
+
+\subsubsection{Uniform Convergence}
+$f_n \to f$ uniformly in $X$ as $n \to \infty$ if and only if
+\[
+\sup_{x \in X} |f_n(x) - f(x)| \to 0 \quad \text{as } n \to \infty.
+\]
+
+\subsubsection{Almost Everywhere Convergence}
+$f_n \to f$ a.e. in $X$ as $n \to \infty$ if and only if
+\[
+\{x \in X : f_n(x) \not\to f(x)\}^c \in \NN_\mu.
+\]
+
+\subsubsection{Convergence in $L^1$}
+For $\{f_n\} \subseteq L^1$ and $f \in L^1$, we say $f_n \to f$ in $L^1$ as $n \to \infty$ if and only if
+\[
+d(f_n, f) \to 0 \quad \text{as } n \to \infty,
+\]
+which is equivalent to
+\[
+\int_X |f_n - f| \, d\mu \to 0 \quad \text{as } n \to \infty.
+\]
+
+\subsubsection{Convergence in $L^\infty$}
+For $\{f_n\} \subseteq L^\infty$ and $f \in L^\infty$, we say $f_n \to f$ in $L^\infty$ as $n \to \infty$ if and only if
+\[
+d(f_n, f) \to 0 \quad \text{as } n \to \infty,
+\]
+which is equivalent to
+\[
+\esssup_X |f_n - f| \to 0 \quad \text{as } n \to \infty.
+\]
+
+\subsubsection{Convergence in Measure}
+We say that $f_n \to f$ in measure as $n \to \infty$ if
+\[
+\forall \varepsilon > 0, \quad \mu(\{x \in X : |f_n(x) - f(x)| \geq \varepsilon\}) \to 0 \quad \text{as } n \to \infty.
+\]
+
+\clearpage
+\subsection{Theorems}
+
+\begin{theorem}
+Let $\mu(X) < \infty$ and let $f_n, f \in \M(X,\A)$ be finite a.e. in $X$. If $f_n \to f$ a.e. in $X$, then $f_n \to f$ in measure.
+\end{theorem}
+
+\begin{remark}
+When $\mu(X) = \infty$, convergence a.e. $\not\Rightarrow$ convergence in measure.
+\end{remark}
+
+\begin{example}
+Let $f_n : \R \to \R$ with $\lambda(\R) = \infty$ and define $f_n := \chi_{[n, +\infty)}$. Then $f_n \to 0$ pointwise in $\R$, but
+\[
+\mu(\{f_n \geq 1/2\}) = \mu([n, +\infty)) = +\infty,
+\]
+so $f_n \not\to 0$ in measure.
+\end{example}
+
+\begin{remark}
+Convergence in measure $\not\Rightarrow$ convergence a.e. This can be shown using the counterexample of the Typewriter sequence.
+\end{remark}
+
+\begin{theorem}
+Let $f_n, f \in \M(X,\A)$ be finite a.e. in $X$. If $f_n \to f$ in measure, then there exists a subsequence $\{f_{n_k}\}$ such that $f_{n_k} \to f$ a.e. in $X$ as $k \to \infty$.
+\end{theorem}
+
+\begin{theorem}
+Let $f_n, f \in L^1(X,\A,\mu)$. If $f_n \to f$ in $L^1$, then $f_n \to f$ in measure.
+\end{theorem}
+
+\begin{proof}
+Suppose, by contradiction, that $f_n \not\to f$ is in measure. Then there exist $\varepsilon > 0$ and $\sigma > 0$ such that
+\[
+\mu(\{|f_n - f| \geq \varepsilon\}) \geq \sigma \quad \text{for infinitely many } n \in \N.
+\]
+Thus,
+\[
+\int_X |f_n - f| \, d\mu \geq \int_{\{|f_n - f| \geq \varepsilon\}} |f_n - f| \, d\mu \geq \int_{\{|f_n - f| \geq \varepsilon\}} \varepsilon \, d\mu = \varepsilon \mu(\{|f_n - f| \geq \varepsilon\}) \geq \varepsilon \sigma
+\]
+for infinitely many $n \in \N$, which implies $f_n \not\to f$ in $L^1$. This is a contradiction.
+\end{proof}
+
+\begin{remark}
+If $f_n \to f$ in measure, this $\not\Rightarrow f_n \to f$ in $L^1$.
+\end{remark}
+
+\begin{example}
+Let $f_n(x) = n \chi_{[0, 1/n]}(x)$ for $x \in [0,1]$ and $f = 0$. Then $f_n \to f$ a.e. in $[0,1]$. Since $\lambda([0,1]) = 1 < \infty$, we have $f_n \to 0$ in measure. However,
+\[
+\int_{[0,1]} |f_n - 0| \, d\lambda = \int_0^1 f_n \, dx = \int_0^{1/n} n \, dx = n \cdot \frac{1}{n} = 1,
+\]
+so $f_n \not\to f$ in $L^1([0,1])$.
+\end{example}
+
+\clearpage
+\begin{corollary}
+If $f_n \to f$ in $L^1$, then there exists a subsequence $\{f_{n_k}\}$ such that $f_{n_k} \to f$ a.e. in $X$ as $k \to \infty$.
+\end{corollary}
+
+\begin{remark}
+To check if $\{f_n\}$ converges in $L^1$, first study the limit a.e. If $f := \lim_{n \to \infty} f_n$ exists a.e. in $X$, then $f$ is the candidate limit for the $L^1$ convergence.
+\end{remark}
+
+\subsection{Typewriter Sequence (Rademacher Sequence)}
+
+Determine $k \in \N$ such that $2^k \leq n \leq 2^{k+1}$ (so $k = \lfloor \log_2 n \rfloor$). Define
+\[
+f_n(x) := \chi_{\left[\frac{n - 2^k}{2^k}, \frac{n - 2^k + 1}{2^k}\right]}(x), \quad I_n := \left[\frac{n - 2^k}{2^k}, \frac{n - 2^k + 1}{2^k}\right].
+\]
+
+For example:
+\begin{itemize}
+\item $n = 1$, $k = 0$: $I_1 = [0,1]$
+\item $n = 2$, $k = 1$: $I_2 = [0, 1/2]$
+\item $n = 3$, $k = 1$: $I_3 = [1/2, 1]$
+\item $n = 4$, $k = 2$: $I_4 = [0, 1/4]$
+\item $n = 5$, $k = 2$: $I_5 = [1/4, 1/2]$
+\end{itemize}
+
+We observe that for every $x \in [0,1]$, there exists a countable set $J \subset \N$ such that $x \in I_n$ for all $n \in J$, and $x \notin I_n$ for all $n \in \N \setminus J$. It follows that
+\[
+f_n(x) = 1 \text{ for infinitely many } n \in \N, \quad f_n(x) = 0 \text{ for infinitely many } n \in \N.
+\]
+Thus, the limit $\lim_{n \to \infty} f_n(x)$ does not exist. Pointwise convergence does not occur, and this holds for every $x$, so we cannot have a.e. pointwise convergence.
+
+However,
+\[
+\int_{[0,1]} f_n \, d\lambda = \int_0^1 f_n \, dx = \int_{\frac{n - 2^k}{2^k}}^{\frac{n - 2^k + 1}{2^k}} 1 \, dx = \frac{1}{2^k} \to 0 \quad \text{as } n \to \infty \ (k \to \infty).
+\]
+Hence, $f_n \to 0$ in $L^1([0,1])$ and $f_n \to 0$ in measure in $[0,1]$.

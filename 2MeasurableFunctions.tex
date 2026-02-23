@@ -1,0 +1,591 @@
+\section{Measurable Functions}
+
+\begin{definition}
+Let $(X,\A)$ and $(X',\A')$ be measurable spaces.
+A function $f:X \to X'$ is said to be \textbf{measurable} if $f^{-1}(E) \in \A$ for every $E \in \A'$.
+\end{definition}
+
+\begin{remark}
+Continuity and measurability are similar and related.
+Given $(X,d)$ and $(X',d')$ metric spaces, let $\G$ be the collection of all open sets in $X$ and $\G'$ the collection of all open sets in $X'$.
+Then $f:X \to X'$ is continuous if and only if $f^{-1}(E) \in \G$ for every $E \in \G'$.
+\end{remark}
+
+\begin{proposition}
+Given $(X,\A)$, $(X',\A')$, and $(X'',\A'')$ measurable spaces, let $f:X \to X'$ and $g:X' \to X''$ be measurable.
+Then $g \circ f:X \to X''$ is measurable.
+\end{proposition}
+
+\begin{theorem} [Characterization by Generating Sets]
+Let $(X,\A)$ and $(X',\A')$ be measurable spaces.
+Let $C' \subseteq \Pset(X')$ be such that $\sigma_0(C') = \A'$.
+Then $f:X \to X'$ is measurable if and only if $f^{-1}(E) \in \A$ for every $E \in C'$.
+\end{theorem}
+
+\begin{remark}
+The implication ($\Rightarrow$) is trivial since measurability is stronger than the characterizing condition, while ($\Leftarrow$) is useful.
+Indeed, to check if a function is measurable we should consider all sets in $\A'$, but if there is a set $C'$ that generates the $\sigma$-algebra $\A'$, it is enough to consider all sets in $C'$, which are usually fewer than all sets of $\A'$.
+Instead of considering the entire $\sigma$-algebra, we are just considering a small collection of sets.
+\end{remark}
+
+\begin{definition}
+Consider $(X,\LL)$ a measurable space.
+Consider $(X',d')$ a metric space, on which we consider $(X',\B')$ measurable space, where $\B'$ is the Borel $\sigma$-algebra.
+Then $f:X \to X'$ is \textbf{Lebesgue measurable} if $f^{-1}(E) \in \LL$ for every $E \in \B'$.
+\end{definition}
+
+\begin{definition}
+Let $(X,d)$ and $(X,\B)$, $(X',d')$ and $(X',\B')$ be metric spaces with their Borel $\sigma$-algebras.
+Then $f:X \to X'$ is \textbf{Borel measurable} if $f^{-1}(E) \in \B$ for every $E \in \B'$.
+\end{definition}
+
+\begin{corollary}
+Consider $(X,\LL)$ a measurable space and $(X',d')$ a metric space with $(X',\B')$ measurable space.
+Then $f:X \to X'$ is Lebesgue measurable if and only if $f^{-1}(E) \in \LL$ for every open set $E \subseteq X'$.
+\end{corollary}
+
+\begin{proof}
+Let $C' = \{\text{open sets of } X'\}$, then $\sigma_0(C') = \B'$.
+By the preceding theorem, $f:X \to X'$ is $\LL$-measurable if and only if $f^{-1}(E) \in \LL$ for every $E \in \B'$.
+\end{proof}
+
+\begin{corollary}
+Given $X$, $X'$ metric spaces, consider $f:X \to X'$ continuous.
+Then $f$ is Borel measurable.
+\end{corollary}
+
+\begin{proof}
+$f$ is continuous if and only if $f^{-1}(E) \in \G$ for every $E \in \G'$.
+By the preceding theorem, instead of taking $\G'$ we take the $\sigma$-algebra:
+$f^{-1}(E) \in \G$ for every $E \in \sigma_0(\G') = \B'$.
+But $\G \subset \B$.
+\end{proof}
+
+\clearpage
+\begin{corollary}
+Given $X$, $X'$ metric spaces, consider $f:X \to X'$ Borel measurable.
+Then $f$ is Lebesgue measurable.
+\end{corollary}
+
+\begin{proof}
+We know $f^{-1}(E) \in \B$ for every $E \in \sigma_0(\G') = \B'$.
+But $\B \subseteq \LL$.
+\end{proof}
+
+\begin{corollary}
+Given $X$, $X'$ metric spaces, if $f:X \to X'$ is continuous, then $f$ is Lebesgue measurable.
+\end{corollary}
+
+\begin{theorem}
+Let $f:X \subseteq \R \to \R$ be Lebesgue measurable and $g:\R \to \R$ be continuous.
+Then $g \circ f$ is Lebesgue measurable.
+\end{theorem}
+
+\begin{proof}
+We have $(X \subseteq \R, \LL(\R))$ and $(\R, \B(\R))$.
+We know:
+\begin{itemize}
+    \item $f$ is $\LL$-measurable if and only if $f^{-1}(E') \in \LL(\R)$ for every $E' \subseteq \R$ (Borel set).
+    \item For every $E \subseteq \R$, $g^{-1}(E)$ is open if and only if $g$ is continuous.
+\end{itemize}
+Then for every $E \subseteq \R$:
+\[
+(g \circ f)^{-1}(E) = f^{-1}[g^{-1}(E)].
+\]
+Since $g$ is continuous, $g^{-1}(E) = E'$ is open.
+Thus, $(g \circ f)^{-1}(E) = f^{-1}(E') \in \LL(\R)$.
+\end{proof}
+
+\begin{remark}[1]
+If $g:\R \to \R$ is only Lebesgue measurable, then we arrive at $f^{-1}[g^{-1}(E)]$.
+But now $g^{-1}(E) \in \LL(\R) \supsetneq \B(\R)$, and we cannot conclude $f^{-1}[g^{-1}(E)] \in \LL(\R)$.
+So $f$, $g$ Lebesgue measurable does not imply $g \circ f$ is Lebesgue measurable.
+\end{remark}
+
+\begin{remark}[2]
+Instead of continuity, we can also assume Borel measurability.
+If $g:\R \to \R$ is Borel measurable, then we have $(\R, \B(\R))$ and $(\R, \B(\R))$.
+As before, we get $f^{-1}[g^{-1}(E)]$, and now $g^{-1}(E) \in \B(\R)$, so we can conclude $f^{-1}[g^{-1}(E)] \in \LL(\R)$.
+Thus, $g \circ f$ is Lebesgue measurable.
+\end{remark}
+
+\begin{theorem}[Lusin]
+Let $f:E \subseteq \R \to \R$ be Lebesgue measurable.
+Then for every $\varepsilon > 0$ there exist a continuous function $g:\R \to \R$ and a closed set $F \subseteq E$ such that:
+\begin{itemize}
+    \item $f = g$ in $F$,
+    \item $\lambda(E \setminus F) < \varepsilon$.
+\end{itemize}
+\end{theorem}
+
+\begin{theorem}
+Let $(X,\A,\mu)$ be a complete measure space. Let $f,g:X \to \R$.
+If $f$ is Lebesgue measurable and $f = g$ a.e., then $g$ is Lebesgue measurable.
+\end{theorem}
+
+\clearpage
+\subsection{Real Valued Functions}
+
+Define:
+\[
+\M(X,\A) \coloneqq \{ f:X \to \Rext \text{ measurable} \}.
+\]
+Notation: $(X,\A) = (X,\A)$, $(\Rext, \B(\Rext)) = (X',\A')$.
+
+Also define:
+\[
+\M_+(X,\A) \coloneqq \{ f:X \to \Rext \text{ measurable}, f \geq 0 \}.
+\]
+
+For every $\alpha \in \R$:
+\begin{align*}
+\{f > \alpha\} &\coloneqq \{ x \in X : f(x) > \alpha \} = f^{-1}((\alpha, +\infty]), \\
+\{f \geq \alpha\} &\coloneqq \{ x \in X : f(x) \geq \alpha \} = f^{-1}([\alpha, +\infty]), \\
+\{f < \alpha\} &\coloneqq f^{-1}([-\infty, \alpha)), \\
+\{f \leq \alpha\} &\coloneqq f^{-1}([-\infty, \alpha]).
+\end{align*}
+
+\begin{theorem}
+Let $(X,\A)$ be a measurable space, $f:X \to \Rext$.
+The following statements are equivalent:
+\begin{enumerate}
+    \item $f$ is measurable.
+    \item $\{f > \alpha\} \in \A$ for every $\alpha \in \R$.
+    \item $\{f \geq \alpha\} \in \A$ for every $\alpha \in \R$.
+    \item $\{f < \alpha\} \in \A$ for every $\alpha \in \R$.
+    \item $\{f \leq \alpha\} \in \A$ for every $\alpha \in \R$.
+\end{enumerate}
+\end{theorem}
+
+Let $f,g:X \to \Rext$. Define:
+\begin{align*}
+\{f < g\} &\coloneqq \{ x \in X : f(x) < g(x) \}, \\
+\{f \leq g\} &\coloneqq \{ x \in X : f(x) \leq g(x) \}, \\
+\{f = g\} &\coloneqq \{ x \in X : f(x) = g(x) \}.
+\end{align*}
+
+\begin{theorem}
+Let $f,g \in \M(X,\A)$. Then:
+\begin{enumerate}
+    \item $\{f < g\} \in \A$,
+    \item $\{f \leq g\} \in \A$,
+    \item $\{f = g\} \in \A$.
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+Let $\{f_n\} \subseteq \M(X,\A)$. Then:
+\[
+\sup_{n \in \N} f_n, \quad \inf_{n \in \N} f_n \in \M(X,\A).
+\]
+\end{theorem}
+
+\begin{proof}
+For every $\alpha \in \R$:
+\[
+\left\{ \sup_{n \in \N} f_n > \alpha \right\} = \bigcup_{n=1}^{\infty} \{ f_n > \alpha \} \in \A.
+\]
+For the infimum, note that:
+\[
+\inf_{n \in \N} f_n = -\sup_{n \in \N} (-f_n).
+\]
+\end{proof}
+
+\begin{corollary}
+If $f,g \in \M(X,\A)$, then:
+\[
+\max\{f,g\}, \quad \min\{f,g\}, \quad f_{\pm} \in \M(X,\A).
+\]
+\end{corollary}
+
+\begin{theorem}
+Let $\{f_n\} \subseteq \M(X,\A)$. Then:
+\[
+\liminf_{n \to \infty} f_n, \quad \limsup_{n \to \infty} f_n \in \M(X,\A).
+\]
+\end{theorem}
+
+\begin{proof}
+Note that:
+\[
+\limsup_{n \to \infty} f_n = \inf_{k \geq 1} \left( \sup_{n \geq k} f_n \right) \in \M(X,\A),
+\]
+and
+\[
+\liminf_{n \to \infty} f_n = -\limsup_{n \to \infty} (-f_n) \in \M(X,\A).
+\]
+\end{proof}
+
+\begin{theorem}
+Let $f,g:X \to \R$, with $f,g \in \M(X,\A)$. Then:
+\[
+f + g \in \M(X,\A), \quad fg \in \M(X,\A).
+\]
+\end{theorem}
+
+\subsection{The Cantor Set}
+
+\subsubsection{Construction}
+
+The Cantor set is constructed through an iterative process:
+
+\begin{itemize}
+    \item \textbf{Step 0:} Start with $K_0 \coloneqq [0,1]$
+    \item \textbf{Step 1:} Remove the open middle third $I_{0,1} \coloneqq (1/3, 2/3)$, leaving:
+    \[
+    K_1 = [0,1/3] \cup [2/3,1]
+    \]
+    \item \textbf{Step n:} After $n$ steps, we have $2^n$ closed intervals $J_{n,k}$ of length $1/3^n$
+    \item \textbf{Step n+1:} From each $J_{n,k}$, remove the open middle third $I_{n,k}$ of length $1/3^{n+1}$
+\end{itemize}
+
+Define the sets at each stage:
+\[
+K_n \coloneqq \bigcup_{k=1}^{2^n} J_{n,k}, \quad K \coloneqq \bigcap_{n=0}^{\infty} K_n
+\]
+The set $K$ is the \textbf{Cantor set}.
+
+\subsubsection{Basic Properties}
+
+\begin{itemize}
+    \item \textbf{Closedness:} Each $K_n$ is a finite union of closed intervals, hence closed. Since $K$ is an intersection of closed sets, $K$ is closed.
+    \item \textbf{Measurability:} $K$ is closed $\Rightarrow K \in \B(\R) \subseteq \LL(\R)$
+    \item \textbf{Total length removed:} Define the removed set:
+    \[
+    \Omega \coloneqq \bigcup_{n=0}^{\infty} \bigcup_{k=1}^{2^n} I_{n,k}
+    \]
+    Since $I_{n,k}$ are open, $\Omega$ is open and measurable. The total length removed is:
+    \[
+    \lambda(\Omega) = \sum_{n=0}^{\infty} \frac{2^n}{3^{n+1}} = \frac{1}{3} \sum_{n=0}^{\infty} \left( \frac{2}{3} \right)^n = \frac{1}{3} \cdot \frac{1}{1 - 2/3} = 1
+    \]
+    Hence, $\lambda(K) = \lambda([0,1]) - \lambda(\Omega) = 0$
+\end{itemize}
+
+\subsubsection{Topological Properties}
+
+\begin{itemize}
+    \item \textbf{Uncountability:} $K$ is uncountable (can be shown via ternary expansion)
+    \item \textbf{Empty interior:} $\operatorname{int}(K) = \emptyset$. Any open interval contained in $K$ would have positive measure, but $\lambda(K) = 0$
+    \item \textbf{Density of complement:} $\overline{[0,1] \setminus K} = [0,1]$. For any $x_0 \in [0,1]$ and $r > 0$, the interval $(x_0 - r, x_0 + r)$ cannot be contained in $K$ (since $\operatorname{int}(K) = \emptyset$), so it must intersect $[0,1] \setminus K$
+    \item \textbf{Perfect set:} $K$ equals its set of accumulation points. For any $\bar{x} \in K$ and $\varepsilon > 0$, choose $n$ such that $1/3^n < \varepsilon$. Since $\bar{x} \in J_{n,k}$ for some $k$, the removed interval $I_{n,k} \subseteq (\bar{x} - \varepsilon, \bar{x} + \varepsilon)$ has endpoints in $K$ different from $\bar{x}$
+\end{itemize}
+
+\subsection{The Vitali-Lebesgue Function}
+
+\subsubsection{Construction}
+
+Define a sequence of functions $L_n:[0,1] \to [0,1]$ recursively:
+
+\begin{itemize}
+    \item \textbf{Base:} $L_0(x) = x$ (the identity function)
+    \item \textbf{Inductive step:} On each interval $J_{n,k}$ of $K_n$, define $L_{n+1}$ to be linear with slope $(3/2)^{n+1}$, preserving continuity
+    \item On the removed intervals $[0,1] \setminus K_n$, keep $L_{n+1}$ constant (equal to its values at the endpoints)
+\end{itemize}
+
+Explicitly:
+\[
+L_n(x) \coloneqq 
+\begin{cases}
+\text{linear with slope } (3/2)^n & \text{on each } J_{n,k} \subset K_n \\
+\text{constant} & \text{on } [0,1] \setminus K_n
+\end{cases}
+\]
+
+\subsubsection{Properties of the Sequence}
+
+\begin{itemize}
+    \item \textbf{Symmetry:} $L_n(x) + L_n(1-x) = 1$ for all $n \in \N$, $x \in [0,1]$
+    \item \textbf{Monotonicity:} $L_{n+1}(x) \leq L_n(x)$ for all $n \in \N$, $x \in [0,1]$
+    \item \textbf{Uniform convergence:} The maximum difference between successive functions is:
+    \[
+    \sup_{x \in [0,1]} |L_{n+1}(x) - L_n(x)| = \frac{1}{2^{n+1}}
+    \]
+    This follows from calculating the maximum difference on the first interval $J_{n,1} = [0, 1/3^n]$:
+    \[
+    |L_{n+1}(x) - L_n(x)| = \left( \frac{3}{2} \right)^n \left( \frac{3}{2} - 1 \right) x = \frac{1}{2^{n+1}} x
+    \]
+    Hence, $\{L_n\}$ is uniformly Cauchy and converges uniformly to a function $L$
+\end{itemize}
+
+\subsubsection{Properties of the Limit Function}
+
+The \textbf{Vitali-Lebesgue function} is defined as:
+\[
+L(x) \coloneqq \lim_{n \to \infty} L_n(x)
+\]
+
+\begin{itemize}
+    \item \textbf{Continuity:} $L \in C([0,1])$ (uniform limit of continuous functions)
+    \item \textbf{Monotonicity:} $L$ is nondecreasing
+    \item \textbf{Symmetry:} $L(x) + L(1-x) = 1$
+    \item \textbf{Singular derivative:} $L'(x) = 0$ almost everywhere. On each $[0,1] \setminus K_n$, $L$ is constant, so $L' = 0$. Since $\lambda(K) = 0$, $L' = 0$ a.e.
+    \item \textbf{Non-constant:} Despite zero derivative a.e., $L(1) - L(0) = 1 - 0 = 1$
+\end{itemize}
+
+\begin{remark}
+The Vitali-Lebesgue function is a classic example of a \textbf{singular function}: continuous, nondecreasing, with derivative zero almost everywhere, yet not constant. This demonstrates that the Fundamental Theorem of Calculus requires absolute continuity, not just continuity.
+\end{remark}
+
+\subsection{Applications}
+
+\subsubsection{Application One}
+Consider a continuous function $f:D \subseteq \R \to \R$.
+In general, given $E \subseteq \R$ with $E \in \LL(\R)$, can we say $f^{-1}(E) \in \LL(\R)$? The answer is no.
+
+\begin{proof}
+Define:
+\[
+h(x) \coloneqq \frac{x + L(x)}{2}, \quad x \in [0,1].
+\]
+Then $h$ is continuous, strictly increasing, and surjective.
+Moreover, $h([0,1] \setminus K)$ is a union of open intervals with total length:
+\[
+\lambda(h([0,1] \setminus K)) = \frac{1}{6} \sum_{k=0}^{\infty} \left( \frac{2}{3} \right)^k = \frac{1}{2}.
+\]
+Since $[0,1] = h([0,1]) = h(K) \cup h([0,1] \setminus K)$, we have $\lambda(h(K)) = \frac{1}{2}$.
+
+There exists $\tilde{E} \subseteq h(K)$ such that $\tilde{E} \notin \LL(\R)$ (e.g., a Vitali set).
+On the other hand, $h^{-1}(\tilde{E}) \subseteq K$, so $h^{-1}(\tilde{E}) \in \LL(\R)$ since $K$ has measure zero and the Lebesgue $\sigma$-algebra is complete.
+
+Now consider $f \coloneqq h^{-1}$ and $\tilde{F} \coloneqq f(\tilde{E}) = h^{-1}(\tilde{E}) \in \LL(\R)$.
+Since $f$ is continuous, but $\tilde{E} = f^{-1}(\tilde{F}) \notin \LL(\R)$, we obtain the counterexample.
+\end{proof}
+
+\clearpage
+\subsubsection{Application Two}
+$(\R, \B(\R), \lambda) \subsetneq (\R, \LL(\R), \lambda)$.
+
+\begin{proof}
+From above, $\tilde{F} \in \LL(\R)$ and $f$ is Lebesgue measurable (since continuous).
+If $\tilde{F} \in \B(\R)$, then $f^{-1}(\tilde{F}) = \tilde{E} \in \LL(\R)$, which is false.
+Hence, $\tilde{F} \notin \B(\R)$.
+\end{proof}
+
+\subsubsection{Application Three}
+If $f$ is Borel measurable and $g$ is Lebesgue measurable, then we can't say $g \circ f$ is Lebesgue measurable for sure.
+
+\begin{proof}
+Let $f \coloneqq h^{-1}$ as above.
+Take $\tilde{F} \in \LL(\R)$ and define $g \coloneqq \chi_{\tilde{F}}$, the indicator function of $\tilde{F}$.
+Then $g$ is Lebesgue measurable.
+Now:
+\[
+(g \circ f)^{-1}((1/2, 3/2)) = f^{-1}(g^{-1}((1/2, 3/2))) = f^{-1}(\tilde{F}) = \tilde{E} \notin \LL(\R).
+\]
+Hence, $g \circ f$ is not Lebesgue measurable.
+\end{proof}
+
+\subsubsection{Application Four}
+$(\R, \B(\R), \lambda)$ is not complete.
+
+\begin{proof}
+The Cantor set $K$ is closed, hence Borel, and $\lambda(K) = 0$.
+There exists $\tilde{F} \subseteq K$ such that $\tilde{F} \notin \B(\R)$ (as above).
+Hence, the Borel measure space is not complete.
+\end{proof}
+
+\subsubsection{Application Five}
+Define $f:\R \to \R$ by:
+\[
+f(x) \coloneqq 
+\begin{cases}
+2 & x \in \tilde{F} \subset K, \\
+1 & x \in K \setminus \tilde{F}, \\
+0 & x \in \R \setminus K.
+\end{cases}
+\]
+Then $f = g$ a.e. where $g \equiv 0$. $g$ is Borel measurable (and Lebesgue measurable).
+But $\{f \geq 2\} = \tilde{F} \notin \B(\R)$, so $f$ is not Borel measurable.
+This shows the need for completeness to pass measurability a.e.
+
+\subsection{Measurable Functions: Further Properties}
+
+\begin{corollary}
+Let $f:X \to \R$.
+\begin{enumerate}
+    \item $f \in \M(X,\A)$ if and only if $f_{\pm} \in \M(X,\A)$.
+    \item $f \in \M(X,\A)$ implies $|f| \in \M(X,\A)$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+(1) The forward implication is known. For the converse, note $f = f_+ - f_- \in \M(X,\A)$.
+
+(2) If $f \in \M(X,\A)$, then $f_{\pm} \in \M(X,\A)$ by (1), so $|f| = f_+ + f_- \in \M(X,\A)$.
+\end{proof}
+
+\clearpage
+\begin{lemma}
+Given $C \subseteq X$, the indicator function $\chi_C \in \M(X,\A)$ if and only if $C \in \A$.
+\end{lemma}
+
+\begin{proof}
+We have:
+\[
+\{\chi_C > \alpha\} = 
+\begin{cases}
+X \in \A & \alpha < 0, \\
+C \in \A & \alpha \in [0,1), \\
+\emptyset \in \A & \alpha \geq 1.
+\end{cases}
+\]
+Hence, $\chi_C \in \M(X,\A) \Leftrightarrow C \in \A$.
+\end{proof}
+
+\begin{remark}
+In general, $|f| \in \M(X,\A)$ does not imply $f \in \M(X,\A)$.
+For example, let $E \subseteq X$ with $E \notin \A$.
+Define:
+\[
+f(x) \coloneqq \chi_E(x) - \chi_{E^c}(x) = 
+\begin{cases}
+1 & x \in E, \\
+-1 & x \in E^c.
+\end{cases}
+\]
+Then $\{f > 1/2\} = E \notin \A$, so $f \notin \M(X,\A)$.
+But $|f| \equiv 1 \in \M(X,\A)$.
+\end{remark}
+
+\subsection{Simple Functions}
+
+\begin{definition}
+Let $X$ be a set. A function $s:X \to \R$ is called a \textbf{simple function} if $s(X)$ is finite.
+\end{definition}
+
+If $s(X) = \{c_1, c_2, \dots, c_n\}$ with $c_k$ distinct, define $E_k \coloneqq \{ x \in X : s(x) = c_k \}$.
+Then the \textbf{canonical form} of $s$ is:
+\[
+s = \sum_{k=1}^{n} c_k \chi_{E_k}.
+\]
+The sets $\{E_k\}_{k=1}^n$ form a partition of $X$.
+
+\begin{remark}
+$s \in \M(X,\A)$ if and only if $E_k \in \A$ for $k = 1,\dots,n$.
+\end{remark}
+
+Define:
+\begin{align*}
+\Scal(X,\A) &\coloneqq \{ \text{measurable simple functions } f:X \to \R \}, \\
+\Scal_+(X,\A) &\coloneqq \{ \text{measurable simple functions } f:X \to \R, f \geq 0 \}.
+\end{align*}
+
+\begin{remark}
+If $(X,\A) = (\R, \LL(\R))$ and each $E_k$ is an interval, then $f$ is a step function.
+\end{remark}
+
+\clearpage
+\begin{theorem}[Simple Approximation Theorem]
+Let $(X,\A)$ be a measurable space and $f:X \to \Rext$.
+Then there exists a sequence $\{s_n\}$ of simple functions such that $s_n \to f$ pointwise on $X$ as $n \to \infty$.
+Furthermore:
+\begin{enumerate}
+    \item If $f \in \M(X,\A)$, then $\{s_n\} \subseteq \Scal(X,\A)$.
+    \item If $f \geq 0$, then $\{s_n\}$ is increasing and $0 \leq s_n \leq f$.
+    \item If $f$ is bounded, then $s_n \to f$ uniformly on $X$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof} [Sketch]
+For $f \geq 0$ bounded, say $0 \leq f \leq 1$, divide $[0,1]$ into $2^n$ intervals of length $2^{-n}$.
+Define:
+\[
+E_k^{(n)} \coloneqq \left\{ x \in X : \frac{k}{2^n} \leq f(x) < \frac{k+1}{2^n} \right\}, \quad k = 0,1,\dots,2^n-1.
+\]
+Then set:
+\[
+s_n \coloneqq \sum_{k=0}^{2^n-1} \frac{k}{2^n} \chi_{E_k^{(n)}}.
+\]
+The sequence $\{s_n\}$ has the desired properties.
+\end{proof}
+
+\subsection{Essentially Bounded Functions}
+
+Let $(X,\A,\mu)$ be a measure space. For any $N \in \NN_\mu$ (null sets), define:
+\[
+\alpha_N \coloneqq \sup_{x \in N^c} f(x).
+\]
+Note: if $N_2 \subseteq N_1$, then $\alpha_{N_2} \geq \alpha_{N_1}$.
+
+\begin{definition}
+The \textbf{essential supremum} of $f$ is:
+\[
+\esssup_X f \coloneqq \inf \left\{ \sup_{x \in N^c} f(x) : N \in \NN_\mu \right\}.
+\]
+The \textbf{essential infimum} is:
+\[
+\essinf_X f \coloneqq \sup \left\{ \inf_{x \in N^c} f(x) : N \in \NN_\mu \right\}.
+\]
+\end{definition}
+
+\begin{proposition}
+Let $f$ be measurable. Then there exists $N \in \NN_\mu$ such that:
+\[
+\esssup_X f = \sup_{x \in N^c} f(x).
+\]
+Moreover, $f(x) \leq \esssup_X f$ almost everywhere.
+\end{proposition}
+
+\clearpage
+\subsubsection{Properties}
+\begin{enumerate}
+    \item If $f \in \M(X,\A)$, then:
+    \[
+    \esssup_X f = - \essinf_X (-f), \quad \esssup_X (kf) = k \esssup_X f \text{ for } k \geq 0.
+    \]
+    \item If $f,g \in \M(X,\A)$, then:
+    \begin{enumerate}
+        \item $f \leq g$ a.e. $\Rightarrow$ $\esssup_X f \leq \esssup_X g$.
+        \item $\esssup_X (f+g) \leq \esssup_X f + \esssup_X g$.
+        \item $f = g$ a.e. $\Rightarrow$ $\esssup_X f = \esssup_X g$.
+        \item If $g \geq 0$ a.e., then $fg \leq (\esssup_X f) g$ a.e.
+    \end{enumerate}
+\end{enumerate}
+
+\begin{definition}
+A function $f \in \M(X,\A)$ is \textbf{essentially bounded} if:
+\[
+\esssup_X |f| < \infty.
+\]
+Define:
+\[
+\LL^\infty(X,\A,\mu) \coloneqq \{ f:X \to \Rext \text{ such that } f \text{ is essentially bounded} \}.
+\]
+\end{definition}
+
+\begin{remark}
+Note: $L^\infty(X,\A,\mu) \neq \LL^\infty(X,\A,\mu)$ (the latter is usually the space of equivalence classes).
+\end{remark}
+
+\begin{remark}
+\begin{enumerate}
+    \item If $f \in \LL^\infty$, then $f$ is finite a.e., since $|f| \leq \esssup_X f < \infty$ a.e.
+    \item $f$ finite a.e. does not imply $f \in \LL^\infty$.
+\end{enumerate}
+\end{remark}
+
+\begin{example}
+Let $f:\R \to \Rext$ be defined by:
+\[
+f(x) \coloneqq 
+\begin{cases}
+1/|x| & x \neq 0, \\
++\infty & x = 0.
+\end{cases}
+\]
+Then $f$ is finite on $\R \setminus \{0\}$, so finite a.e., but $\esssup_X f = +\infty$.
+\end{example}
+
+\begin{example}
+Let:
+\[
+f(x) \coloneqq 
+\begin{cases}
+\arctan(x) & x \in \R \setminus A, \\
++\infty & x \in A,
+\end{cases}
+\]
+where $A = \{1/n : n \in \N\}$.
+Then $\sup_X f = +\infty$, but $\esssup_X f = \pi/2$ since $A$ is countable (measure zero).
+So $f \in \LL^\infty$, but $f$ is not bounded in the usual sense.
+\end{example}

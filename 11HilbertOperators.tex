@@ -1,0 +1,115 @@
+\section{Linear and Continuous Operators on Hilbert Spaces}
+
+\subsection{Symmetric Operators}
+
+\begin{definition}
+Let $H$ be a Hilbert space. An operator $T \in \LL(H)$ is called \textbf{symmetric} if
+\[
+\langle T(x), y \rangle = \langle x, T(y) \rangle, \quad \forall x, y \in H.
+\]
+\end{definition}
+
+\begin{remark}
+An alternative formula for the operator norm is:
+\[
+\|T\|_\LL = \sup_{\|x\| = 1} |\langle T(x), x \rangle|.
+\]
+\end{remark}
+
+\subsection{Fredholm Alternative}
+
+Let $f \in H$, $T \in \LL(H)$. Consider the equation:
+\[
+u - T(u) = f \tag{E}
+\]
+
+\begin{theorem}[Fredholm Alternative]
+Let $H$ be a Hilbert space, $T \in \K(H)$ a compact operator, and $T$ symmetric. Then:
+\begin{enumerate}
+\item $n \coloneqq \dim \Ker(I - T) < \infty$
+\item $\Im(I - T)$ is closed, and $\Im(I - T) = (\Ker(I - T))^\perp$
+\item $\Ker(I - T) = \{0\} \iff \Im(I - T) = H$ \\
+      (i.e., injective $\iff$ surjective)
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+Property (3) holds automatically if $\dim H < \infty$. However, in infinite-dimensional spaces, injectivity $\not\Rightarrow$ surjectivity and vice versa.
+\end{remark}
+
+\subsection{Solvability of Equation (E)}
+
+There are two cases:
+
+\textbf{Case 1:} For all $f \in H$, $u - T(u) = f$ has a unique solution $u \in H$.
+
+\textbf{Case 2:} $u - T(u) = 0$ admits $n$ linearly independent solutions, and equation (E) is solvable if and only if $f \in [\Ker(I - T)]^\perp$ (orthogonality condition).
+
+\begin{remark}
+In Case 1, property (3) gives both existence (surjectivity) and uniqueness (injectivity).
+
+In Case 2, $\dim \Ker(I - T) = n$ by property (1), and $[\Ker(I - T)]^\perp = \Im(I - T)$ by property (2). If $f \in \Im(I - T)$, solutions exist but are not unique.
+\end{remark}
+
+\subsection{The Spectrum}
+
+Let $E$ be a Banach space, $T \in \LL(E)$.
+
+\begin{definition}
+The \textbf{resolvent set} is
+\[
+\rho(T) \coloneqq \{\lambda \in \R : (T - \lambda I): E \to E \text{ is bijective}\}.
+\]
+The \textbf{spectrum} is
+\[
+\sigma(T) \coloneqq \R \setminus \rho(T).
+\]
+\end{definition}
+
+\begin{definition}
+A real number $\lambda$ is an \textbf{eigenvalue} if $\Ker(T - \lambda I) \neq \{0\}$, i.e., there exists $v \in E \setminus \{0\}$ such that $T(v) = \lambda v$.
+
+$\Ker(T - \lambda I)$ is called the \textbf{eigenspace}, and its elements are \textbf{eigenvectors}.
+
+The \textbf{point spectrum} is
+\[
+EV(T) \equiv \sigma_p(T) \coloneqq \{\text{all eigenvalues of } T\}.
+\]
+\end{definition}
+
+\begin{remark}
+$EV(T) \subseteq \sigma(T)$. If $\dim E < \infty$, then $EV(T) = \sigma(T)$.
+\end{remark}
+
+\begin{example}
+Consider the right-shift operator $T: \ell^2 \to \ell^2$ defined by
+\[
+T(x) = (0, x^{(1)}, x^{(2)}, \dots) \quad \text{for } x = \{x^{(k)}\}_{k \in \N} \in \ell^2.
+\]
+For $\lambda = 0$: $T$ is injective $\Rightarrow 0 \notin EV(T)$, but $T$ is not surjective $\Rightarrow 0 \in \sigma(T)$. Thus in general $EV(T) \subset \sigma(T)$.
+\end{example}
+
+\begin{remark}
+The spectrum is a compact subset of $\R$ and
+\[
+\sigma(T) \subseteq [-\|T\|_\LL, \|T\|_\LL].
+\]
+\end{remark}
+
+\begin{theorem}[Structure of the Spectrum]
+Let $E$ be a Banach space, $T \in \K(E)$ compact, with $\dim E = \infty$. Then:
+\begin{enumerate}
+\item $0 \in \sigma(T)$
+\item $\sigma(T) \setminus \{0\} = EV(T) \setminus \{0\}$
+\item One of the following holds:
+\begin{enumerate}
+\item $\sigma(T) = \{0\}$
+\item $\sigma(T) \setminus \{0\}$ is a finite set
+\item $\sigma(T) \setminus \{0\}$ is a sequence of real numbers converging to $0$
+\end{enumerate}
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Spectral Theorem]
+Let $H$ be a separable Hilbert space and $T \in \K(H)$ symmetric. Then there exists an orthonormal basis of $H$ consisting of eigenvectors of $T$.
+\end{theorem}

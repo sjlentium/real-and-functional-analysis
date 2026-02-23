@@ -1,0 +1,461 @@
+\section{Weak Convergence}
+
+\begin{definition}[Weak Convergence]
+Let $X$ be a normed space, $\{x_n\} \subset X$, $x \in X$. \\
+We say that $x_n \rightharpoonup x$ as $n \to \infty$ if 
+\[
+L(x_n) \to L(x) \quad \forall L \in X^*
+\]
+\end{definition}
+
+\begin{remark}
+$x_n \to x \Rightarrow x_n \rightharpoonup x$, but not vice versa. \\
+Indeed, for all $L \in X^*$:
+\[
+|L(x_n) - L(x)| = |L(x_n - x)| \leq \|L\|_{X^*} \|x_n - x\|_X
+\]
+and since $\|x_n - x\|_X \to 0$, we have $L(x_n) \to L(x)$, which by definition means $x_n \rightharpoonup x$.
+\end{remark}
+
+\begin{remark}
+If $X = \R^N$, then $x_n \to x \iff x_n \rightharpoonup x$.
+\end{remark}
+
+\subsection{Weak Convergence in $L^p$}
+
+\begin{theorem}[Weak Convergence in $L^p$]
+Let $\Omega \subset \R^N$ be measurable. For $p \in [1,\infty)$, the following are equivalent:
+\begin{enumerate}
+\item $f_n \rightharpoonup f$ in $L^p(\Omega)$
+\item $T(f_n) \to T(f)$ for all $T \in (L^p)^*$
+\item $\int_{\Omega} f_n g \, d\lambda \to \int_{\Omega} f g \, d\lambda$ for all $g \in L^q$, where $\frac{1}{p} + \frac{1}{q} = 1$
+\item $\int_{\Omega} f_n \varphi \, d\lambda \to \int_{\Omega} f \varphi \, d\lambda$ for all $\varphi \in C_c^1(\Omega)$
+\end{enumerate}
+The equivalence between (2) and (3) follows from the Riesz Representation Theorem.
+\end{theorem}
+
+\subsection{Weak Convergence in $\ell^p$}
+
+\begin{theorem}[Weak Convergence in $\ell^p$]
+For $1 \leq p < \infty$, let $\Lambda \in (\ell^p)^*$.\\
+Then there exists a unique $y \equiv (y^{(k)}) \in \ell^q$ such that
+\[
+\Lambda(x) = \sum_{k=1}^{\infty} x^{(k)} y^{(k)} \quad \quad\forall x \equiv (x^{(k)}) \in \ell^p
+\]
+Then, $x_n \rightharpoonup x$ in $\ell^p$ if and only if
+\[
+\sum_{k=1}^{\infty} x_n^{(k)} y^{(k)} \to \sum_{k=1}^{\infty} x^{(k)} y^{(k)} \quad\quad \forall y \equiv (y^{(k)}) \in \ell^q
+\]
+\end{theorem}
+
+\begin{remark}
+In general, weak convergence does not imply strong convergence. \\
+Consider $X = \ell^2$ and $\{l_n\} \subset \ell^2$ where $l_n \equiv (l_n^{(k)}) = \delta_{kn}$ (the sequence with 1 in the $n$-th position and 0 elsewhere). \\
+Then $l_n \rightharpoonup 0$ since for all $y \in \ell^2$:
+\[
+\sum_{k=1}^{\infty} l_n^{(k)} y^{(k)} = y^{(n)} \to 0 \quad \text{as } n \to \infty
+\]
+However, $\|l_n\|_{\ell^2} = 1$ for all $n \in \N$, so $l_n \not\to 0$ in $\ell^2$.
+\end{remark}
+
+\subsection{Properties of Weak Convergence}
+
+\begin{theorem}[Uniqueness of Weak Limit]
+If $\{x_n\}$ weakly converges, then the weak limit is unique.
+\end{theorem}
+
+\begin{proof}
+Suppose, by contradiction, that $x_n \rightharpoonup x_1$ and $x_n \rightharpoonup x_2$ with $x_1 \neq x_2$. \\
+Then for all $L \in X^*$:
+\[
+|L(x_n) - L(x_1)| \to 0 \quad \text{and} \quad |L(x_n) - L(x_2)| \to 0
+\]
+Hence $L(x_1) = L(x_2)$ for all $L \in X^*$, which implies $x_1 = x_2$ by a corollary of the Hahn-Banach theorem. Contradiction!
+\end{proof}
+
+\begin{proposition}[Boundedness of Weakly Convergent Sequences]
+If $x_n \rightharpoonup x$, then $\{x_n\}$ is bounded.
+\end{proposition}
+
+\begin{theorem}[Lower Semicontinuity of Norm]
+If $x_n \rightharpoonup x$, then
+\[
+\liminf_{n \to \infty} \|x_n\|_X \geq \|x\|_X.
+\]
+$x \mapsto \|x_n\|$ is lower semicontinuous with respect to weak convergence.
+\end{theorem}
+
+\begin{proof}
+Let $x \in X \setminus \{0\}$. By a corollary of the Hahn-Banach theorem, there exists $L \in X^*$ with $\|L\|_{X^*} = 1$ such that $L(x) = \|x\|$. Then
+\[
+0 < \|x\| = L(x) = \lim_{n \to \infty} L(x_n) = \lim_{n \to \infty} |L(x_n)|
+\]
+On the other hand,
+\[
+|L(x_n)| \leq \|L\|_{X^*} \|x_n\|_X = \|x_n\|_X
+\]
+Hence
+\[
+\|x\| = \liminf_{n \to \infty} |L(x_n)| \leq \liminf_{n \to \infty} \|x_n\|_X
+\]
+\end{proof}
+
+\clearpage
+
+\begin{theorem}[Joint Convergence]
+If $x_n \rightharpoonup x$ in $X$ and $L_n \to L$ in $X^*$, then $L_n(x_n) \to L(x)$ in $\R$.
+\end{theorem}
+
+\begin{proof}
+We have:
+\[
+L_n(x_n) - L(x) = L_n(x_n) - L(x_n) + L(x_n) - L(x)
+\]
+So
+\[
+|L_n(x_n) - L(x)| \leq |L_n(x_n) - L(x_n)| + |L(x_n) - L(x)|
+\]
+The first term satisfies:
+\[
+|L_n(x_n) - L(x_n)| = |(L_n - L)(x_n)| \leq \|L_n - L\|_{X^*} \|x_n\|_X
+\]
+Since $\{x_n\}$ is bounded (by the previous proposition) and $\|L_n - L\|_{X^*} \to 0$, this term tends to 0. \\
+The second term $|L(x_n) - L(x)| \to 0$ by weak convergence of $x_n$ to $x$.
+\end{proof}
+
+\begin{theorem}[Weak Continuity of Bounded Linear Operators]
+Let $X$, $Y$ be Banach spaces and $T \in \LL(X,Y)$. \\
+If $x_n \rightharpoonup x$ in $X$, then $T(x_n) \rightharpoonup T(x)$ in $Y$.
+\end{theorem}
+
+\begin{proof}
+Let $L \in Y^*$ and define $\Lambda: X \to \R$ by $\Lambda(x) = L[T(x)]$. \\
+Since $T$ is linear and continuous, and $L$ is linear and continuous, $\Lambda \in X^*$. \\
+By weak convergence of $x_n$ to $x$, we have:
+\[
+\Lambda(x_n) \to \Lambda(x) \quad \text{i.e.,} \quad L[T(x_n)] \to L[T(x)]
+\]
+Since this holds for all $L \in Y^*$, we conclude that $T(x_n) \rightharpoonup T(x)$ in $Y$.
+\end{proof}
+
+
+
+\subsection{Weak* Convergence}
+
+\begin{definition}
+We say that $\{L_n\} \subset X^*$ \textbf{weakly* converges} to $L \in X^*$ whenever
+\[
+L_n(x) \xrightarrow[n \to \infty]{} L(x), \quad \forall x \in X.
+\]
+We write $L_n \xrightharpoonup{\ast} L$ for $n \to \infty$.
+\end{definition}
+
+\subsubsection*{Example: $L^\infty$}
+
+$(\mathbb{R}^N, \mathcal{L}_{\mathbb{R}^N}), \lambda)$, $\Omega \in \mathcal{L}(\mathbb{R}^N)$,
+$\{f_n\} \subset L^\infty(\Omega) = X^*$, $f \in L^\infty(\Omega)$.
+
+Define:
+\[
+L_n(g) \coloneqq \int_\Omega f_n g \, d\lambda, \quad \forall g \in L^1(\Omega) = X
+\]
+\[
+L(g) \coloneqq \int_\Omega f g \, d\lambda, \quad \forall g \in L^1(\Omega)
+\]
+
+Then $L_n \in [L^1(\Omega)]^* = L^\infty(\Omega)$ by the Riesz Theorem.
+
+\[
+L_n \xrightharpoonup{\ast} L \text{ for some } L \in (L^1)^*
+\]
+\[
+\Updownarrow
+\]
+\[
+\int_\Omega f_n g \, d\lambda \xrightarrow[n \to \infty]{} \int_\Omega f g \, d\lambda, \quad \forall g \in L^1(\Omega)
+\]
+\[
+\Updownarrow
+\]
+\[
+f_n \xrightharpoonup{\ast} f \text{ in } L^\infty(\Omega)
+\]
+
+\begin{remark}
+The same holds in $\ell^\infty$:
+\[
+x_n \xrightharpoonup{\ast} x \text{ in } \ell^\infty
+\]
+\[
+\Updownarrow
+\]
+\[
+\sum_{k=1}^\infty x_n^{(k)} y^{(k)} \xrightarrow[n \to \infty]{} \sum_{k=1}^\infty x^{(k)} y^{(k)}, \quad \forall y \equiv y^{(k)} \in \ell^1
+\]
+\end{remark}
+
+\clearpage
+\begin{theorem}
+$L_n \rightharpoonup L$ in $X^*$ $\Rightarrow$ $L_n \xrightharpoonup{\ast} L$. \\
+And viceversa, if $X$ is reflexive.
+\end{theorem}
+
+\begin{proof}
+$L_n \rightharpoonup L$ in $X^*$
+\[
+\Updownarrow \text{ def}
+\]
+\[
+\Lambda(L_n) \xrightarrow[n \to \infty]{} \Lambda(L), \quad \forall \Lambda \in X^{**}
+\]
+\[
+\Downarrow
+\]
+\[
+\Lambda(L_n) \xrightarrow[n \to \infty]{} \Lambda(L), \quad \forall \Lambda \in \tau(X) \subseteq X^{**}
+\]
+\[
+\Updownarrow
+\]
+\[
+L_n(x) \to L(x), \quad \forall x \in X
+\]
+\[
+\Updownarrow
+\]
+\[
+L_n \xrightharpoonup{\ast} L
+\]
+
+And viceversa:
+$X$ is reflexive $\iff \tau(X) = X^{**}$.
+\end{proof}
+
+\begin{theorem}
+Let $X$ be a Banach space.
+\begin{itemize}
+\item $\{L_n\} \subset X^*$ weakly* converges $\Rightarrow$ the weak* limit is unique;
+\item $L_n \xrightharpoonup{\ast} L \Rightarrow \{L_n\}$ is bounded in $X^*$;
+\item $L_n \xrightharpoonup{\ast} L \Rightarrow \liminf_{n \to \infty} \|L_n\|_{X^*} \geq \|L\|_{X^*}$;
+\item $\begin{cases} x_n \to x \\ L_n \xrightharpoonup{\ast} L \end{cases} \Rightarrow L_n(x_n) \xrightarrow[n \to \infty]{} L(x)$
+\end{itemize}
+\end{theorem}
+
+
+\subsection{Banach-Alaoglu Theorem}
+
+\begin{theorem}[Banach-Alaoglu]
+Let $X$ be a separable Banach space. Then any bounded sequence $\{L_n\} \subset X^*$ admits a subsequence that weakly* converges to some $L \in X^*$.
+\end{theorem}
+
+\begin{remark}
+$\{f_n\} \subset L^\infty$ bounded. \\
+$L^\infty$ is the dual of $L^1$. Every function in $L^\infty$ identifies an element of $(L^1)^*$.
+
+Define:
+\[
+L_n(g) \coloneqq \int_\Omega f_n g \, d\lambda, \quad \forall g \in L^1
+\]
+\[
+|L_n(g)| \leq \|f_n\|_\infty \|g\|_1 \leq c\|g\|_1, \quad \forall n \in \mathbb{N}
+\]
+\[
+\Rightarrow \|L_n\|_{(L^1)^*} \leq c, \quad \forall n \in \mathbb{N}
+\]
+
+So the sequence $\{L_n\}$ is bounded in $(L^1)^*$. \\
+Now we can apply the Banach-Alaoglu theorem:
+\[
+\exists \{L_{n_h}\} \subset \{L_n\} : L_{n_h} \xrightharpoonup{\ast} L \text{ for some } L \in (L^1)^*.
+\]
+This means that:
+\[
+\exists \{f_{n_h}\} \subset \{f_n\} : L_{n_h}(g) \xrightharpoonup{\ast} L(g), \quad \forall g \in L^1
+\]
+
+We can also say:
+\[
+\exists! f \in L^\infty : L(g) \coloneqq \int_\Omega f g \, d\lambda, \quad \forall g \in L^1
+\]
+
+So, by the two of them:
+\[
+\Rightarrow \int_\Omega f_{n_h} g \, d\lambda \xrightarrow[h \to \infty]{} \int_\Omega f g \, d\lambda
+\]
+\[
+\iff f_{n_h} \xrightharpoonup{\ast} f, \quad \forall g \in L^1
+\]
+
+Therefore, any bounded sequence $\{f_n\} \subset L^\infty$ admits a subsequence $\{f_{n_h}\}$ which weakly* converges to some $f \in L^\infty$.
+\end{remark}
+
+\begin{remark}
+The same holds also in $\ell^\infty$.
+\end{remark}
+
+\clearpage
+\begin{corollary}
+Let $X$ be a separable and reflexive Banach space. Then any bounded sequence $\{x_n\} \subset X$ admits a subsequence which weakly converges.
+\end{corollary}
+
+\begin{proof}
+$X$ separable and reflexive $\Rightarrow X^*$ is separable too.
+\begin{itemize}
+\item $X^* = Y$ separable
+\item $\{\tau(x_n)\} \subset X^{**} = Y^*$ bounded, where $\tau(x_n)$ is the canonical evaluation map
+\end{itemize}
+
+So $Y$ is separable and we have a sequence in $Y^*$. \\
+We apply the Banach-Alaoglu theorem for $Y = X^*$, therefore obtaining:
+\[
+\exists \{\tau(x_{n_h})\} \subset \{\tau(x_n)\} : \tau(x_{n_h}) \xrightharpoonup{\ast} \Lambda, \quad \Lambda \in Y^* = X^{**}
+\]
+\[
+\Updownarrow
+\]
+\[
+[\tau(x_{n_h})](f) \to \Lambda(f), \quad \forall f \in Y = X^*
+\]
+where $[\tau(x_{n_h})](f) = f(x_{n_h})$ and $\Lambda(f) = f(x)$ with $x \coloneqq \tau^{-1}(\Lambda)$.
+\[
+\Updownarrow
+\]
+\[
+x_{n_h} \xrightharpoonup[h \to \infty]{} x
+\]
+\end{proof}
+
+\subsection{Compact Operators}
+
+Let $X, Y$ be Banach spaces.
+
+\begin{definition}
+$K: X \to Y$ linear is said to be \textbf{compact} if
+\[
+\forall E \subseteq X \text{ bounded}, \quad \overline{K(E)} \subseteq Y \text{ is compact}.
+\]
+\end{definition}
+
+\begin{remark}[Equivalent definition]
+$\forall \{x_n\} \subset X$ bounded, $K(x_n)$ has a subsequence which converges in $Y$ strongly.
+\end{remark}
+
+\begin{theorem}
+$K: X \to Y$ linear, compact $\Rightarrow K \in \mathcal{L}(X, Y)$.
+\end{theorem}
+
+\begin{proof}
+Let $B \subset X$ be the closed unit ball. \\
+$\Rightarrow K(B)$ is relatively compact $\Rightarrow K(B)$ is bounded. \\
+Therefore $\exists M > 0$ such that $\forall x \in X$, $\|x\|_X \leq 1$ we have $\|K(x)\|_Y \leq M$. \\
+$\Rightarrow K$ is bounded. \\
+Since $K$ is also linear $\Rightarrow K \in \mathcal{L}(X, Y)$.
+\end{proof}
+
+\begin{definition}
+$T \in \mathcal{L}(X, Y)$ is a \textbf{finite rank operator} if $\dim \operatorname{Im}(T) < \infty$.
+\end{definition}
+
+\begin{remark}
+$T \in \mathcal{L}(X, Y)$, $\operatorname{rank}(T)$ finite $\Rightarrow T$ is compact. Not viceversa.
+\end{remark}
+
+\begin{theorem}
+$\{K_n\} \subset \mathcal{L}(X, Y)$, $\operatorname{rank}(K_n) < \infty$, $\forall n \in \mathbb{N}$. \\
+Assume $K_n \xrightarrow[n \to \infty]{} K$ in $\mathcal{L}(X, Y)$. \\
+Then $K$ is compact.
+\end{theorem}
+
+\begin{remark}
+The converse is not true.
+\end{remark}
+
+\begin{theorem}
+$X, Y$ Banach spaces. \\
+$K \in \mathcal{L}(X, Y)$, $\dim(Y) = \infty$ \\
+$K$ is compact $\Rightarrow K$ is not surjective.
+\end{theorem}
+
+\begin{proof}
+Suppose that, by contradiction, $K$ is surjective. \\
+Now consider $B_1(0) \subset X$ open. \\
+$K(B_1(0)) \subset Y$, $K(0) = 0 \in K(B_1(0))$. \\
+Given $K$ surjective, we can apply the open mapping theorem. \\
+So $Y$ is open (open set maps into an open set).
+
+\[
+\Rightarrow \exists \delta > 0 : B_\delta(0) \subseteq K(B_1(0))
+\]
+\[
+B_\delta(0) \subseteq Y, \quad \overline{B_\delta(0)} \subseteq \overline{K(B_1(0))}
+\]
+
+By assumption, $K$ is compact, so $\overline{K(B_1(0))}$ is compact in $Y$. \\
+Now we have a closed ball compact in $Y$: $\overline{B_\delta(0)} \subseteq Y$, $\dim(Y) = \infty$. \\
+This contradicts the Riesz theorem.
+\end{proof}
+
+\begin{definition}
+$\mathcal{K}(X, Y) \coloneqq \{K \in \mathcal{L}(X, Y) : K \text{ compact}\}$ \\
+If $X = Y$, we write $\mathcal{K}(X, X) = \mathcal{K}(X)$.
+\end{definition}
+
+\clearpage
+\begin{theorem}
+\textbf{\textit{Part 1}}. If $T \in \mathcal{K}(X, Y)$, then
+\[
+x_n \xrightharpoonup[n \to \infty]{} x \Rightarrow T(x_n) \xrightarrow[n \to \infty]{} T(x).
+\]
+This is called \textbf{weak-strong continuity (WSC)}.
+
+\vspace{5pt}
+\textbf{\textit{Part 2}}. If $X$ is separable and reflexive, and $T \in \mathcal{L}(X, Y)$ satisfies the WSC property, then $T \in \mathcal{K}(X, Y)$.
+\end{theorem}
+
+\begin{remark}
+In general WSC property is equivalent to compactness.
+\end{remark}
+
+\begin{proof}
+\textbf{Part 1.} \\
+Consider $\{x_n\}$ weakly convergent to $x$ for some $x \in X$. \\
+We apply a corollary of the Banach-Steinhaus theorem $\Rightarrow \{x_n\}$ is bounded. \\
+Since $T$ is compact by assumption:
+\[
+\exists \{x_{n_k}\}, y \in Y : T(x_{n_k}) \xrightarrow[k \to \infty]{} y
+\]
+
+Take any $L \in Y^*$. We consider:
+\[
+(L \circ T)(x_{n_k}) = L[T(x_{n_k})]
+\]
+Since $L \circ T \in X^*$, by definition of weak convergence:
+\[
+(L \circ T)(x_{n_k}) \xrightarrow[k \to \infty]{} (L \circ T)(x)
+\]
+Strong convergence implies weak convergence:
+\[
+L[T(x_{n_k})] \xrightarrow[k \to \infty]{} L(y)
+\]
+Thus, $y = T(x)$ and $T(x_{n_k}) \xrightarrow[k \to \infty]{} T(x)$.
+
+Now we want to show that $T(x_n) \xrightarrow[n \to \infty]{} T(x)$. \\
+If this is not true, $\exists \varepsilon > 0$, $\{x_{n_h}\}$ such that:
+\[
+\|T(x_{n_h}) - T(x)\|_Y > \varepsilon
+\]
+However, $x_{n_h} \rightharpoonup x$ by hypothesis, since $\{x_{n_h}\} \subset \{x_n\}$. \\
+By the previous argument:
+\[
+\exists \{x_{n_{h_i}}\} \subset \{x_{n_h}\} : T(x_{n_{h_i}}) \xrightarrow[i \to \infty]{} T(x)
+\]
+And we are done.
+
+\textbf{Part 2.} \\
+Let $\{x_n\} \subset X$ be bounded, $X$ reflexive. \\
+Banach-Alaoglu theorem $\Rightarrow \exists \{x_{n_k}\}, x \in X : x_{n_k} \rightharpoonup x$ \\
+By hypothesis, $T$ fulfills WSC, thus $T(x_{n_k}) \xrightarrow[k \to \infty]{} T(x)$. \\
+So for any bounded $\{x_n\} \subset X$, there exists a subsequence such that we have strong convergence. \\
+This is the definition of compact operator. \\
+Done.
+\end{proof}

@@ -1,0 +1,771 @@
+\section{Lebesgue Integral}
+
+\subsection{Integral of Non-Negative Measurable Simple Functions}
+
+Let $(X, \A, \mu)$ be a measure space. Let $s \in S_+(X, \A)$ be a non-negative measurable simple function. Then $s$ can be written as:
+\[
+s = \sum_{k=1}^{n} c_k \chi_{E_k},
+\]
+where $c_1, \dots, c_n \in \Rp$, $\{E_k\}$ is a partition of $X$, and $n \in \N$ is fixed.
+
+\begin{definition}
+The \textbf{integral of $s$ over $X$} is defined as:
+\[
+\int_X s \, d\mu \coloneqq \sum_{k=1}^{n} c_k \mu(E_k).
+\]
+\end{definition}
+
+If $E \in \A$, we set:
+\[
+\int_E s \, d\mu \coloneqq \int_X s\chi_E \, d\mu.
+\]
+Note that $s\chi_E = \sum_{k=1}^{n} c_k \chi_{E_k \cap E}$, and therefore:
+\[
+\int_E s \, d\mu = \sum_{k=1}^{n} c_k \mu(E_k \cap E).
+\]
+
+\begin{remark}
+For any $E \in \A$, we have:
+\[
+\int_X \chi_E \, d\mu = \mu(E).
+\]
+Indeed, we can write $\chi_E(x) = \sum_{k=1}^{2} c_k \chi_{E_k}(x)$ with $E_1 = E$, $E_2 = E^c$, $c_1 = 1$, and $c_2 = 0$. Therefore:
+\[
+\int_X \chi_E \, d\mu = c_1 \mu(E_1) + c_2 \mu(E_2) = \mu(E).
+\]
+\end{remark}
+
+\begin{remark}
+For any $\mu$-null set $N \in \NN_\mu$, we have:
+\[
+\int_N s \, d\mu = 0.
+\]
+Indeed:
+\[
+\int_N s \, d\mu = \sum_{k=1}^{n} c_k \mu(E_k \cap N) = 0,
+\]
+because $(E_k \cap N) \subseteq N$ for all $k$.
+\end{remark}
+
+\clearpage
+\subsubsection{Properties}
+
+Let $s, t \in S_+(X, \A)$ be non-negative measurable simple functions.
+
+\begin{enumerate}
+    \item If $c \geq 0$, then:
+    \[
+    \int_X cs \, d\mu = c \int_X s \, d\mu.
+    \]
+    
+    \item The integral is additive:
+    \[
+    \int_X (s + t) \, d\mu = \int_X s \, d\mu + \int_X t \, d\mu.
+    \]
+    
+    \item The integral is monotonic: if $s \leq t$, then:
+    \[
+    \int_X s \, d\mu \leq \int_X t \, d\mu.
+    \]
+    
+    \item For $E, F \in \A$ with $E \subseteq F$:
+    \[
+    \int_E s \, d\mu \leq \int_F s \, d\mu.
+    \]
+\end{enumerate}
+
+\begin{proposition}
+Let $s \in S_+(X, \A)$. Then the function $\varphi : \A \to \Rpext$ defined by:
+\[
+\varphi(E) \coloneqq \int_E s \, d\mu, \quad \forall E \in \A,
+\]
+is a measure on $(X, \A)$.
+\end{proposition}
+
+\begin{proof}
+We need to verify that $\varphi$ satisfies the definition of a measure:
+
+\begin{itemize}
+    \item $\varphi(\emptyset) = \int_\emptyset s \, d\mu = 0$, since $\mu(\emptyset) = 0$.
+    
+    \item $\sigma$-additivity: Let $\{E_k\}_{k=1}^\infty$ be a sequence of pairwise disjoint measurable sets, and let $E = \bigcup_{k=1}^\infty E_k$. Write $s = \sum_{l=1}^m d_l \chi_{F_l}$. Then:
+    \begin{align*}
+    \varphi(E) &= \int_E s \, d\mu = \sum_{l=1}^m d_l \mu(F_l \cap E) \\
+    &= \sum_{l=1}^m \sum_{k=1}^\infty d_l \mu(F_l \cap E_k) \quad \text{(by $\sigma$-additivity of $\mu$)} \\
+    &= \sum_{k=1}^\infty \sum_{l=1}^m d_l \mu(F_l \cap E_k) = \sum_{k=1}^\infty \int_{E_k} s \, d\mu = \sum_{k=1}^\infty \varphi(E_k).
+    \end{align*}
+\end{itemize}
+\end{proof}
+
+\clearpage
+\subsection{Integral of Non-Negative Measurable Functions}
+
+Let $f: X \to \Rpext$ be a non-negative measurable function, i.e., $f \in \M_+(X, \A)$.
+
+\begin{definition}
+The \textbf{integral of $f$ over $X$} is defined as:
+\[
+\int_X f \, d\mu \coloneqq \sup_{s \in S_f} \int_X s \, d\mu,
+\]
+where $S_f \coloneqq \{s \in S_+(X, \A) : s \leq f\}$.
+
+If $E \in \A$, we set:
+\[
+\int_E f \, d\mu \coloneqq \int_X f\chi_E \, d\mu.
+\]
+\end{definition}
+
+\begin{remark}
+$S_f \neq \emptyset$ by the Simple Approximation Theorem. There exists an increasing sequence $\{s_n\} \subseteq S_f$ such that $s_n \leq s_{n+1}$ and $s_n \to f$ pointwise in $X$ as $n \to \infty$.
+
+It is also possible to define:
+\[
+\int_X f \, d\mu \coloneqq \lim_{n \to \infty} \int_X s_n \, d\mu.
+\]
+This integral is independent of the choice of the approximating sequence $\{s_n\}$.
+\end{remark}
+
+\subsubsection{Properties}
+
+The integral of non-negative measurable functions inherits the same properties as the integral of simple functions.
+
+\begin{remark}
+For any $f \in \M_+(X, \A)$ and any $\mu$-null set $N \in \NN_\mu$, we have:
+\[
+\int_N f \, d\mu = 0.
+\]
+This follows from the corresponding property for simple functions.
+\end{remark}
+
+\begin{theorem}[Chebyshev's Inequality]
+Let $f \in \M_+(X, \A)$. Then for any $c > 0$:
+\[
+\mu(\{f \geq c\}) \leq \frac{1}{c} \int_{\{f \geq c\}} f \, d\mu \leq \frac{1}{c} \int_X f \, d\mu.
+\]
+\end{theorem}
+
+\clearpage
+\begin{proposition}
+Let $f \in \M_+(X, \A)$ such that $\int_X f \, d\mu < \infty$. Then $f$ is finite almost everywhere in $X$.
+\end{proposition}
+
+\begin{proof}
+We need to show that $\mu(\{f = \infty\}) = 0$. Note that:
+\[
+\{f = \infty\} = \bigcap_{n=1}^{\infty} \{f > n\}.
+\]
+Let $E_n \coloneqq \{f > n\}$. Then:
+\begin{enumerate}
+    \item $\{E_n\}$ is a decreasing sequence,
+    \item By Chebyshev's inequality: $\mu(E_n) \leq \frac{1}{n} \int_X f \, d\mu$,
+    \item For $n = 1$, $\mu(E_1) < \infty$.
+\end{enumerate}
+Therefore, by the continuity of the measure:
+\[
+\mu(\{f = \infty\}) = \mu\left(\bigcap_{n=1}^{\infty} \{f > n\}\right) = \lim_{n \to \infty} \mu(E_n) \leq \lim_{n \to \infty} \frac{1}{n} \int_X f \, d\mu = 0.
+\]
+\end{proof}
+
+\begin{lemma}[Vanishing Lemma]
+Let $f \in \M_+(X, \A)$ such that $\int_X f \, d\mu = 0$. Then $f = 0$ almost everywhere in $X$.
+\end{lemma}
+
+\begin{proof}
+We need to show that $\mu(\{f > 0\}) = 0$. Note that:
+\[
+\{f > 0\} = \bigcup_{n=1}^{\infty} \{f > 1/n\}.
+\]
+Let $F_n \coloneqq \{f > 1/n\}$. Then:
+\begin{enumerate}
+    \item $\{F_n\}$ is an increasing sequence,
+    \item $\frac{1}{n} \chi_{F_n} \leq f\chi_{F_n}$.
+\end{enumerate}
+By Chebyshev's inequality:
+\[
+0 \leq \mu(F_n) \leq \frac{1}{1/n} \int_X f \, d\mu = 0 \quad \text{for all } n \in \N.
+\]
+Therefore:
+\[
+\mu(\{f > 0\}) = \mu\left(\bigcup_{n=1}^{\infty} F_n\right) = \lim_{n \to \infty} \mu(F_n) = 0.
+\]
+\end{proof}
+
+\clearpage
+\begin{theorem}[Monotone Convergence Theorem, Beppo Levi]
+Let $\{f_n\} \subseteq \M_+(X, \A)$ and $f: X \to \Rpext$ be such that:
+\begin{enumerate}
+    \item $f_n \leq f_{n+1}$ in $X$ for all $n$,
+    \item $f_n \to f$ pointwise in $X$ as $n \to \infty$.
+\end{enumerate}
+Then:
+\[
+\lim_{n \to \infty} \int_X f_n \, d\mu = \int_X \left(\lim_{n \to \infty} f_n\right) \, d\mu = \int_X f \, d\mu.
+\]
+\end{theorem}
+
+\begin{proof}
+Since $\{f_n\} \subseteq \M_+(X, \A)$ and $f_n \to f$ pointwise, we have $f \in \M_+(X, \A)$.
+
+As $\{f_n\}$ is increasing, by the monotonicity of the integral:
+\[
+\int_X f_n \, d\mu \leq \int_X f_{n+1} \, d\mu \leq \int_X f \, d\mu.
+\]
+Thus $\{\int_X f_n \, d\mu\}$ is an increasing sequence of real numbers, and there exists:
+\[
+\alpha \coloneqq \lim_{n \to \infty} \int_X f_n \, d\mu \leq \int_X f \, d\mu.
+\]
+We now prove that $\alpha \geq \int_X f \, d\mu$.
+
+For any $\varepsilon \in (0,1)$ and $s \in S_f$, define:
+\[
+E_n \coloneqq \{(1-\varepsilon)s \leq f_n\}, \quad \forall n \in \N.
+\]
+We have:
+\begin{enumerate}
+    \item $\{E_n\} \subseteq \A$,
+    \item $\{E_n\}$ is increasing (since $\{f_n\}$ is increasing),
+    \item $X = \bigcup_{n=1}^{\infty} E_n$.
+\end{enumerate}
+To verify (3): let's note that clearly $\bigcup_{n=1}^{\infty} E_n \subseteq X$ and then let's check if $X \subseteq \bigcup_{n=1}^{\infty} E_n$. Let $x \in X$. 
+\begin{itemize}
+    \item If $f(x) = \lim_{n \to \infty} f_n(x) = +\infty$, then there exists $\bar{n} \in \N$ such that, for all $n > \bar{n}$, we have $(1-\varepsilon)s(x) < f_n(x)$, so $x \in E_n$.
+    \item If $f(x) < +\infty$, then there exists $\bar{n} \in \N$ such that, for all $n > \bar{n}$, we have $(1-\varepsilon)s(x) < (1-\varepsilon)f(x) < f_n(x)$, so again $x \in E_n$.
+\end{itemize}
+
+Now we have:
+\[
+(1-\varepsilon) \int_{E_n} s \, d\mu \leq \int_{E_n} f_n \, d\mu \leq \int_X f_n \, d\mu.
+\]
+Taking the limit as $n \to \infty$:
+\[
+(1-\varepsilon) \int_X s \, d\mu \leq \lim_{n \to \infty} \int_X f_n \, d\mu = \alpha.
+\]
+Since $\varepsilon$ is arbitrary:
+\[
+\int_X s \, d\mu \leq \alpha \Rightarrow \sup_{s \in S_f} \int_X s \, d\mu \leq \alpha \Rightarrow \int_X f \, d\mu \leq \alpha.
+\]
+This completes the proof.
+\end{proof}
+
+\begin{remark}
+The step $\lim_{n \to \infty} \int_{E_n} s \, d\mu = \int_X s \, d\mu$ is justified because $\varphi(E) \coloneqq \int_E s \, d\mu$ is a measure and $\{E_n\}$ is increasing, so by the continuity of the measure:
+\[
+\lim_{n \to \infty} \varphi(E_n) = \varphi\left(\bigcup_{n=1}^{\infty} E_n\right) = \varphi(X) = \int_X s \, d\mu.
+\]
+\end{remark}
+
+\begin{lemma}[Fatou's Lemma]
+Let $\{f_n\} \subseteq \M_+(X, \A)$. Then:
+\[
+\liminf_{n \to \infty} \int_X f_n \, d\mu \geq \int_X \left(\liminf_{n \to \infty} f_n\right) \, d\mu.
+\]
+\end{lemma}
+
+\begin{proof}
+Note that $\liminf_{n \to \infty} f_n \in \M_+(X, \A)$. Define:
+\[
+\liminf_{n \to \infty} f_n \coloneqq \sup_{k \geq 1} \inf_{n \geq k} f_n = \sup_{k \geq 1} g_k,
+\]
+where $g_k \coloneqq \inf_{n \geq k} f_n$. Then:
+\begin{enumerate}
+    \item $\{g_k\} \subseteq \M_+(X, \A)$ and $\{g_k\}$ is increasing,
+    \item $g_k \leq f_k$ for all $k \in \N$,
+    \item $\liminf_{n \to \infty} f_n = \sup_{k \geq 1} g_k = \lim_{k \to \infty} g_k$.
+\end{enumerate}
+From (2), we have:
+\[
+\int_X g_k \, d\mu \leq \int_X f_k \, d\mu \quad \text{for all } k \in \N.
+\]
+Taking $\liminf$ on both sides:
+\[
+\liminf_{k \to \infty} \int_X g_k \, d\mu \leq \liminf_{k \to \infty} \int_X f_k \, d\mu.
+\]
+From (1), $\{\int_X g_k \, d\mu\}$ is an increasing sequence, so:
+\[
+\liminf_{k \to \infty} \int_X g_k \, d\mu = \lim_{k \to \infty} \int_X g_k \, d\mu.
+\]
+By the Monotone Convergence Theorem and (1), (3):
+\[
+\lim_{k \to \infty} \int_X g_k \, d\mu = \int_X \left(\lim_{k \to \infty} g_k\right) \, d\mu = \int_X \left(\liminf_{n \to \infty} f_n\right) \, d\mu.
+\]
+Therefore:
+\[
+\int_X \left(\liminf_{n \to \infty} f_n\right) \, d\mu \leq \liminf_{n \to \infty} \int_X f_n \, d\mu.
+\]
+\end{proof}
+
+\begin{remark}
+Consider $(X, \A, \mu) = (\N, \Pset(\N), \mu^{\#})$ (counting measure). Define:
+\[
+f_n(x) = \chi_{\{n\}}(x) = 
+\begin{cases}
+1 & \text{if } x = n, \\
+0 & \text{if } x \neq n.
+\end{cases}
+\]
+Then:
+\begin{itemize}
+    \item $\lim_{n \to \infty} f_n = 0$, so $\liminf_{n \to \infty} f_n = 0$,
+    \item $\int_{\N} (\liminf_{n \to \infty} f_n) \, d\mu^{\#} = 0$,
+    \item For each $n \in \N$, $\int_{\N} f_n \, d\mu^{\#} = 1$,
+    \item $\liminf_{n \to \infty} \int_{\N} f_n \, d\mu^{\#} = 1$.
+\end{itemize}
+Thus, here we have a strict inequality:
+\[
+\liminf_{n \to \infty} \int_{\N} f_n \, d\mu^{\#} > \int_{\N} \left(\liminf_{n \to \infty} f_n\right) \, d\mu^{\#}.
+\]
+\end{remark}
+
+\begin{theorem}[Integration of Series]
+Let $\{f_n\} \subseteq \M_+(X, \A)$. Then:
+\[
+\int_X \left(\sum_{n=1}^{\infty} f_n\right) \, d\mu = \sum_{n=1}^{\infty} \left(\int_X f_n \, d\mu\right).
+\]
+\end{theorem}
+
+\clearpage
+\begin{theorem}
+Let $f \in \M_+(X, \A)$.
+\begin{enumerate}
+    \item The function $\nu: \A \to \Rpext$ defined by:
+    \[
+    \nu(E) = \int_E f \, d\mu, \quad \forall E \in \A,
+    \]
+    is a measure.
+    \item For any $g \in \M_+(X, \A)$:
+    \[
+    \int_X g \, d\nu = \int_X gf \, d\mu.
+    \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\begin{enumerate}
+    \item We verify that $\nu$ is a measure:
+    \begin{itemize}
+        \item $\nu(\emptyset) = \int_\emptyset f \, d\mu = 0$ since $\mu(\emptyset) = 0$,
+        \item $\sigma$-additivity: Let $\{E_k\} \subseteq \A$ be disjoint and $E = \bigcup_{k=1}^{\infty} E_k$. Then:
+        \begin{align*}
+        \nu(E) &= \int_X f\chi_E \, d\mu = \int_X f\sum_{k=1}^{\infty} \chi_{E_k} \, d\mu \\
+        &= \sum_{k=1}^{\infty} \int_X f\chi_{E_k} \, d\mu \quad \text{(by MCT)} \\
+        &= \sum_{k=1}^{\infty} \int_{E_k} f \, d\mu = \sum_{k=1}^{\infty} \nu(E_k).
+        \end{align*}
+    \end{itemize}
+    
+    \item First, let $g = s \in S_+(X, \A)$ with $s = \sum_{k=1}^{n} c_k \chi_{F_k}$, where $\{F_k\}$ is a partition of $X$. Then:
+    \begin{align*}
+    \int_X s \, d\nu &= \sum_{k=1}^{n} c_k \nu(F_k) = \sum_{k=1}^{n} c_k \int_{F_k} f \, d\mu \\
+    &= \int_X \left(\sum_{k=1}^{n} c_k f\chi_{F_k}\right) \, d\mu = \int_X f\left(\sum_{k=1}^{n} c_k \chi_{F_k}\right) \, d\mu = \int_X sf \, d\mu.
+    \end{align*}
+    For general $g \in \M_+(X, \A)$, the result follows by approximation.
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+\begin{enumerate}
+    \item For any $E \in \A$, if $\mu(E) = 0$ then $\nu(E) = 0$,
+    \item We say that $d\nu = f d\mu$ and $f = \frac{d\nu}{d\mu}$.
+\end{enumerate}
+\end{remark}
+
+\clearpage
+\subsubsection{Null Sets and Integrals}
+
+\begin{theorem}
+Let $f, g \in \M_+(X, \A)$ such that $f = g$ almost everywhere in $X$. Then:
+\[
+\int_X f \, d\mu = \int_X g \, d\mu.
+\]
+\end{theorem}
+
+\begin{proof}
+Let $N \coloneqq \{f \neq g\}$, so $N \in \A$ and $\mu(N) = 0$. Then:
+\[
+\int_N f \, d\mu = \int_N g \, d\mu = 0.
+\]
+Therefore:
+\[
+\int_X f \, d\mu = \int_N f \, d\mu + \int_{N^c} f \, d\mu = \int_{N^c} f \, d\mu = \int_{N^c} g \, d\mu = \int_N g \, d\mu + \int_{N^c} g \, d\mu = \int_X g \, d\mu.
+\]
+\end{proof}
+
+\begin{corollary}
+Let $f \in \M_+(X, \A)$. Then the following are equivalent:
+\begin{enumerate}
+    \item $\int_X f \, d\mu = 0$,
+    \item $f = 0$ almost everywhere in $X$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+\begin{itemize}[leftmargin=5em]
+    \item [$(1) \Rightarrow (2)$] This is the Vanishing Lemma.
+    \item [$(2) \Rightarrow (1)$] If $f = 0$ a.e., then by the previous theorem with $g = 0$:
+    \[
+    \int_X f \, d\mu = \int_X 0 \, d\mu = 0.
+    \]
+\end{itemize}
+\end{proof}
+
+\subsection{Integrable Functions}
+
+Let $(X, \A, \mu)$ be a measure space and $f : X \to \Rext$.
+
+\begin{definition}
+A function $f : X \to \Rext$ is said to be \textbf{integrable} on $X$ if $f \in \M(X, \A)$ and
+\[
+\int_X f_+  d\mu < \infty, \quad \int_X f_-  d\mu < \infty.
+\]
+If $f \in \M(X, \A)$, then $f_\pm \in \M(X, \A)$, so the integrals are well-defined.
+
+We define
+\[
+\LL^1(X, \A, \mu) \coloneqq \{ f : X \to \Rext \text{ integrable on } X \}.
+\]
+\end{definition}
+
+\clearpage
+\begin{definition}
+Let $f \in \LL^1$. The \textbf{Lebesgue integral} of $f$ on $X$ is defined as
+\[
+\int_X f  d\mu \coloneqq \int_X f_+  d\mu - \int_X f_-  d\mu.
+\]
+
+If $E \in \A$, we set
+\[
+\int_E f  d\mu \coloneqq \int_X f \chi_E  d\mu = \int_E f_+  d\mu - \int_E f_-  d\mu = \int_X f_+ \chi_E  d\mu - \int_X f_- \chi_E  d\mu.
+\]
+\end{definition}
+
+\begin{proposition}
+Let $f : X \to \Rext$. Then
+\begin{enumerate}
+    \item $f \in \LL^1 \iff f_\pm \in \LL^1$,
+    \item $f \in \LL^1 \iff f \in \M,\ |f| \in \LL^1$,
+    \item $f \in \LL^1 \Rightarrow \left| \int_X f  d\mu \right| \leq \int_X |f|  d\mu$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\begin{enumerate}
+    \item 
+    $f \in \LL^1 \iff f \in \M,\ \int_X f_\pm  d\mu < \infty$. \\
+    $f_\pm \in \LL^1 \iff f_\pm \in \M,\ \int_X (f_+)_+  d\mu < \infty,\ \int_X (f_+)_-  d\mu < \infty,\ \int_X (f_-)_+  d\mu < \infty,\ \int_X (f_-)_-  d\mu < \infty$. \\
+    Since $f \in \M \iff f_\pm \in \M$ and
+    \[
+    \int_X f_\pm  d\mu < \infty \iff \int_X (f_+)_+  d\mu < \infty,\ \int_X (f_+)_-  d\mu < \infty,\ \int_X (f_-)_+  d\mu < \infty,\ \int_X (f_-)_-  d\mu < \infty,
+    \]
+    the equivalence follows.
+
+    \item 
+    $f \in \LL^1 \iff f \in \M,\ \int_X f_\pm  d\mu < \infty$. \\
+    Note that $f \in \M \Rightarrow |f| \in \M$. \\
+    Now, $|f| \in \LL^1 \iff f \in \LL^1,\ \int_X |f|_\pm  d\mu < \infty$, but
+    \[
+    \int_X |f|_\pm  d\mu < \infty = \int_X |f|  d\mu < \infty.
+    \]
+
+    ($\Rightarrow$) 
+    $f \in \LL^1 \Rightarrow f \in \M,\ |f| \in \M$, and
+    \[
+    \int_X |f|  d\mu = \int_X (f_+ + f_-)  d\mu < \infty \Rightarrow |f| \in \LL^1.
+    \]
+
+    ($\Leftarrow$) 
+    $|f| \in \LL^1,\ f \in \M \Rightarrow f \in \M$, and
+    \[
+    \int_X f_+  d\mu + \int_X f_-  d\mu = \int_X (f_+ + f_-)  d\mu = \int_X |f|  d\mu < \infty.
+    \]
+    The sum is finite and $\int_X f_+  d\mu$ and $\int_X f_-  d\mu$ are both positive; hence, they are both finite. Therefore, $f \in \LL^1$.
+
+    \item
+    $$
+    \left| \int_X f  d\mu \right| = \left| \int_X f_+  d\mu - \int_X f_-  d\mu \right| \leq \int_X (f_+ + f_-)  d\mu = \int_X |f|  d\mu.
+    $$
+\end{enumerate}
+\end{proof}
+
+\begin{definition}
+By point (2), we have an alternative (and most common) definition of $\LL^1$:
+\[
+\LL^1 = \left\{ f : X \to \Rext : f \in \M(X, \A),\ \int_X |f|  d\mu < \infty \right\}.
+\]
+
+For all $p \in [1, \infty)$, we define the \textbf{Lebesgue spaces}:
+\[
+L^p = \left\{ f : X \to \Rext : f \in \M(X, \A),\ \int_X |f|^p  d\mu < \infty \right\}.
+\]
+\end{definition}
+
+\begin{remark}
+Note that $L^p \neq \LL^p$.
+\end{remark}
+
+\begin{proposition}
+$\LL^1(X, \A, \mu)$ is a vector space. That is, linear combinations of integrable functions remain integrable.
+\end{proposition}
+
+\begin{proof}
+Let $f, g \in \LL^1$ and $\lambda \in \R$. Then $f_\pm, g_\pm$ are finite a.e.\ in $X$, so $f, g$ are finite a.e.\ in $X$. Hence, $h \coloneqq f + \lambda g$ is defined a.e.\ in $X$ and $h \in \M(X, \A)$. Moreover,
+\[
+\int_X |h|  d\mu \leq \int_X |f|  d\mu + |\lambda| \int_X |g|  d\mu < \infty,
+\]
+so $h \in \LL^1$. Therefore, $\L\LL^1(X, \A, \mu)$ is a vector space.
+\end{proof}
+
+\begin{remark}
+Let $f, g \in \LL^1$ and $\lambda \in \R$. Then
+\begin{enumerate}
+    \item $\int_X (f + g)  d\mu = \int_X f  d\mu + \int_X g  d\mu$,
+    \item $\int_X \lambda f  d\mu = \lambda \int_X f  d\mu$.
+\end{enumerate}
+\end{remark}
+
+\begin{lemma}[Vanishing Lemma 2]
+Let $f \in \LL^1(X, \A, \mu)$ be such that
+\[
+\int_E f  d\mu = 0 \quad \forall E \in \A.
+\]
+Then $f = 0$ a.e.\ in $X$.
+\end{lemma}
+
+\begin{proof}
+Define
+\[
+E_+ \coloneqq \{ f \geq 0 \} \in \A, \quad E_- \coloneqq \{ f \leq 0 \} \in \A.
+\]
+Then
+\[
+\int_{E_+} f  d\mu = 0 \Rightarrow f = 0 \text{ a.e.\ in } E_+,
+\]
+\[
+\int_{E_-} f  d\mu = 0 \Rightarrow f = 0 \text{ a.e.\ in } E_-.
+\]
+Hence, $f = 0$ a.e.\ in $E_+ \cup E_- = X$.
+\end{proof}
+
+\begin{remark}
+The condition can also be written as
+\[
+\int_X f \chi_E  d\mu = 0 \quad \forall E \in \A.
+\]
+\end{remark}
+
+\begin{theorem}
+Let $f \in \LL^1$, $g \in \M$, and $f = g$ a.e.\ in $X$. Then $g \in \LL^1$ and
+\[
+\int_X f  d\mu = \int_X g  d\mu.
+\]
+\end{theorem}
+
+\begin{proof}
+Since $f_\pm = g_\pm$ a.e.\ in $X$, by previous results we have
+\[
+\int_X f_\pm  d\mu = \int_X g_\pm  d\mu.
+\]
+\end{proof}
+
+\clearpage
+\begin{theorem}[Lebesgue Dominated Convergence Theorem]
+Let $\{f_n\} \subseteq \M(X, \A)$, $f \in \M(X, \A)$ be such that $f_n \to f$ a.e.\ in $X$ as $n \to \infty$. Suppose there exists $g \in \LL^1(X, \A, \mu)$ such that $|f_n| \leq g$ a.e.\ in $X$ for all $n \in \N$.
+
+Then $f_n, f \in \LL^1$ and
+\[
+\int_X |f_n - f|  d\mu \xrightarrow[n \to \infty]{} 0.
+\]
+In particular,
+\[
+\lim_{n \to \infty} \int_X f_n  d\mu = \int_X \left( \lim_{n \to \infty} f_n \right) d\mu = \int_X f  d\mu.
+\]
+\end{theorem}
+
+\begin{proof}
+For all $n \in \N$,
+\[
+\int_X |f_n|  d\mu \leq \int_X g  d\mu < \infty.
+\]
+Since $|f_n| \leq g$ a.e.\ in $X$, it follows that $|f| \leq g$ a.e.\ in $X$, so
+\[
+\int_X f  d\mu \leq \int_X g  d\mu < \infty.
+\]
+Hence, $f_n, f \in \LL^1$, and $f_n, f$ are finite a.e.\ in $X$.
+
+Define for all $n \in \N$:
+\[
+g_n \coloneqq 2g - |f_n - f|.
+\]
+Since $|f_n - f| \leq |f_n| + |f| \leq 2g$ a.e.\ in $X$, we have $g_n \geq 0$ a.e.\ in $X$, so $g_n \in \M_+$.
+
+Now,
+\[
+2 \int_X g  d\mu = \int_X \left( \lim_{n \to \infty} g_n \right) d\mu \leq \liminf_{n \to \infty} \int_X g_n  d\mu = \liminf_{n \to \infty} \int_X [2g - |f_n - f|]  d\mu
+\]
+\[
+= 2 \int_X g  d\mu + \liminf_{n \to \infty} \int_X [-|f_n - f|]  d\mu = 2 \int_X g  d\mu - \limsup_{n \to \infty} \int_X |f_n - f|  d\mu.
+\]
+Thus,
+\[
+2 \int_X g  d\mu \leq 2 \int_X g  d\mu - \limsup_{n \to \infty} \int_X |f_n - f|  d\mu,
+\]
+so
+\[
+\limsup_{n \to \infty} \int_X |f_n - f|  d\mu \leq 0.
+\]
+Hence,
+\[
+0 \leq \liminf_{n \to \infty} \int_X |f_n - f|  d\mu \leq \limsup_{n \to \infty} \int_X |f_n - f|  d\mu \leq 0,
+\]
+and therefore
+\[
+\lim_{n \to \infty} \int_X |f_n - f|  d\mu = 0.
+\]
+
+For the second part, observe that
+\[
+0 \leq \left| \int_X f_n  d\mu - \int_X f  d\mu \right| = \left| \int_X (f_n - f)  d\mu \right| \leq \int_X |f_n - f|  d\mu \xrightarrow[n \to \infty]{} 0,
+\]
+so
+\[
+\int_X f_n  d\mu \xrightarrow[n \to \infty]{} \int_X f  d\mu.
+\]
+\end{proof}
+
+\begin{remark}
+If
+\begin{enumerate}
+    \item $\mu(X) < \infty$,
+    \item $\exists M > 0$ such that $|f_n| \leq M$ a.e.\ in $X$,
+\end{enumerate}
+then take $g \coloneqq M$. Indeed, $g \in \M$ and
+\[
+\int_X |g|  d\mu = \int_X M  d\mu = M \mu(X) < \infty \Rightarrow g \in \LL^1.
+\]
+\end{remark}
+
+\begin{theorem}[Integration of Series]
+Let $\{f_n\} \subseteq \LL^1$ be such that
+\[
+\sum_{n=1}^\infty \int_X |f_n|  d\mu < \infty.
+\]
+Then
+\begin{enumerate}
+    \item the series $\sum_{n=1}^\infty f_n$ converges a.e.\ in $X$,
+    \item $\int_X \left( \sum_{n=1}^\infty f_n \right) d\mu = \sum_{n=1}^\infty \int_X f_n  d\mu$.
+\end{enumerate}
+\end{theorem}
+
+\subsection{$\LL^1$ and $\LL^\infty$}
+
+Let $(X, \A, \mu)$ be a measure space. Define the equivalence relation $f R g \iff f = g$ a.e.\ in $X$. Let $[f] \coloneqq \{ g \mid f R g \}$ and define
+\[
+\LL^1(X, \A, \mu) \coloneqq L^1(X, \A, \mu) / R.
+\]
+For simplicity, we often say $f \in \LL^1$.
+
+\begin{lemma}
+$\LL^1$ is a metric space with the distance
+\[
+d(f, g) \coloneqq \int_X |f - g|  d\mu, \quad \forall f, g \in \LL^1.
+\]
+\end{lemma}
+
+\begin{proof}
+The map $d : \LL^1 \times \LL^1 \to \R$ is well-defined since for all $f, g \in \LL^1$,
+\[
+\int_X |f - g|  d\mu \leq \int_X |f|  d\mu + \int_X |g|  d\mu < \infty.
+\]
+
+For all $f, g \in \LL^1$, we have $d(f, g) \geq 0$ and $d(f, f) = 0$.
+
+If $d(f, g) = 0$, then $\int_X |f - g|  d\mu = 0$, so by the vanishing lemma, $|f - g| = 0$ a.e in $X$, hence $f = g$ a.e in $X$, i.e., $f = g$ in $\LL^1$.
+
+Symmetry: $d(f, g) = d(g, f)$.
+
+Triangle inequality: for all $f, g, h \in \LL^1$,
+\[
+d(f, g) = \int_X |f - g|  d\mu \leq \int_X |f - h|  d\mu + \int_X |h - g|  d\mu = d(f, h) + d(h, g).
+\]
+\end{proof}
+
+\begin{remark}
+\begin{enumerate}
+    \item $L^1$ is not a metric space,
+    \item $\LL^1$ is a metric space.
+\end{enumerate}
+\end{remark}
+
+Define
+\[
+\LL^\infty(X, \A, \mu) \coloneqq L^\infty(X, \A, \mu) / R,
+\]
+with the metric
+\[
+d(f, g) \coloneqq \esssup_X |f - g|.
+\]
+
+\begin{lemma}
+$\LL^\infty$ is a metric space.
+\end{lemma}
+
+\clearpage
+\subsection{Comparisons}
+\subsubsection{Peano-Jordan / Lebesgue Measure}
+
+\begin{theorem}
+Let $E \subseteq \Rn$. If $E$ is Peano-Jordan measurable, then $E \in \LL(\Rn)$ and $m_{PJ}(E) = \lambda(E)$.
+\end{theorem}
+
+\begin{example}
+The set $E = [0,1] \cap \mathbb{Q}$ is not Peano-Jordan measurable, but it is countable and so $E \in \LL(\R)$ with $\lambda(E) = 0$.
+\end{example}
+
+\subsubsection{Riemann / Lebesgue Integral}
+
+\begin{theorem}
+Consider $I = [a,b]$ and let $f \in R(I)$. Then $f \in L(I, \LL(I), \lambda)$ and 
+\[
+\int_I f \, d\lambda = \int_a^b f(x) \, dx.
+\]
+\end{theorem}
+
+\begin{example}
+Let $I = [0,1]$ and define $f \coloneqq \chi_{I \cap \mathbb{Q}}$. Then:
+\begin{enumerate}
+    \item $f \notin R(I)$
+    \item $f \in L^1$
+    \item $\int_I f \, d\lambda = \lambda(I \cap \mathbb{Q}) = 0$
+\end{enumerate}
+\end{example}
+
+\subsubsection{Generalized Riemann Integral}
+
+Let $\alpha, \beta \in \Rext$ and $I = [\alpha, \beta]$. Define
+\[
+R^i(I) \coloneqq \{ f \colon I \to \R \mid f \text{ is integrable in the generalized sense} \}.
+\]
+
+\begin{theorem}
+If $f \in R^i(I)$, then $f \in \M(I, \LL(I))$. Furthermore, if $f \in R^i(I)$ and $|f| \in R^i(I)$, then $f \in L^1$. Moreover,
+\[
+\int_I f \, d\lambda = \int_{\alpha}^{\beta} f(x) \, dx.
+\]
+\end{theorem}
+
+\begin{remark} [Dirichlet Integral]
+Define $f \colon [0,\infty) \to \R$ by
+\[
+f(x) \coloneqq 
+\begin{cases}
+\frac{\sin x}{x}, & x \neq 0 \\
+1, & x = 0
+\end{cases}
+\]
+Clearly $f \in R^i(I)$ and
+\[
+\int_0^{\infty} \frac{\sin x}{x} \, dx = \frac{\pi}{2}.
+\]
+But notice that
+\[
+\int_{\R_+} \left| \frac{\sin x}{x} \right| \, d\lambda = \int_0^{\infty} \left| \frac{\sin x}{x} \right| \, dx = \infty \quad \Rightarrow \quad f \notin L^1.
+\]
+\end{remark}

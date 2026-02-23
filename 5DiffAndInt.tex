@@ -1,0 +1,407 @@
+\section{Differentiation and Integration}
+\subsection{Absolute Continuity}
+
+\begin{remark}
+The following is not correct: Given $f:[a,b] \to \R$ continuous,
+\[
+\frac{1}{h} \int_{x_0}^{x_0+h} f(t) \, dt \xrightarrow[h \to 0]{} f(x_0).
+\]
+\end{remark}
+
+Let's consider $L^1$ now. In $L^1$ we cannot write the previous limit, since we don't know if $f(x_0)$ is defined. But we have the following:
+\[
+\lim_{h \to 0} \frac{1}{h} \int_{x_0}^{x_0+h} |f(t) - f(x_0)| \, dt = 0.
+\]
+
+\begin{definition}[Lebesgue Points]
+A point $x_0 \in [a,b]$ is a \textbf{Lebesgue point} for $f$ if
+\[
+\lim_{h \to 0} \frac{1}{h} \int_{x_0}^{x_0+h} |f(t) - f(x_0)| \, dt = 0.
+\]
+\end{definition}
+
+\begin{theorem}
+If $f \in L^1((a,b))$, then almost every $x_0 \in [a,b]$ is a Lebesgue point for $f$. So almost every point is a regular and good point.
+\end{theorem}
+
+\clearpage
+\begin{theorem}[First Fundamental Theorem of Calculus in $L^1$]
+If $f \in L^1((a,b))$, then
+\[
+F(x) \coloneqq \int_{[a,x]} f \, d\lambda
+\]
+is differentiable a.e. in $(a,b)$ and $F'(x) = f(x)$ for a.e. $x \in (a,b)$.
+\end{theorem}
+
+\begin{proof}
+The key insight here is the connection between Lebesgue points and differentiability. Let's break down the proof step by step:
+
+\begin{enumerate}
+\item \textbf{Setting up the difference quotient}: For a Lebesgue point $x \in [a,b]$ and $h \neq 0$ with $x+h \in [a,b]$, we consider:
+\[
+\frac{F(x+h) - F(x)}{h} - f(x) = \frac{1}{h} \int_x^{x+h} [f(t) - f(x)] \, dt.
+\]
+This expresses the difference between the difference quotient and the function value at $x$.
+
+\item \textbf{Applying the triangle inequality}: Taking absolute values and using the triangle inequality for integrals:
+\[
+\left| \frac{F(x+h) - F(x)}{h} - f(x) \right| \leq \frac{1}{|h|} \int_x^{x+h} |f(t) - f(x)| \, dt.
+\]
+
+\item \textbf{Crucial observation}: The right-hand side is exactly the expression that defines a Lebesgue point! For $x$ to be a Lebesgue point, we require:
+\[
+\lim_{h \to 0} \frac{1}{|h|} \int_x^{x+h} |f(t) - f(x)| \, dt = 0.
+\]
+
+\item \textbf{Conclusion}: Since almost every point is a Lebesgue point (by the previous theorem), and at Lebesgue points the limit above is zero, we conclude that:
+\[
+\lim_{h \to 0} \left| \frac{F(x+h) - F(x)}{h} - f(x) \right| = 0,
+\]
+which means $F'(x) = f(x)$ for almost every $x \in (a,b)$.
+\end{enumerate}
+
+The beauty of this proof lies in how it connects the measure-theoretic concept of Lebesgue points with the differential calculus concept of derivative.
+\end{proof}
+
+\clearpage
+\subsection{Absolutely Continuous Functions}
+
+Let $J = [a,b]$ and define
+\[
+\F(J) \coloneqq \{\text{finite collections of closed intervals } \subseteq J \text{ without interior points in common}\}.
+\]
+
+\begin{definition}
+A function $f: J \to \R$ is said to be \textbf{absolutely continuous} in $J$ if for every $\varepsilon > 0$, there exists $\delta > 0$ such that for every $\{[a_k, b_k]\} \in \F(J)$ with $k = 1, \dots, n$ for which
+\[
+\sum_{k=1}^n (b_k - a_k) < \delta,
+\]
+one has
+\[
+\sum_{k=1}^n |f(b_k) - f(a_k)| < \varepsilon.
+\]
+We define $AC([a,b]) \coloneqq \{ f: [a,b] \to \R \text{ absolutely continuous} \}$.
+\end{definition}
+
+\begin{remark}
+Consider $n = 1$, $k = 1$:
+\[
+\{[a_k, b_k]\} = 
+\begin{cases}
+[x,y], & y \geq x \\
+[y,x], & y < x
+\end{cases}.
+\]
+For every $\varepsilon > 0$, there exists $\delta > 0$ such that for all $x, y \in [a,b]$ with $|x - y| < \delta$, we have $|f(y) - f(x)| < \varepsilon$. So $f$ is uniformly continuous in $[a,b]$.
+
+\begin{enumerate}
+\item So an absolutely continuous function is uniformly continuous and therefore continuous:
+\[
+f \in AC \Rightarrow f \in UC \Rightarrow f \in C^0.
+\]
+
+\item To show that the implication doesn't go the other way, consider
+\[
+f(x) = 
+\begin{cases}
+x \sin(1/x), & x \in [-1,1] \setminus \{0\} \\
+0, & x = 0
+\end{cases}.
+\]
+Then $f \in UC([-1,1])$ but $f \notin AC([-1,1])$.
+
+\item If $f$ is Lipschitz in $[a,b]$, then $f \in AC([a,b])$.
+
+\begin{proof}
+$f$ is Lipschitz means there exists $L > 0$ such that $|f(y) - f(x)| \leq L|y - x|$ for all $x, y \in [a,b]$. For every $\varepsilon > 0$,
+\[
+\sum_{k=1}^n |f(b_k) - f(a_k)| \leq \sum_{k=1}^n L|b_k - a_k| = L \sum_{k=1}^n |b_k - a_k| < L\delta < \varepsilon,
+\]
+provided that $\delta < \varepsilon/L$.
+\end{proof}
+
+\item $f \in AC([a,b]) \nRightarrow f$ Lipschitz. Consider $f(x) = \sqrt{x}$ on $[0,1]$. This function is not Lipschitz (it is Hölder continuous), but
+\[
+f(x) = \sqrt{x} = \int_0^x \frac{1}{2\sqrt{t}} \, dt \in AC
+\]
+because $1/(2\sqrt{t}) \in L^1$.
+\end{enumerate}
+\end{remark}
+
+\begin{theorem}[Absolute Continuity of the Integral]
+Let $f \in M_+(X, \A)$ be such that $\int_X f \, d\mu < \infty$. Then for every $\varepsilon > 0$, there exists $\delta > 0$ such that for every $E \in \A$ with $\mu(E) < \delta$, we have
+\[
+\int_E f \, d\mu < \varepsilon.
+\]
+\end{theorem}
+
+\begin{proof}
+This proof demonstrates a fundamental property of integrable functions. Let's examine the strategy:
+
+\begin{enumerate}
+\item \textbf{Constructing approximating sets}: We define $F_n = \{f < n\}$, which are measurable sets where $f$ is bounded. The sequence $\{F_n\}$ is increasing and covers almost all of $X$ since $f$ is finite almost everywhere (because $\int_X f \, d\mu < \infty$).
+
+\item \textbf{Using continuity of the integral}: By the Monotone Convergence Theorem (or continuity from below):
+\[
+\int_X f \, d\mu = \lim_{n \to \infty} \int_{F_n} f \, d\mu.
+\]
+This means that for large $n$, most of the integral's mass is concentrated on the sets $F_n$ where $f$ is bounded.
+
+\item \textbf{Controlling the tail}: For any $\varepsilon > 0$, there exists $\bar{n}$ such that:
+\[
+\int_{F_n^C} f \, d\mu < \frac{\varepsilon}{2} \quad \text{for all } n > \bar{n}.
+\]
+This bounds the integral over the "bad" set where $f$ is large.
+
+\item \textbf{Splitting the integral}: For any measurable set $E$ with $\mu(E) < \delta$, we split:
+\[
+\int_E f \, d\mu = \int_{E \cap F_n} f \, d\mu + \int_{E \cap F_n^C} f \, d\mu.
+\]
+
+\item \textbf{Estimating both parts}:
+\begin{itemize}
+\item On $E \cap F_n$, $f$ is bounded by $n$, so:
+\[
+\int_{E \cap F_n} f \, d\mu \leq n \cdot \mu(E) < n\delta.
+\]
+\item On $E \cap F_n^C$, we use the tail estimate:
+\[
+\int_{E \cap F_n^C} f \, d\mu \leq \int_{F_n^C} f \, d\mu < \frac{\varepsilon}{2}.
+\]
+\end{itemize}
+
+\item \textbf{Choosing $\delta$}: Taking $\delta = \frac{\varepsilon}{2n}$, we get:
+\[
+\int_E f \, d\mu < n \cdot \frac{\varepsilon}{2n} + \frac{\varepsilon}{2} = \varepsilon.
+\]
+\end{enumerate}
+
+This proof shows that for integrable functions, the contribution from small sets can be made arbitrarily small, which is a crucial property in measure theory.
+\end{proof}
+
+\clearpage
+\begin{corollary}
+Let $I = [a,b]$ and $f \in L^1(I)$. Then $F(x) \coloneqq \int_{[a,x]} f \, d\lambda$ is absolutely continuous in $I$.
+\end{corollary}
+
+\begin{proof}
+This corollary shows that indefinite integrals of $L^1$ functions are absolutely continuous:
+
+\begin{enumerate}
+\item \textbf{Setup}: Let $\{[a_k, b_k]\}$ be a finite collection of non-overlapping intervals in $[a,b]$ with:
+\[
+\sum_{k=1}^n (b_k - a_k) < \delta.
+\]
+
+\item \textbf{Estimating the variation}: For $F(x) = \int_{[a,x]} f \, d\lambda$, we have:
+\[
+\sum_{k=1}^n |F(b_k) - F(a_k)| = \sum_{k=1}^n \left| \int_{[a_k, b_k]} f \, d\lambda \right|.
+\]
+
+\item \textbf{Using triangle inequality}: 
+\[
+\sum_{k=1}^n \left| \int_{[a_k, b_k]} f \, d\lambda \right| \leq \sum_{k=1}^n \int_{[a_k, b_k]} |f| \, d\lambda.
+\]
+
+\item \textbf{Combining integrals}: Since the intervals are disjoint:
+\[
+\sum_{k=1}^n \int_{[a_k, b_k]} |f| \, d\lambda = \int_E |f| \, d\lambda,
+\]
+where $E = \bigcup_{k=1}^n [a_k, b_k]$ and $\lambda(E) < \delta$.
+
+\item \textbf{Applying absolute continuity}: By the previous theorem, since $|f| \in L^1$, for any $\varepsilon > 0$ there exists $\delta > 0$ such that $\lambda(E) < \delta$ implies $\int_E |f| \, d\lambda < \varepsilon$.
+\end{enumerate}
+\end{proof}
+
+\clearpage
+\begin{theorem}[Second Fundamental Theorem of Calculus]
+Let $\varphi: [a,b] \to \R$. The following are equivalent:
+\begin{enumerate}
+\item $\varphi \in AC([a,b])$
+\item $\varphi$ is differentiable a.e. in $[a,b]$, $\varphi' \in L^1([a,b])$, and
+\[
+\varphi(x) - \varphi(a) = \int_{[a,x]} \varphi' \, d\lambda, \quad \forall x \in [a,b].
+\]
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+Take $\varphi: [a,b] \to \R$ with $\varphi \in C^1((a,b]) \cap C^0([a,b])$ and $\varphi' \in L^1([a,b])$. Then condition (2) is fulfilled.
+\end{remark}
+\begin{proof}
+For every $\xi \in (a,b)$, we have $\varphi \in C^1([\xi,b])$, so we can use the fundamental formula of calculus:
+\[
+\varphi(x) - \varphi(\xi) = \int_{[\xi,x]} \varphi'(t) \, dt.
+\]
+Now notice that $\varphi(x) - \varphi(\xi) \xrightarrow[\xi \to a^+]{} \varphi(x) - \varphi(a)$. For the right-hand side:
+\[
+\int_{[\xi,x]} \varphi'(t) \, dt = \int_{[a,x]} \varphi'(t) \chi_{[\xi,x]}(t) \, dt.
+\]
+We have $\varphi'(t) \chi_{[\xi,x]}(t) \in M(X, \A)$ and $\varphi'(t) \chi_{[\xi,x]}(t) \xrightarrow[\xi \to a^+]{} \varphi'(t)$ in $[a,x]$, with $|\varphi'(t) \chi_{[\xi,x]}(t)| \leq \varphi'(t) \in L^1([a,b])$ for all $t \in [a,x], \xi$. By the Dominated Convergence Theorem, we conclude that
+\[
+\varphi(x) - \varphi(a) = \int_{[a,x]} \varphi'(t) \, dt.
+\]
+\end{proof}
+
+\subsection{Sobolev Spaces}
+
+\begin{proposition}
+The following are equivalent:
+\begin{itemize}
+\item $u \in AC([a,b])$
+\item $u \in C^0([a,b])$, $u$ is differentiable a.e., $u' \in L^1([a,b])$, and
+\[
+\int_a^b u' \varphi \, dx = -\int_a^b u \varphi' \, dx, \quad \forall \varphi \in C_c^\infty((a,b)).
+\]
+\end{itemize}
+We can also consider $\forall \varphi \in \text{Lip}([a,b])$ with $\varphi(b) = \varphi(a) = 0$.
+\end{proposition}
+
+\begin{definition}[Weak Derivative]
+Let $u \in L^p((a,b))$, $p \in [1,\infty)$. We say that $w \in L_{\text{loc}}^1((a,b))$ is the \textbf{weak derivative} of $u$ if
+\[
+\int_a^b u \varphi' \, dx = -\int_a^b w \varphi \, dx, \quad \forall \varphi \in C_c^\infty((a,b)).
+\]
+We write $u' \equiv w$.
+\end{definition}
+
+\begin{definition}
+We define the \textbf{Sobolev spaces}:
+\[
+W^{1,p}(I) \coloneqq \left\{ u: I \to \R : u \in L^p(I), \, w \in L^p(I) \right\}.
+\]
+When $p = 1$, we have $W^{1,1}(I)$; when $p = 2$, we have $W^{1,2}(I) \equiv H^1(I)$.
+\end{definition}
+
+\begin{remark}
+Both $u$ and $w$ are equivalence classes.
+\end{remark}
+
+\begin{lemma}[Vanishing Lemma, 3rd Version]
+Let $u \in L^1([a,b])$. Suppose that
+\[
+\int_a^b u \varphi \, dx = 0, \quad \forall \varphi \in C_c^\infty((a,b)).
+\]
+Then $u = 0$ a.e. in $[a,b]$.
+\end{lemma}
+
+\begin{proposition}
+If the weak derivative $w$ exists, it is unique.
+\end{proposition}
+
+\begin{proof}
+The uniqueness of weak derivatives is fundamental to the theory of Sobolev spaces:
+
+\begin{enumerate}
+\item \textbf{Assumption of non-uniqueness}: Suppose $w_1$ and $w_2$ are both weak derivatives of $u$. Then for any test function $\varphi \in C_c^\infty((a,b))$:
+\[
+\int_a^b w_1 \varphi \, dx = -\int_a^b u \varphi' \, dx = \int_a^b w_2 \varphi \, dx.
+\]
+
+\item \textbf{Difference vanishes}: Subtracting gives:
+\[
+\int_a^b (w_1 - w_2) \varphi \, dx = 0 \quad \text{for all } \varphi \in C_c^\infty((a,b)).
+\]
+
+\item \textbf{Applying the Vanishing Lemma}: The Vanishing Lemma (3rd version) states that if a function in $L^1$ integrates to zero against all test functions, then it must be zero almost everywhere.
+
+\item \textbf{Conclusion}: Therefore, $w_1 = w_2$ almost everywhere, meaning the weak derivative is unique as an element of $L^1$ (i.e., unique up to sets of measure zero).
+\end{enumerate}
+
+This proof highlights the power of test functions in distribution theory - they can "detect" when two functions are essentially the same.
+\end{proof}
+
+\begin{remark}
+In principle, weak derivative and a.e. derivative are different. However, by the previous proposition, they coincide if $u \in AC$. Therefore, $AC(I) \subseteq W^{1,1}(I)$.
+\end{remark}
+
+\clearpage
+\begin{theorem}
+$AC(I) = W^{1,1}(I)$.
+\end{theorem}
+
+\begin{proof}
+This is a fundamental characterization of absolutely continuous functions:
+
+\textit{Forward direction ($AC(I) \subseteq W^{1,1}(I)$)}:
+\begin{enumerate}
+\item If $u \in AC(I)$, then by the Second Fundamental Theorem of Calculus, $u$ is differentiable almost everywhere, $u' \in L^1(I)$, and:
+\[
+u(x) - u(a) = \int_a^x u'(t) \, dt.
+\]
+
+\item \textbf{Verifying weak derivative condition}: For any $\varphi \in C_c^\infty((a,b))$, we can integrate by parts (justified by absolute continuity):
+\[
+\int_a^b u \varphi' \, dx = [u \varphi]_a^b - \int_a^b u' \varphi \, dx = -\int_a^b u' \varphi \, dx,
+\]
+since $\varphi$ has compact support in $(a,b)$, so $\varphi(a) = \varphi(b) = 0$.
+
+\item Therefore, $u'$ is indeed the weak derivative of $u$, so $u \in W^{1,1}(I)$.
+\end{enumerate}
+
+\textit{Reverse direction ($W^{1,1}(I) \subseteq AC(I)$)}:
+\begin{enumerate}
+\item \textbf{Constructing a candidate}: Given $u \in W^{1,1}(I)$ with weak derivative $w$, define:
+\[
+z(x) = \int_a^x w(t) \, dt.
+\]
+
+\item \textbf{Properties of $z$}: Since $w \in L^1(I)$, the integral function $z$ is absolutely continuous (by the previous corollary).
+
+\item \textbf{Comparing $u$ and $z$}: For any test function $\varphi \in C_c^\infty((a,b))$:
+\[
+\int_a^b z \varphi' \, dx = -\int_a^b z' \varphi \, dx = -\int_a^b w \varphi \, dx = \int_a^b u \varphi' \, dx,
+\]
+where the last equality uses that $w$ is the weak derivative of $u$.
+
+\item \textbf{Difference has zero weak derivative}: Therefore:
+\[
+\int_a^b (z - u) \varphi' \, dx = 0 \quad \text{for all } \varphi \in C_c^\infty((a,b)).
+\]
+
+\item \textbf{Constant difference}: By the corollary to the Vanishing Lemma, this implies $z - u$ is constant almost everywhere, say $z - u = c$ a.e.
+
+\item \textbf{Conclusion}: Since $z$ is absolutely continuous and differs from $u$ by only a constant, $u$ is also absolutely continuous.
+\end{enumerate}
+
+This proof beautifully connects the classical notion of absolute continuity with the modern distributional approach to derivatives.
+\end{proof}
+
+\clearpage
+To explain the previous "Therefore", we used a corollary of the Vanishing Lemma:
+
+\begin{corollary}
+Let $u \in L^1([a,b])$. Suppose that
+\[
+\int_a^b u \varphi' \, dx = 0, \quad \forall \varphi \in C_c^\infty((a,b)).
+\]
+Then $u$ is constant a.e. in $[a,b]$. Because this means that the weak derivative of $u$ is $0$.
+\end{corollary}
+
+\subsection{Derivative of Measures}
+
+Let $(X,\A)$ be a measurable space, with $\mu$, $\nu$ measures.
+\begin{definition}
+A function $\phi \in M_+(X,\A)$ is said to be the \textbf{Radon-Nikodym derivative} of $\nu$ with respect to $\mu$ if
+\[
+\nu(E) = \int_E \phi  d\mu \quad \forall E \in \A.
+\]
+We write $\phi = \frac{d\nu}{d\mu}$.
+\end{definition}
+
+\begin{definition}
+We say that $\nu$ is \textbf{absolutely continuous} with respect to $\mu$ if
+\[
+\mu(E) = 0 \Rightarrow \nu(E) = 0.
+\]
+We write $\nu \ll \mu$.
+\end{definition}
+
+\begin{theorem}[Radon-Nikodym]
+Let $(X,\A)$ be a measurable space, with $\mu$, $\nu$ measures. Suppose that $\nu \ll \mu$ and that $\mu$ is $\sigma$-finite. Then $\frac{d\nu}{d\mu}$ exists and is unique $\mu$-almost everywhere.
+\end{theorem}
+
+
+\begin{remark}
+The Radon-Nikodym theorem establishes that under the conditions $\nu \ll \mu$ and $\mu$ $\sigma$-finite, the measure $\nu$ can be "reconstructed" from $\mu$ by integrating the derivative $\frac{d\nu}{d\mu}$. This is the measure-theoretic analogue of the Fundamental Theorem of Calculus.
+\end{remark}

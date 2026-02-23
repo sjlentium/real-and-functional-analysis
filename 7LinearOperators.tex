@@ -1,0 +1,346 @@
+\section{Linear Operators}
+
+\begin{definition}
+Let $X$, $Y$ be vector spaces.  
+An operator $T: X \to Y$ is called a \textbf{linear operator} if  
+\[
+T(\alpha v_1 + \beta v_2) = T(\alpha v_1) + T(\beta v_2)
+\]
+for all $v_1, v_2 \in X$ and all $\alpha, \beta \in \R$.  
+If $Y = \R$, then $T$ is called a \textbf{functional}.
+\end{definition}
+
+\begin{remark}
+For any linear operator $T$, we have $T(0) = T(0 \cdot v) = 0 \cdot T(v) = 0$.
+\end{remark}
+
+\begin{definition}
+Let $X$, $Y$ be normed spaces.  
+We say that $T: X \to Y$ is \textbf{bounded} if there exists $M > 0$ such that  
+\[
+\|T(x)\|_Y \leq M \|x\|_X \quad \text{for all } x \in X.
+\]
+\end{definition}
+
+\begin{definition}
+Let $X$, $Y$ be normed spaces.  
+An operator $T: X \to Y$ is \textbf{continuous at $x_0 \in X$} if and only if for every sequence $\{x_n\} \subset X$ with $x_n \to x_0$ as $n \to \infty$, we have  
+\[
+T(x_n) \to T(x_0) \quad \text{as } n \to \infty.
+\]
+We say $T$ is \textbf{continuous} if it is continuous at every $x_0 \in X$.
+\end{definition}
+
+\begin{definition}
+Let $X$, $Y$ be normed spaces.  
+An operator $T: X \to Y$ is \textbf{Lipschitz} if and only if there exists $L > 0$ such that  
+\[
+\|T(x) - T(y)\|_Y \leq L \|x - y\|_X \quad \text{for all } x, y \in X.
+\]
+\end{definition}
+
+\clearpage
+\begin{theorem}
+Let $T: X \to Y$ be a linear operator between two normed spaces.  
+Then the following statements are equivalent:
+\begin{enumerate}
+    \item $T$ is bounded.
+    \item $T$ is Lipschitz.
+    \item $T$ is continuous at $x_0 = 0$.
+    \item $T$ is continuous.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+\begin{itemize}[leftmargin=5em]
+    \item [$(1) \Rightarrow (2)$]
+    If $T$ is bounded, then $\|T(x)\|_Y \leq M \|x\|_X$ for all $x \in X$.  
+    Then for all $x, y \in X$:
+    \[
+    \|T(x) - T(y)\|_Y = \|T(x - y)\|_Y \leq M \|x - y\|_X,
+    \]
+    so $T$ is Lipschitz with constant $M$.
+
+    \item [$(2) \Rightarrow (3)$]
+    Let $\{x_n\} \subset X$ with $x_n \to 0$. Then $\|x_n\|_X \to 0$.  
+    We have:
+    \[
+    0 \leq \|T(x_n) - T(0)\|_Y = \|T(x_n)\|_Y \leq L \|x_n - 0\|_X = L \|x_n\|_X \to 0,
+    \]
+    so $\|T(x_n) - T(0)\|_Y \to 0$, hence $T(x_n) \to T(0)$.
+
+    \item [$(3) \Rightarrow (1)$]
+    Suppose by contradiction that $T$ is not bounded.  
+    
+    Then there exists a sequence $\{x_n\} \subset X$, $x_n \neq 0$, such that  
+    \[
+    \|T(x_n)\|_Y \geq n \|x_n\|_X.
+    \]
+    Define $S_n = \frac{x_n}{n \|x_n\|_X}$. Then  
+    \[
+    \|S_n\|_X = \frac{1}{n} \to 0,
+    \]
+    so $S_n \to 0$. However,
+    \[
+    T(S_n) = \frac{1}{n \|x_n\|_X} T(x_n),
+    \]
+    and
+    \[
+    \|T(S_n)\|_Y = \frac{1}{n \|x_n\|_X} \|T(x_n)\|_Y \geq \frac{1}{n \|x_n\|_X} \cdot n \|x_n\|_X = 1.
+    \]
+    Thus, $T(S_n) \not\to T(0) = 0$, contradicting continuity at $0$.
+
+    \item [$(4) \Rightarrow (3)$]
+    Obvious.
+
+    \item [$(3) \Rightarrow (4)$]
+    Let $x_0 \in X$ and $\{x_n\} \subset X$ with $x_n \to x_0$.  
+    
+    Then $\|T(x_n) - T(x_0)\|_Y = \|T(x_n - x_0)\|_Y \leq L \|x_n - x_0\|_X \to 0$,  
+    so $T(x_n) \to T(x_0)$.
+    
+\end{itemize}
+\end{proof}
+
+\begin{remark}
+Let $X$, $Y$ be normed spaces, and $T: X \to Y$ be linear with $\dim(X) < \infty$.  
+Then $T$ is continuous.
+\end{remark}
+
+\begin{example}
+Define $T: \ell^2 \to \ell^2$ by  
+\[
+T(x) = \left( \frac{x^{(1)}}{1}, \frac{x^{(2)}}{2}, \dots, \frac{x^{(k)}}{k}, \dots \right)
+\]
+for $x = \{x^{(k)}\} \in \ell^2$. Then $T$ is linear and continuous (hence bounded), since  
+\[
+\|T(x)\|_{\ell^2}^2 = \sum_{k=1}^\infty \left( \frac{x^{(k)}}{k} \right)^2 \leq \sum_{k=1}^\infty (x^{(k)})^2 = \|x\|_{\ell^2}^2.
+\]
+\end{example}
+
+\begin{definition}
+Let $X$, $Y$ be normed spaces.  
+We denote by $\LL(X,Y)$ (or $\B(X,Y)$) the set of all linear continuous operators from $X$ to $Y$.  
+When $X = Y$, we write $\LL(X) \equiv \LL(X,X)$.
+\end{definition}
+
+\begin{remark}
+$\LL(X,Y)$ is a vector space.  
+If $T \in \LL(X,Y)$, then there exists $M > 0$ such that  
+\[
+\|T(x)\|_Y \leq M \quad \text{for all } x \in X \text{ with } \|x\|_X \leq 1.
+\]
+Hence,  
+\[
+\sup_{\substack{x \in X \\ \|x\|_X \leq 1}} \|T(x)\|_Y \in \R_+.
+\]
+We can show that $(\LL(X,Y), \|\cdot\|_{\LL})$ is a normed space, where the \textbf{operator norm} is defined by  
+\[
+\|T\|_{\LL} \coloneqq \sup_{\substack{x \in X \\ \|x\|_X \leq 1}} \|T(x)\|_Y.
+\]
+\end{remark}
+
+\begin{proposition}
+The operator norm can be equivalently defined as:
+\begin{align*}
+\|T\|_{\LL} &= \sup_{\substack{x \in X \\ \|x\|_X \leq 1}} \|T(x)\|_Y, \\
+\|T\|_{\LL} &= \sup_{\substack{x \in X \\ \|x\|_X = 1}} \|T(x)\|_Y, \\
+\|T\|_{\LL} &= \sup_{x \in X \setminus \{0\}} \frac{\|T(x)\|_Y}{\|x\|_X}.
+\end{align*}
+\end{proposition}
+
+\begin{proof}
+The equivalence between the first and second follows from homogeneity:  
+If $\|x\|_X \leq 1$, $x \neq 0$, then  
+\[
+\|T(x)\|_Y = \|x\|_X \left\| T\left( \frac{x}{\|x\|_X} \right) \right\|_Y \leq \left\| T\left( \frac{x}{\|x\|_X} \right) \right\|_Y,
+\]
+so the supremum over $\|x\|_X \leq 1$ is attained on the unit sphere.  
+The equivalence with the third follows from  
+\[
+\frac{\|T(x)\|_Y}{\|x\|_X} = \left\| T\left( \frac{x}{\|x\|_X} \right) \right\|_Y.
+\]
+\end{proof}
+
+\begin{theorem}
+Let $X$ be a normed space and $Y$ be a Banach space.  
+Then $(\LL(X,Y), \|\cdot\|_{\LL})$ is a Banach space.
+\end{theorem}
+
+\subsection{Uniform Boundedness Principle (Banach–Steinhaus Theorem)}
+
+\begin{theorem}[Baire's Theorem]
+Let $X$ be a complete metric space.  
+If $\{A_n\}_{n \in \N} \subset X$ is a sequence of open dense sets, then  
+\[
+\overline{\bigcap_{n=1}^\infty A_n} = X.
+\]
+Equivalently, if $\{C_n\}_{n \in \N} \subset X$ is a sequence of closed sets with $\bigcup_{n=1}^\infty C_n = X$,  
+then there exists $n_0 \in \N$ such that $\operatorname{Int}(C_{n_0}) \neq \emptyset$.
+\end{theorem}
+
+\begin{definition}
+Let $X$, $Y$ be Banach spaces and $\F \subset \LL(X,Y)$.  
+We say that $\F$ is \textbf{pointwise bounded} if for every $x \in X$, there exists $M_x > 0$ such that  
+\[
+\sup_{T \in \F} \|T(x)\|_Y \leq M_x.
+\]
+We say that $\F$ is \textbf{uniformly bounded} if there exists $M > 0$ such that  
+\[
+\sup_{T \in \F} \|T\|_{\LL} \leq M.
+\]
+\end{definition}
+
+\begin{theorem}[Uniform Boundedness Principle]
+Let $X$, $Y$ be Banach spaces and $\F \subset \LL(X,Y)$.  
+If $\F$ is pointwise bounded, then $\F$ is uniformly bounded.
+\end{theorem}
+
+\begin{proof}
+For each $n \in \N$, define  
+\[
+C_n \coloneqq \{ x \in X : \|T(x)\|_Y \leq n \text{ for all } T \in \F \}.
+\]
+\begin{enumerate}
+    \item Each $C_n$ is closed:  
+          Let $\{x_k\} \subset C_n$ with $x_k \to x_0 \in X$.  
+          Then $T(x_k) \to T(x_0)$ for all $T \in \F$, and since $\|T(x_k)\|_Y \leq n$,  
+          we have $\|T(x_0)\|_Y \leq n$, so $x_0 \in C_n$.
+    
+    \item $\bigcup_{n=1}^\infty C_n = X$:  
+          For each $x \in X$, pointwise boundedness implies $\sup_{T \in \F} \|T(x)\|_Y < \infty$,  
+          so $x \in C_n$ for some $n$.
+\end{enumerate}
+By Baire's Theorem, there exists $n_0 \in \N$ such that $\operatorname{Int}(C_{n_0}) \neq \emptyset$.  
+Hence, there exists a closed ball $\overline{B}_\varepsilon(x_0) \subset C_{n_0}$.  
+For any $z \in X$ with $\|z\|_X \leq \varepsilon$, we have $z + x_0 \in \overline{B}_\varepsilon(x_0) \subset C_{n_0}$, so  
+\[
+\|T(z)\|_Y = \|T(z + x_0) - T(x_0)\|_Y \leq \|T(z + x_0)\|_Y + \|T(x_0)\|_Y \leq n_0 + n_0 = 2n_0.
+\]
+For any $x \in X \setminus \{0\}$ and $T \in \F$,  
+\[
+\|T(x)\|_Y = \frac{\|x\|_X}{\varepsilon} \left\| T\left( \varepsilon \frac{x}{\|x\|_X} \right) \right\|_Y \leq \frac{2n_0}{\varepsilon} \|x\|_X.
+\]
+Thus, $\|T\|_{\LL} \leq \frac{2n_0}{\varepsilon} \coloneqq M$ for all $T \in \F$, so $\F$ is uniformly bounded.
+\end{proof}
+
+\clearpage
+\begin{corollary}
+Let $X$, $Y$ be Banach spaces and $\{T_n\}_{n \in \N} \subset \LL(X,Y)$.  
+Suppose that for every $x \in X$, the limit $\lim_{n \to \infty} T_n(x)$ exists.  
+Define $T: X \to Y$ by $T(x) \coloneqq \lim_{n \to \infty} T_n(x)$.  
+Then $T$ is linear and bounded, hence $T \in \LL(X,Y)$.
+\end{corollary}
+
+\begin{proof}
+Linearity is obvious.  
+For each $x \in X$, the sequence $\{T_n(x)\}$ is convergent and hence bounded.  
+Thus, $\{T_n\}$ is pointwise bounded.  
+By the Uniform Boundedness Principle, there exists $M > 0$ such that  
+\[
+\|T_n(x)\|_Y \leq M \|x\|_X \quad \text{for all } n \in \N,\ x \in X.
+\]
+Taking the limit as $n \to \infty$, we get  
+\[
+\|T(x)\|_Y \leq M \|x\|_X \quad \text{for all } x \in X,
+\]
+so $T$ is bounded.
+\end{proof}
+
+\subsection{Open Mapping Theorem}
+
+\begin{definition}
+Let $X$, $Y$ be metric spaces and $T: X \to Y$.  
+We say $T$ is \textbf{open} if $T(A)$ is open in $Y$ for every open set $A \subset X$.
+\end{definition}
+
+\begin{theorem}[Open Mapping Theorem]
+Let $X$, $Y$ be Banach spaces and $T \in \LL(X,Y)$.  
+If $T$ is surjective, then $T$ is an open mapping.
+\end{theorem}
+
+\begin{corollary}[Inverse Bounded/Continuous Mapping]
+Let $T \in \LL(X,Y)$ be bijective.  
+Then $T^{-1} \in \LL(Y,X)$.
+\end{corollary}
+
+\begin{proof}
+Since $T$ is bijective, $T^{-1}: Y \to X$ is linear.  
+We show $T^{-1}$ is continuous.  
+Let $E \subset X$ be open. Then $(T^{-1})^{-1}(E) = T(E)$ is open by the Open Mapping Theorem,  
+so $T^{-1}$ is continuous.
+\end{proof}
+
+\subsection{Closed Graph Theorem}
+
+\begin{definition}
+Let $X$, $Y$ be normed spaces and $T: X \to Y$ a linear operator.  
+We say $T$ is \textbf{closed} if for every sequence $\{x_n\} \subset X$ with  
+$x_n \to x$ in $X$ and $T(x_n) \to y$ in $Y$, we have $T(x) = y$.
+\end{definition}
+
+\begin{remark}
+If $T \in \LL(X,Y)$, then $T$ is closed.  
+The converse is not true in general.
+\end{remark}
+
+\begin{definition}
+The \textbf{graph} of $T: X \to Y$ is the set  
+\[
+\operatorname{graph}(T) \coloneqq \{(x, T(x)) : x \in X\} \subseteq X \times Y.
+\]
+We say $\operatorname{graph}(T)$ is closed if whenever $(x_n, T(x_n)) \to (x, y)$ in $X \times Y$,  
+then $(x, y) \in \operatorname{graph}(T)$.
+\end{definition}
+
+\begin{remark}
+$T$ is closed if and only if $\operatorname{graph}(T)$ is closed.
+\end{remark}
+
+\clearpage
+\begin{corollary}
+Let $(X, \|\cdot\|_1)$ and $(X, \|\cdot\|_2)$ be Banach spaces.  
+Suppose there exists $M > 0$ such that  
+\[
+\|x\|_2 \leq M \|x\|_1 \quad \text{for all } x \in X.
+\]
+Then $\|\cdot\|_1$ and $\|\cdot\|_2$ are equivalent, i.e., there exists $m > 0$ such that  
+\[
+\|x\|_1 \leq m \|x\|_2 \quad \text{for all } x \in X.
+\]
+\end{corollary}
+
+\begin{proof}
+Consider the identity map $I: (X, \|\cdot\|_1) \to (X, \|\cdot\|_2)$ defined by $I(x) = x$.  
+Then $I$ is linear, bijective, and bounded (hence continuous) by assumption.  
+By the Inverse Bounded Mapping Theorem, $I^{-1}: (X, \|\cdot\|_2) \to (X, \|\cdot\|_1)$ is also bounded.  
+Thus, there exists $m' > 0$ such that  
+\[
+\|I^{-1}(x)\|_1 \leq m' \|x\|_2 \quad \text{for all } x \in X.
+\]
+Since $I^{-1}(x) = x$, we get $\|x\|_1 \leq m' \|x\|_2$.  
+Taking $m = m'$ gives the result.
+\end{proof}
+
+\begin{theorem}[Closed Graph Theorem]
+Let $X$, $Y$ be Banach spaces and $T: X \to Y$ a linear closed operator.  
+Then $T \in \LL(X,Y)$.
+\end{theorem}
+
+\begin{proof}
+Define the \textbf{graph norm} on $X$ by  
+\[
+\|x\|_2 \coloneqq \|x\|_X + \|T(x)\|_Y.
+\]
+Then $(X, \|\cdot\|_2)$ is a Banach space (since $T$ is closed).  
+Clearly, $\|x\|_X \leq \|x\|_2$.  
+By the previous corollary, there exists $M \geq 1$ such that  
+\[
+\|x\|_2 \leq M \|x\|_X \quad \text{for all } x \in X.
+\]
+Hence, 
+\[
+\|T(x)\|_Y \leq \|x\|_2 \leq M \|x\|_X,
+\]
+so $T$ is bounded.
+\end{proof}

@@ -1,0 +1,388 @@
+\section{Dual Spaces}
+
+Let $X$ be a normed space. The dual of $X$, denoted $X^*$ or $X'$, is defined as:
+\[
+X^* := \LL(X, \R)
+\]
+which is a Banach space with the norm:
+\[
+\|L\|_* := \sup_{\substack{\|x\| = 1 \\ x \in X}} |L(x)|.
+\]
+
+\begin{example} [Dual of $L^p$]
+
+Let $X = L^p(X, \A, \mu)$ with $1 < p < \infty$ and $\frac{1}{p} + \frac{1}{q} = 1$.
+
+For $g \in L^q$, define:
+\[
+L_g : L^p \to \R, \quad L_g(f) := \int_X fg \, d\mu.
+\]
+
+$L_g$ is linear due to the linearity of the integral. Indeed, for all $\alpha \in \R$ and $f_1, f_2 \in L^p$:
+\[
+L_g(\alpha_1 f_1 + \alpha_2 f_2) = \int_X (\alpha_1 f_1 + \alpha_2 f_2)g \, d\mu = \alpha_1 \int_X f_1 g \, d\mu + \alpha_2 \int_X f_2 g \, d\mu = \alpha_1 L_g(f_1) + \alpha_2 L_g(f_2).
+\]
+
+$L_g$ is bounded. Indeed, for all $f \in L^p$:
+\[
+|L_g(f)| = \left| \int_X fg \, d\mu \right| \leq \int_X |fg| \, d\mu \leq \|f\|_p \|g\|_q = \|f\|_p M,
+\]
+where the last inequality follows from Hölder's inequality. Hence, $L_g \in (L^p)^*$.
+
+Now we compute $\|L_g\|_*$. From the previous inequality, we know $\|L_g\|_* \leq \|g\|_q$. Consider the special function:
+\[
+\varphi := \frac{|g|^{q-2} g}{\|g\|_q^{q-1}}.
+\]
+Then:
+\[
+L_g(\varphi) = \int_X \varphi g \, d\mu = \int_X \frac{|g|^{q-2} g}{\|g\|_q^{q-1}} g \, d\mu = \frac{1}{\|g\|_q^{q-1}} \int_X |g|^q \, d\mu = \frac{\|g\|_q^q}{\|g\|_q^{q-1}} = \|g\|_q.
+\]
+Therefore, $\|L_g\|_* = \|g\|_{L^q}$.
+\end{example}
+
+\begin{example} [Finite-Dimensional Case]
+
+Let $(V, \langle \cdot, \cdot \rangle)$ be a finite-dimensional inner product space with $\dim V = n$.
+
+Let $L : V \to \R$ be linear (and thus continuous in finite dimensions), so $L \in V^*$.
+
+We can prove that there exists a unique $y \in V$ such that:
+\[
+L(x) = \langle x, y \rangle \quad \forall x \in V.
+\]
+
+\begin{proof}
+\textbf{Existence.} Consider an orthonormal basis of $V$: $B = \{\vec{v}_1, \dots, \vec{v}_n\}$. Then for all $x \in V$:
+\[
+x = \alpha_1 \vec{v}_1 + \dots + \alpha_n \vec{v}_n, \quad \text{where } \alpha_i = \langle x, \vec{v}_i \rangle.
+\]
+So:
+\begin{align*}
+L(x) &= \alpha_1 L(\vec{v}_1) + \dots + \alpha_n L(\vec{v}_n) \\
+&= \langle x, \vec{v}_1 \rangle L(\vec{v}_1) + \dots + \langle x, \vec{v}_n \rangle L(\vec{v}_n) \\
+&= \langle x, \vec{v}_1 L(\vec{v}_1) + \dots + \vec{v}_n L(\vec{v}_n) \rangle \\
+&= \langle x, y \rangle.
+\end{align*}
+
+\textbf{Uniqueness.} Suppose there exists $y' \in V$ such that $L(x) = \langle x, y' \rangle$ for all $x \in V$. Then:
+\[
+0 = L(x) - L(x) = \langle x, y \rangle - \langle x, y' \rangle = \langle x, y - y' \rangle \quad \forall x \in V,
+\]
+which implies $y - y' = 0$, so $y = y'$.
+\end{proof}
+
+Hence, $V \simeq V^*$.
+
+Now we compute the norm $\|L\|_*$. We have:
+\[
+|L(x)| = |\langle x, y \rangle| \leq \|x\| \|y\| = \|x\| M \quad \forall x \in V,
+\]
+so $\|L\|_* \leq \|y\|$. Moreover:
+\[
+\left| L\left( \frac{y}{\|y\|} \right) \right| = \left| \frac{1}{\|y\|} \langle y, y \rangle \right| = \frac{\|y\|^2}{\|y\|} = \|y\|.
+\]
+Therefore, $\|L\|_* = \|y\|$.
+
+\end{example}
+
+\begin{example} [Extension in $\R^2$]
+
+Let $X = \R^2$ and $Y$ be a vector subspace of $X$. Consider $\phi \in Y^*$ (i.e., $\phi : Y \to \R$ is linear and hence continuous).
+
+The problem is to find $\psi \in X^*$ such that:
+\begin{itemize}
+\item $\psi = \phi$ in $Y \subset X$
+\item $\|\psi\|_* = \|\phi\|_*$
+\end{itemize}
+
+Since $\phi \in Y^*$, there exists a unique $\eta \in Y \subset X$ such that $\phi(x) = \langle \eta, x \rangle$ for all $x \in Y$.
+
+Define $\psi : X \to \R$ by $\psi(x) = \langle \eta, x \rangle$ for all $x \in X$. From the preceding example, $\psi$ is linear and bounded, and $\|\psi\|_* = \|\eta\| = \|\phi\|_*$.
+\end{example}
+
+\subsection{Hahn-Banach Theorem}
+
+\begin{theorem}[Continuous Extension]
+Let $X$ be a normed space, $Y$ a vector subspace of $X$, and $f \in Y^*$. Then there exists $F \in X^*$ such that:
+\begin{itemize}
+\item $F(y) = f(y)$ for all $y \in Y$
+\item $\|F\|_{X^*} = \|f\|_{Y^*}$
+\end{itemize}
+\end{theorem}
+
+\subsubsection{Separation Form}
+
+Let $X = \R^2$ and $A, B$ be disjoint convex subsets of $X$. We want to find a line that separates the two sets: $H = \{f(x) = \alpha\}$.
+
+\begin{definition}
+Let $X$ be a normed space, $\alpha \in \R$, and $f \in X^*$. We define the \textbf{closed hyperplane} as $H = \{x \in X : f(x) = \alpha\}$.
+\end{definition}
+
+\begin{definition}
+We say that $H$ \textbf{separates} $A \subseteq X$ and $B \subseteq X$ if:
+\[
+f(a) \leq \alpha \leq f(b) \quad \forall a \in A, b \in B.
+\]
+We say that $H$ \textbf{strictly separates} $A \subseteq X$ and $B \subseteq X$ if there exists $\varepsilon > 0$ such that:
+\[
+f(a) \leq \alpha - \varepsilon \quad \text{and} \quad f(b) \geq \alpha + \varepsilon \quad \forall a \in A, b \in B.
+\]
+\end{definition}
+
+\begin{theorem}[Separation Form]
+Let $X$ be a normed space. If $\emptyset \neq A \subseteq X$ and $\emptyset \neq B \subseteq X$ are disjoint convex sets and $A$ is open, then there exists a closed hyperplane $H$ which separates $A$ and $B$.
+\end{theorem}
+
+\begin{remark}
+If $A, B$ are disjoint convex sets with $A$ closed and $B$ compact, then there exists $H$ which strictly separates $A$ and $B$.
+\end{remark}
+
+\subsubsection{Consequences of the Hahn-Banach Theorem}
+
+\begin{corollary}
+Let $X$ be a normed space and $x_0 \in X \setminus \{0\}$. Then there exists $L_{x_0} \in X^*$ such that:
+\[
+\|L_{x_0}\|_{X^*} = 1 \quad \text{and} \quad L_{x_0}(x_0) = \|x_0\|.
+\]
+\end{corollary}
+
+\begin{proof}
+Let $Y := \Span\{x_0\} = \{\lambda x_0 : \lambda \in \R\}$, a vector subspace of $X$. Define $L_0 : Y \to \R$ by $L_0(\lambda x_0) := \lambda \|x_0\|$.
+
+By the Hahn-Banach theorem (continuous extension), there exists $\tilde{L}_0 : X \to \R$ with $\tilde{L}_0 \in X^*$, $\|\tilde{L}_0\| = \|L_0\|$, and:
+\[
+\|L_0\| = \sup_{\substack{\|\lambda x_0\| = 1 \\ \lambda x_0 \in Y}} |L_0(\lambda x_0)| = 1.
+\]
+Moreover, $\tilde{L}_0(x_0) = L_0(x_0) = 1 \cdot \|x_0\| = \|x_0\|$. Set $L_{x_0} := \tilde{L}_0$.
+\end{proof}
+
+\clearpage
+\begin{corollary}
+Let $y, z \in X$. Assume $L(y) = L(z)$ for all $L \in X^*$. Then $y = z$.
+\end{corollary}
+
+\begin{proof}
+Suppose, by contradiction, that there exist $y \neq z$ such that $L(y) = L(z)$ for all $L \in X^*$. Define $x := y - z \neq 0$. Then:
+\[
+L(x) = L(y - z) = L(y) - L(z) = 0 \quad \forall L \in X^*.
+\]
+By the preceding corollary, there exists $L_x \in X^*$ such that $L_x(x) = \|x\| \neq 0$. But $L(x) = 0$ and $L_x(x) \neq 0$, a contradiction.
+\end{proof}
+
+\begin{corollary}
+Let $Y \subseteq X$ be a vector subspace with $\overline{Y} \neq X$ and $x_0 \in X \setminus \overline{Y}$. Then there exists $L \in X^*$ such that $L(x_0) \neq 0$ and $L|_Y = 0$.
+\end{corollary}
+
+\begin{proof}
+Let $Z := \{\lambda x_0 + y : y \in Y, \lambda \in \R\} \subset X$, a vector subspace. Define $L_0 : Z \to \R$ by $L_0(\lambda x_0 + y) := \lambda$. Then:
+\[
+L_0(x_0) = L_0(1 \cdot x_0 + 0) = 1 \neq 0, \quad \ker(L_0) = \{\lambda x_0 + y \in Z : L_0(\lambda x_0 + y) = 0\} = Y.
+\]
+So $L_0|_Y = 0$. By the Hahn-Banach theorem, there exists $\tilde{L}_0 \in X^*$ such that $\tilde{L}_0 = L_0$ in $Z \supseteq Y$. Set $L := \tilde{L}_0$. Then $L|_Y = 0$ and $L(x_0) = L_0(x_0) = 1 \neq 0$.
+\end{proof}
+
+\subsection{Reflexive Spaces}
+
+\begin{definition}
+Let $X$ be a normed space and $X^*$ its dual.\\The dual of $X^*$, i.e., $(X^*)^* \equiv X^{**}$, is called the \textbf{bidual} or \textbf{second dual}.
+
+For each $x \in X$, define $\Lambda_x : X^* \to \R$ by $\Lambda_x(L) := L(x)$ for all $L \in X^*$.
+
+$\Lambda_x$ is linear, and:
+\[
+|\Lambda_x(L)| = |L(x)| \leq \|L\|_* \|x\|_X = \|L\|_* M \quad \forall L \in X^*,
+\]
+so $\Lambda_x$ is bounded. Therefore, $\Lambda_x \in X^{**}$ and $\|\Lambda_x\|_{X^{**}} \leq \|x\|_X$.
+\end{definition}
+
+\begin{definition}
+The map $\tau : X \to X^{**}$ defined by $\tau(x) := \Lambda_x$ for all $x \in X$ is called the \textbf{canonical map} (or evaluation map).
+\end{definition}
+
+\clearpage
+\begin{theorem} We have
+
+\begin{enumerate}
+\item $\tau$ is linear and $\|\tau(x)\|_{X^{**}} = \|x\|_X$ for all $x \in X$.
+\item $\tau$ is injective.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1) Linearity is obvious. We already proved that $\|x\|_X \geq \|\tau(x)\|_{X^{**}}$. It remains to show the opposite inequality.
+
+By a corollary of the Hahn-Banach theorem, for each $x \in X \setminus \{0\}$, there exists $L \in X^*$ such that $\|L\|_{X^*} = 1$ and $L(x) = \|x\|_X$. Therefore:
+\[
+\|\tau(x)\|_{X^{**}} = \|\Lambda_x\|_{X^{**}} = \sup_{\|L\|_{X^*} = 1} |\Lambda_x(L)| = \sup_{\|L\|_{X^*} = 1} |L(x)| \geq \|x\|_X.
+\]
+So $\|\tau(x)\|_{X^{**}} = \|x\|_X$ for all $x \in X$.
+
+(2) For all $x_1, x_2 \in X$:
+\[
+\tau(x_1) = \tau(x_2) \Leftrightarrow \Lambda_{x_1} = \Lambda_{x_2} \Leftrightarrow L(x_1) = L(x_2) \quad \forall L \in X^* \Rightarrow x_1 = x_2,
+\]
+by a corollary of the Hahn-Banach theorem. So $\tau$ is injective.
+\end{proof}
+
+\begin{remark}
+$\tau(X)$ is closed in $X^{**}$. Indeed, $X$ is complete $\Rightarrow$ $\tau(X)$ is complete (because $\tau$ is an isometry). A complete metric space in $X^{**}$ implies closedness.
+\end{remark}
+
+\begin{definition}
+If $\tau(X) = X^{**}$ (i.e., $\tau$ is surjective), then $X$ is said to be \textbf{reflexive}.
+\end{definition}
+
+\begin{remark}
+\begin{enumerate}
+\item If $X$ is reflexive, then $\tau : X \to X^{**}$ is bijective.
+\item $X$ is reflexive $\Leftrightarrow$ for all $\phi \in X^{**}$ and $L \in X^*$, we have $\phi(L) = L(x)$ where $x := \tau^{-1}(\phi)$.
+\end{enumerate}
+\end{remark}
+
+\begin{definition}
+A normed space $X$ is \textbf{uniformly convex} if for every $\varepsilon > 0$, there exists $\delta > 0$ such that for all $x, y \in X$ with $\|x\| \leq 1$, $\|y\| \leq 1$, and $\|x - y\| > \varepsilon$, we have:
+\[
+\left\| \frac{x + y}{2} \right\| < 1 - \delta.
+\]
+\end{definition}
+
+\begin{theorem}[Milman-Pettis]
+If $X$ is a Banach space that is uniformly convex, then $X$ is reflexive.
+\end{theorem}
+
+\begin{theorem}
+For all $p \in (1, \infty)$, $L^p(\Omega)$ is uniformly convex.
+\end{theorem}
+
+\begin{corollary}
+By the previous theorem, for all $p \in (1, \infty)$, $L^p(\Omega)$ is reflexive.
+\end{corollary}
+
+\begin{remark}
+$L^1(\Omega)$ and $L^\infty(\Omega)$ are not reflexive.
+\end{remark}
+
+\subsubsection{Clarkson Inequalities}
+
+\begin{itemize}
+\item \textbf{Case $p \geq 2$:}
+\[
+\left\| \frac{f + g}{2} \right\|_p^p + \left\| \frac{f - g}{2} \right\|_p^p \leq \frac{1}{2} \left( \|f\|_p^p + \|g\|_p^p \right) \quad \forall f, g \in L^p(\Omega).
+\]
+
+\item \textbf{Case $1 < p < 2$:}
+\[
+\left\| \frac{f + g}{2} \right\|_p^q + \left\| \frac{f - g}{2} \right\|_p^q \leq \left( \frac{1}{2} \left( \|f\|_p^p + \|g\|_p^p \right) \right)^{q/p},
+\]
+where $q$ is the conjugate exponent of $p$.
+\end{itemize}
+
+\begin{proposition}
+$L^p$ is uniformly convex for all $p \in (1, \infty)$.
+\end{proposition}
+
+\begin{proof}
+Take any $\varepsilon > 0$, and $f, g \in L^p$ with $\|f\|_p \leq 1$, $\|g\|_p \leq 1$, and $\|f - g\|_p > \varepsilon$.
+
+\textbf{Case $p \geq 2$:} We have $\|f - g\|_p > \varepsilon$, so $\|f - g\|_p^p > \varepsilon^p$. By Clarkson's inequality:
+\[
+\left\| \frac{f + g}{2} \right\|_p^p < 1 - \left( \frac{\varepsilon}{2} \right)^p \Leftrightarrow \left\| \frac{f + g}{2} \right\|_p < 1 - \delta,
+\]
+where $\delta = 1 - \left[ 1 - \left( \frac{\varepsilon}{2} \right)^p \right]^{1/p} > 0$.
+
+\textbf{Case $1 < p < 2$:} The proof is similar.
+\end{proof}
+
+\subsection{Dual of $L^p$}
+
+Let $L^p(X, \A, \mu)$ with $1 < p < \infty$, and $g \in L^q$ with $\frac{1}{p} + \frac{1}{q} = 1$.
+
+Define $\Lambda : L^p \to \R$ by $\Lambda(f) := \int_X fg \, d\mu$ for all $f \in L^p$.
+
+Then $\Lambda \in (L^p)^*$ and $\|\Lambda\|_{(L^p)^*} = \|g\|_{L^q}$.
+
+\begin{theorem}[Riesz Representation Theorem]
+Let $(X, \A, \mu)$ be a measure space and $p \in (1, \infty)$. For any $\Lambda \in (L^p(X, \A, \mu))^*$, there exists a unique $g \in L^q$ with $\frac{1}{p} + \frac{1}{q} = 1$ such that:
+\[
+\Lambda(f) = \int_X fg \, d\mu \quad \forall f \in L^p.
+\]
+Furthermore, $\|\Lambda\|_{(L^p)^*} = \|g\|_{L^q}$.
+\end{theorem}
+
+\begin{remark}
+The same holds when $p = 1$, $q = \infty$, provided that $\mu$ is $\sigma$-finite.
+\end{remark}
+
+\subsection{Dual of $L^\infty$}
+
+Consider $(\R^N, \LL(\R^N), \lambda)$ with $\Omega \in \LL(\R^N)$. Let $g \in L^1$. Define $L_g : L^\infty \to \R$ by:
+\[
+L_g(f) := \int_\Omega fg \, d\lambda \quad \forall f \in L^\infty.
+\]
+
+\clearpage
+Then:
+\begin{itemize}
+\item $L_g$ is linear.
+\item $|L_g(f)| \leq \|f\|_\infty \|g\|_1 \Rightarrow \|L_g\|_{(L^\infty)^*} \leq \|g\|_1$.
+\end{itemize}
+So $L_g$ is bounded, and hence $L^1 \subseteq (L^\infty)^*$.
+
+Take $f := \sgn(g)$. Then:
+\[
+|L_g(f)| = \int_\Omega |g| \, d\mu = \|g\|_1 \Rightarrow \|L_g\|_{(L^\infty)^*} = \|g\|_1.
+\]
+
+But $(L^\infty)^* \supsetneq L^1$. There exists $L \in (L^\infty)^*$ that is not of the form $L_g$ with $g \in L^1$.
+
+Indeed, consider $L_0 \in [C_c^0(\R^N)]^*$ with $(C_c^0(\R^N), \|\cdot\|_\infty)$ and $C_c^0(\R^N)$ a vector subspace of $L^\infty$. Define $L_0(f) := f(0)$ for all $f \in C_c^0(\R^N)$. Then:
+\begin{itemize}
+\item $L_0$ is linear.
+\item $|L_0(f)| = |f(0)| \leq \|f\|_\infty$ for all $f \in C_c^0(\R^N)$.
+\end{itemize}
+So $L_0$ is bounded. By the Hahn-Banach theorem, there exists $L \in (L^\infty(\R^N))^*$ which is a continuous extension of $L_0$.
+
+\vspace{15pt}
+
+\begin{remark}
+Claim: There does not exist $g \in L^1(\R^N)$ such that $L(f) = \int_{\R^N} fg \, d\lambda$ for all $f \in L^\infty(\R^N)$.
+
+\begin{proof}
+Suppose, by contradiction, that such a $g$ exists. Then for all $f_1 \in C_c^0(\R^N)$ with $f_1(0) = 0$:
+\[
+L(f_1) = L_0(f_1) = f_1(0) = 0, \quad \text{but also} \quad L(f_1) = \int_{\R^N} f_1 g \, d\lambda.
+\]
+This implies $g = 0$ a.e. in $\R^N$. Then $L(f) = \int_{\R^N} f \cdot 0 \, d\lambda = 0$ for all $f \in L^\infty(\R^N)$.
+
+But take $f_2 \in C_c^0(\R^N)$ with $f_2(0) \neq 0$. Then:
+\[
+0 = L(f_2) = L_0(f_2) = f_2(0) \neq 0,
+\]
+a contradiction.
+\end{proof}
+\end{remark}
+
+\begin{remark}
+For a normed space $X$:
+\begin{itemize}
+\item If $X^*$ is separable, then $X$ is separable.
+\item If $X$ is not separable, then $X^*$ is not separable.
+\end{itemize}
+Take $X = L^\infty$. Suppose, by contradiction, that $(L^\infty)^* = L^1$. Then $L^\infty$ not separable $\Rightarrow$ $L^1$ not separable, which is false since $L^1$ is separable.
+\end{remark}
+
+\subsection{Summary of $L^p$ Spaces}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Space & Completeness & Separability & Reflexivity & Dual \\
+\hline
+$L^p$ ($1 < p < \infty$) & Yes & Yes & Yes & $L^q$ ($\frac{1}{p} + \frac{1}{q} = 1$) \\
+\hline
+$L^1$ & Yes & Yes & No & $L^\infty$ (if $\mu$ is $\sigma$-finite) \\
+\hline
+$L^\infty$ & Yes & No & No & $\supsetneq L^1$ \\
+\hline
+\end{tabular}
+\end{center}
