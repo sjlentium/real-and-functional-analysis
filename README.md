@@ -9,7 +9,7 @@ Detailed notes for the **Real and Functional Analysis** course within the Mathem
 
 ## 🚀 View the Notes
 The PDF is automatically compiled and updated via GitHub Actions.
-[**👉 Download / View PDF**](https://sjlentium.github.io/real-and-functional-analysis/main.pdf)
+[**👉 Download / View PDF**](https://sjlentium.github.io/real-and-functional-analysis/Real_and_Functional_Analysis.pdf)
 
 ## 🛠 How to Compile Locally
 If you wish to compile the source code on your machine:
